@@ -5,13 +5,15 @@ permalink: /about/
 main_nav: true
 ---
 
-![alt text]({{ site.baseurl }}/assets/profile-placeholder.jpg "Profile Picture"){:.profile}
+![alt text]({{ site.baseurl }}/assets/profile-placeholder.png "Profile Picture"){:.profile}
 
 ### 전상기 (Sanggi Jeon)
 
 다재다능한 개발자가 되고 싶은 전상기입니다.
 
 개발하는 것을 좋아하고 백엔드 개발자가 되기 위해 노력하고 있습니다.
+
+
 
 
 
@@ -22,6 +24,8 @@ main_nav: true
 - Protocol Engineering Lab (2017.03 ~ 2017.12)
 
 - 상명대학교 컴퓨터공학과 (2015.07 ~ 2019.08)
+
+
 
 
 

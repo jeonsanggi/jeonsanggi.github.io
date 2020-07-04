@@ -10,7 +10,7 @@ exclude:
 
 # Site settings
 title: Jeonsanggi
-subtitle: "정리노트"
+subtitle: "개발자가 되고 싶어요~!!"
 email: jsg2861@gmail.com
 name: Sanggi Jeon
 description: >
@@ -21,7 +21,7 @@ description: >
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://jeonsanggi.github.io" # the base hostname & protocol for your site
 cover: "/assets/header_image.jpg"
-logo: "/assets/profile-placeholder.jpg"
+logo: "/assets/profile-placeholder.png"
 
 # Build settings
 markdown: kramdown
@@ -109,12 +109,12 @@ social:
 # These are for automatically generating sharing metadata for FB and Twitter
 # OS Protocol is for sharing the source of your site, if you're interested. For more, see osprotocol.com
 protocols:
-    fb_image: "/assets/logo.png"
+    fb_image: "/assets/profile-placeholder.png"
     fb_image_width: 612
     fb_image_height: 605
     fb_image_type: "image/png"
 
-    twitter_image: "/assets/logo.png"
+    twitter_image: "/assets/profile-placeholder.png"
 
     os_repo: "https://github.com/bencentra/centrarium.com"
     os_rcs_type: "git"

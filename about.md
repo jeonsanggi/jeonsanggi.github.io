@@ -7,17 +7,18 @@ main_nav: true
 
 ![alt text]({{ site.baseurl }}/assets/profile-placeholder.png "Profile Picture"){:.profile}
 
-### 전상기 (Sanggi Jeon)
+--------------------
+### 🧑 전상기 (Sanggi Jeon)
 
-다재다능한 개발자가 되고 싶은 전상기입니다.
+깊이 있는 개발자가 되고 싶은 전상기입니다.
 
 개발하는 것을 좋아하고 백엔드 개발자가 되기 위해 노력하고 있습니다.
 
 
 
 
-
-#### 교내외 활동
+--------------------
+#### 📘 교내외 활동
 
 - 파이썬 기반의 데이터 분석 및 딥러닝 교육 수료, 한국데이터산업진흥원 주관  (2019.06 ~ 2019.09)
 
@@ -28,8 +29,8 @@ main_nav: true
 
 
 
-
-#### SKILL
+--------------------
+#### 🛒 SKILL
 
 - Progmming Language
   - Java, Python

@@ -57,6 +57,9 @@ descriptions:
   - cat: java
     desc: "Posts describing JAVA."
 
+  - cat: ORACLE
+    desc: "Posts describing ORACLE."
+
 
 # Social icons and sharing options
 #

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>05.DDL(Data Definition Language)</title>
+  <meta name="description" content="DDL(Data Definition Language)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/14/05.DDL.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">05.DDL(Data Definition Language)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="ddldata-definition-language">DDL(Data Definition Language)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>CREATE TABLE</th>
+      <th>테이블 생성</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ALTER TABLE</td>
+      <td>테이블 관련 변경</td>
+    </tr>
+    <tr>
+      <td>DROP TABLE</td>
+      <td>테이블 삭제</td>
+    </tr>
+    <tr>
+      <td>RENAME</td>
+      <td>이름 변경</td>
+    </tr>
+    <tr>
+      <td>TRUNCATE</td>
+      <td>테이블의 모든 데이터 삭제</td>
+    </tr>
+    <tr>
+      <td>COMMENT</td>
+      <td>테이블 설명 추가</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="1-ddl-종류">1. DDL 종류</h3>
+
+<h4 id="11-create-table">1.1. CREATE TABLE</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="p">(</span>
+    <span class="n">book_id</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+    <span class="n">title</span>	<span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+    <span class="n">author</span>	<span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="n">pub_date</span> <span class="nb">DATE</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="111-subquery를-이용한-테이블-생성">1.1.1. Subquery를 이용한 테이블 생성</h5>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">account_emp</span>
+<span class="k">AS</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="o">*</span>
+    <span class="k">FROM</span> <span class="n">emp</span>
+    <span class="k">WHERE</span> <span class="n">deptno</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="12-alter-table">1.2. ALTER TABLE</h4>
+
+<h5 id="121-컬럼-추가">1.2.1. 컬럼 추가</h5>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">ADD</span> <span class="p">(</span><span class="n">pubs</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">50</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h5 id="122-컬럼-수정">1.2.2. 컬럼 수정</h5>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">MODIFY</span> <span class="p">(</span><span class="n">title</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h5 id="123-컬럼-삭제">1.2.3. 컬럼 삭제</h5>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">DROP</span> <span class="p">(</span><span class="n">author</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h5 id="124-unused-컬럼">1.2.4. UNUSED 컬럼</h5>
+
+<ul>
+  <li>UNUSED를 통해 일시적으로 컬럼을 사용하지 않음</li>
+  <li>삭제해도 된다고 생각이 들면 DROP UNUSED COLUMNS로 삭제</li>
+  <li>UNUSED를 한번 지정하면 다시 바꿀 수 없기 때문에 백업을 해두어야 함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">SET</span> <span class="n">UNUSED</span> <span class="p">(</span><span class="n">author</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">DROP</span> <span class="n">UNUSED</span> <span class="n">COLUMNS</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="13-drop-talbe">1.3. DROP TALBE</h4>
+
+<ul>
+  <li>테이블 삭제</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">book</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="14-truncate-table">1.4. TRUNCATE TABLE</h4>
+
+<ul>
+  <li>테이블 안의 데이터 모두 삭제</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">TRUNCATE</span> <span class="k">TABLE</span> <span class="n">book</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="15-comment-table">1.5. COMMENT TABLE</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COMMENT</span> <span class="k">ON</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">IS</span> <span class="s1">'this is comment'</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">user_tab_comments</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="16-rename-table">1.6. RENAME TABLE</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">RENAME</span> <span class="n">book</span> <span class="k">TO</span> <span class="n">article</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-constraint-제약조건">2. Constraint (제약조건)</h3>
+
+<ul>
+  <li>
+    <p>Database 테이블 레벨에서 특정한 규칙을 설정해둠</p>
+  </li>
+  <li>
+    <p>예상치 못한 데이터의 손실이나 일관성을 어기는 데이터의 추가, 변경 등을 예방</p>
+  </li>
+  <li>
+    <p>Syntax</p>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="err">테이블이름</span><span class="p">(</span>
+    <span class="err">컬럼이름</span> <span class="n">datatype</span> <span class="p">[</span><span class="k">DEFAULT</span> <span class="err">기본값</span><span class="p">][</span><span class="err">컬럼제약조건</span><span class="p">],</span>
+    <span class="err">컬럼이름</span> <span class="n">datatype</span> <span class="p">[</span><span class="k">DEFAULT</span> <span class="err">기본값</span><span class="p">][</span><span class="err">컬럼제약조건</span><span class="p">],</span>
+	<span class="p">...</span>
+    <span class="p">[</span><span class="err">테이블</span> <span class="err">제약조건</span><span class="p">]</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="21-제약-조건-종류">2.1. 제약 조건 종류</h4>
+
+<ul>
+  <li>
+    <p>NOT NULL</p>
+  </li>
+  <li>UNIQUE</li>
+  <li>PRIMARY KEY</li>
+  <li>FOREIGN KEY</li>
+  <li>CHECK</li>
+</ul>
+
+<h5 id="211-not-null">2.1.1. NOT NULL</h5>
+
+<ul>
+  <li>NULL 값이 들어올 수 없음</li>
+  <li>컬럼형태로만 제약조건 정의할 수 있음(테이블 제약조건 불가)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">TABLEE</span> <span class="n">book</span><span class="p">(</span>
+    <span class="n">book_id</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h5 id="212-unique">2.1.2. UNIQUE</h5>
+
+<ul>
+  <li>중복된 값을 허용하지 않음 (NULL은 들어올 수 있음)</li>
+  <li>복합 컬럼에 대해서도 정의 가능</li>
+  <li>자동적으로 인덱스 생성</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">TABLEE</span> <span class="n">book</span><span class="p">(</span>
+    <span class="n">book_id</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">[</span><span class="k">CONSTRAINT</span> <span class="err">제약조건이름</span><span class="p">]</span> <span class="n">UINQUE</span> <span class="n">book_id</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h5 id="213-primary-key">2.1.3. PRIMARY KEY</h5>
+
+<ul>
+  <li>NOT NULL + UNIQUE (인덱스 자동 생성)</li>
+  <li>테이블 당 하나만 나올 수 있음</li>
+  <li>복합 컬럼에 대해서 정의 가능(순서 중요)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="p">(</span>
+	<span class="p">...</span>
+    <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">book_id</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="214-check">2.1.4. CHECK</h5>
+
+<ul>
+  <li>임의의 조건 검사. 조건식이 참이어야 변경 가능</li>
+  <li>동일 테이블의 컬럼만 이용 가능</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">book</span><span class="p">(</span>
+    <span class="n">rate</span> <span class="n">NUMBER</span> <span class="k">CHECK</span> <span class="p">(</span><span class="n">rate</span> <span class="k">IN</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h5 id="215-foreign-key">2.1.5. FOREIGN KEY</h5>
+
+<ul>
+  <li>
+    <p>참조 무결성 제약</p>
+  </li>
+  <li>일반적으로 REFERENCE 테이블의 PK를 참조</li>
+  <li>REFERENCE 테이블에 없는 값은 삽입 불가</li>
+  <li>REFERENCE 테이블의 레코드 삭제 시 동작
+    <ul>
+      <li>ON DELETE CASCADE: 해당하는 FK를 가진 참조행도 삭제 (위험하기 때문에 잘 사용되지 않음)</li>
+      <li>ON DELETE SET NULL: 해당하는 FK를 NULL로 바꿈</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">book</span><span class="p">(</span>
+    <span class="p">...</span>
+    <span class="n">author_id</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+    <span class="k">CONSTRAINT</span> <span class="n">c_book_fk</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">author_id</span><span class="p">)</span>
+    <span class="n">REFERENCE</span> <span class="n">author</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+    <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">SET</span> <span class="k">NULL</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="22-제약조건-예제1">2.2. 제약조건 예제1</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">AUTHOR</span><span class="p">(</span>
+    <span class="n">AUTHOR_ID</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">CONSTRAINT</span> <span class="n">PK_AUTHOR</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+    <span class="n">AUTHOR_NAME</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="k">CONSTRAINT</span> <span class="n">NOT_NULL_AUTHOR</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+    <span class="n">AUTHOR_DESC</span> <span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">BOOK</span> <span class="k">ADD</span> <span class="p">(</span><span class="n">AUTHOR_ID</span> <span class="n">NUMBER</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">EMP</span> <span class="k">ADD</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">EMPNO</span><span class="p">);</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">DEPT</span> <span class="k">ADD</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">DEPTNO</span><span class="p">);</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">EMP</span> <span class="k">ADD</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">DEPTNO</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">DEPT</span><span class="p">(</span><span class="n">DEPTNO</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="23-제약조건-추가">2.3. 제약조건 추가</h4>
+
+<ul>
+  <li>NOT NULL은 추가 못함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">BOOK</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">FK_BOOK_AUTHOR</span> <span class="k">FOREIGN</span> <span class="k">KEY</span><span class="p">(</span><span class="n">AUTHOR_ID</span><span class="p">)</span>
+<span class="k">REFERENCES</span> <span class="n">AUTHOR</span><span class="p">(</span><span class="n">AUTHOR_ID</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="24-제약-조건-삭제">2.4. 제약 조건 삭제</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">book</span> <span class="k">DROP</span> <span class="k">CONSTRAINT</span> <span class="n">c_book_fk</span><span class="p">;</span>
+<span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">author</span> <span class="k">DROP</span> <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">CASCADE</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="25-제약-조건-타입">2.5. 제약 조건 타입</h4>
+
+<ul>
+  <li>P : PRIMARY KEY</li>
+  <li>U : UNIQUE KEY</li>
+  <li>C : CHECK</li>
+  <li>R : FOREIGN KEY</li>
+</ul>
+
+<h4 id="26-테이블-제약조건-확인">2.6. 테이블 제약조건 확인</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">UC</span><span class="p">.</span><span class="k">CONSTRAINT_NAME</span><span class="p">,</span> <span class="n">UC</span><span class="p">.</span><span class="k">TABLE_NAME</span><span class="p">,</span> <span class="n">UCC</span><span class="p">.</span><span class="k">COLUMN_NAME</span><span class="p">,</span>
+	<span class="n">UC</span><span class="p">.</span><span class="n">CONSTRAINT_TYPE</span><span class="p">,</span> <span class="n">UC</span><span class="p">.</span><span class="n">R_CONSTRAINT_NAME</span><span class="p">,</span> <span class="n">UC</span><span class="p">.</span><span class="n">SEARCH_CONDITION</span>
+<span class="k">FROM</span> <span class="n">USER_CONSTRAINTS</span> <span class="n">UC</span> <span class="k">JOIN</span> <span class="n">USER_CONS_COLUMNS</span> <span class="n">UCC</span>
+	<span class="k">ON</span> <span class="n">UC</span><span class="p">.</span><span class="k">CONSTRAINT_NAME</span> <span class="o">=</span> <span class="n">UCC</span><span class="p">.</span><span class="k">CONSTRAINT_NAME</span>
+<span class="k">WHERE</span> <span class="n">UC</span><span class="p">.</span><span class="k">TABLE_NAME</span> <span class="o">=</span> <span class="s1">'AUTHOR'</span><span class="p">;</span>
+</code></pre></div></div>
+
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

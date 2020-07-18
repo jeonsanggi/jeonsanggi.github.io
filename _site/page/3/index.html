@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Developer - page 3</title>
+  <meta name="description" content=""배운 것과 공부한 것을 정리하는 습관을 갖자!"
+">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/3/">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">Developer</h1>
+      <p class="subtitle">배운 것과 공부한 것을 정리하는 습관을 갖자!</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/10.First-Class-Function.html">10.일급함수(First Class Function)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>일급함수 (First Class Function) 함수를 변수로 생각하는 것 함수 자체를 인자(argument)로써 다른 함수에 전달, 다른 함수의 결과값으로 반환, 함수를 변수에 할당할 수 있음 함수를 변수에 할당 def double_func(x): return x * 2 a = double_func print(double_func) # 결과: &lt;function double_func at 0x000002A8AB8D21F8&gt; print(a) # 결과: &lt;function double_func at 0x000002A8AB8D21F8&gt; print(a(5))...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/09.Generator.html">09.제너레이터(Generator)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Generator iterator를 생성해주는 함수로 함수안에 yield 키워드를 사용 모든 값을 포함하여 반환하지 않고 한 개의 값씩 반환하는 방식 메모리를 효율적으로 사용하기 위해 사용 # 기존 함수 구현 def square_numbers(nums): result = [] for i in nums: result.append(i*i) return result my_nums = square_numbers([1, 2, 3, 4, 5]) print(my_nums) next() 메서드를 사용하거나...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/08.Module.html">08.모듈(Module)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Module 함수나 변수 또는 클래스를 모아 놓은 파일 모듈은 다른 파이썬 프로그램에서 불러와 사용할 수 있게 만든 파이썬 파일 def convert_to_f(celsius_value): return celsius_value * 90 / 5 +32 # 모듈 테스트 할때는 따로 작성해서 해줘야함 if __name__ == '__main__': print("모듈 테스트") print(convert_to_f(45)) else: print("임포트문 실행") #chap04.py from fah_converter import convert_to_f...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/07.class.html">07.클래스(Class)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Class class 클래스 이름 (상속 받을 클래스): 최상위 클래스는 object이다. 상속을 명시하지 않으면 default로 object를 상속 init: 생성자 str: 객체를 print 했을 때 출력 할 것 class SoccerPlayer: # 상속을 명시하지 않으면 default로 object를 상속 # __init__ 은 생성자 def __init__(self, name, position, back_number): self.name = name self.position = position...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/06.List.html">06.List</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>List linked list로 구현되어 있음 color1 = ['red', 'blue', 'green'] color2 = ['orange', 'black', 'white'] add_color = color1 + color2 print(len(add_color)) print(add_color) 1. extend colors = ['red', 'blue', 'green'] colors.extend(['black', 'purple']) print(colors) 2. Slice [start : end: step] cities = ['서울', '부산', '인천', '대구', '대전', '광주', '울산', '수원'] print(cities[0:6]) print(cities[:6])...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/page/4/">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
+			
+		
+		<span class="page-number">Page 3 of 10</span>
+		
+		<a class="newer-posts" href="/page/4/">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

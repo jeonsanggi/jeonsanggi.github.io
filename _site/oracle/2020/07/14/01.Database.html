@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>01.데이터베이스</title>
+  <meta name="description" content="데이터베이스 (Database)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/14/01.Database.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">01.데이터베이스</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="데이터베이스-database">데이터베이스 (Database)</h2>
+
+<h3 id="1-데이터베이스">1. 데이터베이스</h3>
+
+<ul>
+  <li>데이터베이스의 특성
+    <ul>
+      <li>실시간 접근성(Real-time Accessability)
+        <ul>
+          <li>사용자의 요구를 즉시 처리할 수 있다.</li>
+        </ul>
+      </li>
+      <li>계속적인 변화(Continuous Evolution)
+        <ul>
+          <li>정확한 값을 유지하려고 삽입,삭제,수정 작업 등을 이용해 데이터를 지속적으로 갱신할 수 있다.</li>
+        </ul>
+      </li>
+      <li>동시 공유성(Concurrent Sharing)
+        <ul>
+          <li>사용자마다 서로 다른 목적으로 사용하므로 동시에 여러 사람이 동일한 데이터에 접근하고 이용할 수 있다.</li>
+        </ul>
+      </li>
+      <li>내용 참조(Content Reference)
+        <ul>
+          <li>저장한 데이터 레코드의 위치나 주소가 아닌 사용자가 요구하는 데이터의 내용, 즉 데이터 값에 따라 참조할 수 있어야 한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>데이터베이스 관리 시스템 (Database Managemetn System; DBMS)
+    <ul>
+      <li>데이터베이스를 관리하는 소프트웨어</li>
+      <li>여러 응용 소프트웨어(프로그램) 또는 시스템이 동시에 데이터베이스에 접근하여 사용할 수 있게 함</li>
+      <li>필수 3기능
+        <ul>
+          <li>정의기능 : 데이터베이스의 논리적, 물리적 구조를 정의</li>
+          <li>조작기능 : 데이터를 검색, 삭제, 갱신, 삽입, 삭제하는 기능</li>
+          <li>제어기능 : 데이터베이스의 내용 정확성과 안정성을 유지하도록 제어하는 기능</li>
+        </ul>
+      </li>
+      <li>DBMS 종류
+        <ul>
+          <li>Oracle, SQL Server, MySQL 등</li>
+        </ul>
+      </li>
+      <li>DBMS 장점
+        <ul>
+          <li>데이터 중복 최소화</li>
+          <li>데이터의 일관성 및 무결성 유지</li>
+          <li>데이터 보안 보장</li>
+        </ul>
+      </li>
+      <li>DBMS 단점
+        <ul>
+          <li>운영비가 비쌈</li>
+          <li>백업 및 복구에 대한 관리가 복잡</li>
+          <li>부분적 데이터베이스 손실이 전체 시스템을 정지</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-데이터베이스-종류">2. 데이터베이스 종류</h3>
+
+<ol>
+  <li>관계형 데이터베이스 (Relational Database; RDB)
+    <ul>
+      <li>키와 값들의 간단한 관계를 테이블화 시킨 매우 간단한 원칙 개념의 데이터베이스</li>
+      <li>일련의 정형화된 테이블로 구성된 데이터 항목들의 집합이며 각 테이블은 데이터의 성격에 따라 여러 개의 컬럼(키)이 포함됨</li>
+      <li>사용자는 SQL이라는 표준 질의어를 통해 데이터를 조작 또는 조회 할 수 있음</li>
+    </ul>
+  </li>
+  <li>객체 지향 데이터베이스 (Object Oriented DataBase; OODB)
+    <ul>
+      <li>정보를 객체의 형태로 표현하는 데이터베이스</li>
+      <li>객체 모델이 그대로 데이터베이스에도 적용되어 데이터 모델을 그대로 응용프로그램에 적용</li>
+    </ul>
+  </li>
+  <li>객체 관계형 데이터베이스 (Object Relation Database)
+    <ul>
+      <li>관계형 데이터베이스에서 사용되는 데이터를 확장</li>
+      <li>관계형 데이터베이스를 객체 지향 모델링과 데이터를 관리하는 기능을 갖도록 확장한 것</li>
+    </ul>
+  </li>
+  <li>NoSQL (Not Only SQL)
+    <ul>
+      <li>대용량 데이터의 웹 서비스와 SNS, 클라우드 컴퓨팅의 확대 보급과 대중화로 최근 주목 받는 데이터베이스 기술</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="3-데이터베이스-용어">3. 데이터베이스 용어</h3>
+
+<ol>
+  <li>테이블(Table)
+    <ul>
+      <li>RDBMS의 기본적 저장구조</li>
+      <li>한 개 이상의 column과 0개 이상의 row로 구성</li>
+    </ul>
+  </li>
+  <li>열(Colum)
+    <ul>
+      <li>테이블 상에서의 단일 종류의 데이터를 나타냄</li>
+      <li>특정 데이터 타입 및 크기를 가지고 잇음</li>
+    </ul>
+  </li>
+  <li>행 (Row)
+    <ul>
+      <li>튜플(Tuple) 또는 레코드(Record)라는 이름으로 불림</li>
+      <li>Column들의 값의 조합</li>
+      <li>기본키(PK)에 의해 구분됨</li>
+      <li>기본키는 중복을 허용하지 않으며 없어서는 안된다.</li>
+    </ul>
+  </li>
+  <li>Field
+    <ul>
+      <li>Row와 Column의 교차점으로 Field는 데이터를 포함할 수 있고 없을 때는 NULL 값을 가지고 있음</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="4-키key">4. 키(Key)</h3>
+
+<ol>
+  <li>Primary Key(PK): 기본키
+    <ul>
+      <li>릴레이션에서 튜플을 구분하기 위하여 사용하는 기본 키</li>
+      <li>하나의 애트리뷰트, 또는 애트리뷰트의 집합(복합키) 가능</li>
+      <li>관리자에 의해 릴레이션 생성시 정의됨(자동으로 Index 생성됨)</li>
+      <li>동일한 PK를 지닌 레코드가 존재할 수 없음</li>
+    </ul>
+  </li>
+  <li>기타
+    <ul>
+      <li>Candidate Key(후보키)
+        <ul>
+          <li>튜플을 식별할 수 있는 최소한의 애트리뷰트 집합</li>
+          <li>하나의 릴레이션에는 PK가 될 수 있는 키가 여러 개 있을 수 있음</li>
+          <li>유일성과 최소성이 있으며 Candidate key가 될 수 있음</li>
+        </ul>
+      </li>
+      <li>Alternative Key (대체키)
+        <ul>
+          <li>후보키 중 기본키가 아닌것</li>
+        </ul>
+      </li>
+      <li>Composite key(복합키)
+        <ul>
+          <li>둘 이상의 애트리뷰트가 하나의 Key를 이루는 경우</li>
+        </ul>
+      </li>
+      <li>Foreign Key(FK; 외래키)
+        <ul>
+          <li>기본키를 참조하는 애트리뷰트</li>
+          <li>다른 릴레이션의 튜플을 대표</li>
+          <li>릴레이션 간의 관계를 나타내기 위하여 사용</li>
+          <li>Null 가능 (참조되지 않음 의미)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="5-sql-structured-query-language">5. SQL (Structured Query Language)</h3>
+
+<ul>
+  <li>데이터베이스 스키마 생성, 자료의 검색, 수정과 데이터터베이스 객체 접근 관리 등을 위해 고안된 언어</li>
+  <li>다수의 데이터베이스 관련 프로그램의 표준언어</li>
+</ul>
+
+<h4 id="51-sql-명령어의-종류">5.1 SQL 명령어의 종류</h4>
+
+<ol>
+  <li>DML: 데이터 조작어로 검색 및 수정하기 위한 수단 제공
+    <ul>
+      <li>SELECT, INSERT, UPDATE, DELETE, MERGE</li>
+    </ul>
+  </li>
+  <li>DDL: 데이터 구조를 생성, 변경, 삭제 등의 기능을 제공
+    <ul>
+      <li>CREATE, ALTER, DROP, RENAME</li>
+    </ul>
+  </li>
+  <li>DCL: 데이터에 대한 권한 관리 및 트랜잭션 제어
+    <ul>
+      <li>GRANT, <code class="highlighter-rouge">REVOKE</code></li>
+    </ul>
+  </li>
+</ol>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

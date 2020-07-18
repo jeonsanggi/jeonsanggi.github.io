@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>10.표준 API 함수적 인터페이스</title>
+  <meta name="description" content="표준 API 함수적 인터페이스">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/java/2020/07/03/10.Standard-API-Functional-Interface.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/java/java.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">10.표준 API 함수적 인터페이스</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 3, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/JAVA">Java</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="표준-api-함수적-인터페이스">표준 API 함수적 인터페이스</h2>
+
+<ul>
+  <li>
+    <p>자바에서 제공되는 표준API에서 한 개의 추상메소드를 가지는 인터페이스는 모두 람다식을 이용해서 익명 구현 객체로 표현 가능</p>
+  </li>
+  <li>자바8 부터 java.util.function 패키지에 자주 사용되는 함수적 인터페이스를 표준 API로 제공</li>
+  <li>
+    <p>제공되는 인터페이스는 5가지</p>
+
+    <ul>
+      <li>Consumer: 매개값은 있고 리턴값이 없음</li>
+      <li>Supplier: 매개값이 없고 리턴값이 있음</li>
+      <li>Function: 매개값, 리턴값 모두 있음(주로 매개값은 리턴값으로 매핑)
+        <ul>
+          <li>Function&lt;T, R&gt;
+            <ul>
+              <li>T는 입력 타입</li>
+              <li>R은 출력 타입 (Apply의 return 타입)</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Operator: 매개값, 리턴값 모두 있음(주로 매개값을 연산하고 결과를 리턴)</li>
+      <li>Predicate: 매개값은 있고 리턴 타입은 boolean(매개값을 조사해서 true/false 리턴)</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="1-consumer-예제">1. Consumer 예제</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1. FunctionalInterfaceApiMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam0625</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.function.BiConsumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.DoubleConsumer</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.ObjIntConsumer</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FunctionalInterfaceApiMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Consumer</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">consumer</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">t</span> <span class="o">+</span> <span class="s">" Class"</span><span class="o">);</span>
+		<span class="n">consumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="s">"Java"</span><span class="o">);</span>
+
+		<span class="nc">BiConsumer</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">biConsumer</span> <span class="o">=</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">u</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">t</span><span class="o">+</span><span class="n">u</span><span class="o">);</span>
+		<span class="n">biConsumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="s">"Java"</span><span class="o">,</span> <span class="s">" Class"</span><span class="o">);</span>
+
+		<span class="nc">DoubleConsumer</span> <span class="n">doubleConsumer</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d</span> <span class="o">+</span> <span class="s">"를 10으로 나눈 나머지 "</span> <span class="o">+</span> <span class="n">d</span><span class="o">%</span><span class="mi">10</span> <span class="o">+</span> <span class="s">"입니다."</span><span class="o">);</span>
+		<span class="n">doubleConsumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="mf">14.0</span><span class="o">);</span>
+
+		<span class="nc">ObjIntConsumer</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">objIntConsumer</span> <span class="o">=</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">t</span><span class="o">+</span><span class="n">i</span><span class="o">);</span>
+		<span class="n">objIntConsumer</span><span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="s">"Java"</span><span class="o">,</span> <span class="mi">8</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="2-supplier-예제">2. Supplier 예제</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1. FunctionalInterfaceApiMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam0625</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.function.IntSupplier</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FunctionalInterfaceApiMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">IntSupplier</span> <span class="n">intSupplier</span> <span class="o">=</span> <span class="o">()</span> <span class="o">-&gt;{</span>
+			<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="nc">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mi">6</span><span class="o">)</span> <span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+			<span class="k">return</span> <span class="n">num</span><span class="o">;</span>
+		<span class="o">};</span>
+		<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="n">intSupplier</span><span class="o">.</span><span class="na">getAsInt</span><span class="o">();</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"주사위 눈: "</span><span class="o">+</span> <span class="n">num</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="3-function-예제">3. Function 예제</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-1. Student2.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam0625</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student2</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">englishScore</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">mathScore</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Student2</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">englishScore</span><span class="o">,</span> <span class="kt">int</span> <span class="n">mathScore</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">englishScore</span> <span class="o">=</span> <span class="n">englishScore</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">mathScore</span> <span class="o">=</span> <span class="n">mathScore</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getEnglishScore</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">englishScore</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getMathScore</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">mathScore</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-2. Student2Main.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Function</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.ToIntFunction</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student2Main</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Student2</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+			<span class="k">new</span> <span class="nf">Student2</span><span class="o">(</span><span class="s">"홍길동"</span><span class="o">,</span> <span class="mi">95</span><span class="o">,</span> <span class="mi">80</span><span class="o">),</span>
+			<span class="k">new</span> <span class="nf">Student2</span><span class="o">(</span><span class="s">"이순신"</span><span class="o">,</span> <span class="mi">90</span><span class="o">,</span> <span class="mi">85</span><span class="o">)</span>
+	<span class="o">);</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printString</span><span class="o">(</span><span class="nc">Function</span><span class="o">&lt;</span><span class="nc">Student2</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span><span class="o">(</span><span class="nc">Student2</span> <span class="nl">student:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">function</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="n">student</span><span class="o">));</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printInt</span><span class="o">(</span><span class="nc">ToIntFunction</span><span class="o">&lt;</span><span class="nc">Student2</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span><span class="o">(</span><span class="nc">Student2</span> <span class="nl">student:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">function</span><span class="o">.</span><span class="na">applyAsInt</span><span class="o">(</span><span class="n">student</span><span class="o">));</span>
+		<span class="o">}</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"[학생이름]"</span><span class="o">);</span>
+		<span class="c1">// 람다에서 t는 매개인자 "-&gt;"는 메소드</span>
+		<span class="c1">// printString(t -&gt; t.getName()) 코드를 풀어쓰면</span>
+		<span class="c1">// Function&lt;Student2, String&gt; f = t -&gt; t.getName()</span>
+		<span class="c1">// printString(f) 와 같음</span>
+		<span class="n">printString</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span> <span class="c1">//메소드를 가지는 객체를 전달</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"[영어점수]"</span><span class="o">);</span>
+		<span class="n">printInt</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">getEnglishScore</span><span class="o">());</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"[수학점수]"</span><span class="o">);</span>
+		<span class="n">printInt</span><span class="o">(</span><span class="n">t</span><span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">getMathScore</span><span class="o">());</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 2. ToIntBiFunctionMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.function.ToIntBiFunction</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ToIntBiFunctionMain</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">ToIntBiFunction</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">function</span><span class="o">;</span>
+
+		<span class="n">function</span> <span class="o">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span><span class="o">.</span><span class="na">compareToIgnoreCase</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+		<span class="n">print</span><span class="o">(</span><span class="n">function</span><span class="o">.</span><span class="na">applyAsInt</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">,</span> <span class="s">"hello world"</span><span class="o">));</span>
+
+		<span class="n">function</span> <span class="o">=</span> <span class="nl">String:</span><span class="o">:</span><span class="n">compareToIgnoreCase</span><span class="o">;</span>
+		<span class="n">print</span><span class="o">(</span><span class="n">function</span><span class="o">.</span><span class="na">applyAsInt</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">,</span> <span class="s">"hello world"</span><span class="o">));</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="kt">int</span> <span class="n">order</span><span class="o">){</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">order</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"동일한 문자열입니다."</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 3-1. Member.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Member</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"아무개"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span> <span class="o">=</span> <span class="s">"없다"</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Member</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Member() 실행"</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Member(String id) 실행"</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nf">Member</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Member(String name, String id) 실행"</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">printStatus</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"name: "</span> <span class="o">+</span> <span class="n">name</span><span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"id: "</span> <span class="o">+</span> <span class="n">id</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 3-2. BiFunctionMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.function.BiFunction</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Function</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BiFunctionMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 생성자 참조</span>
+		<span class="c1">// new는 생성자를 호출하는 키워드. Member의 생성자를 호출</span>
+		<span class="nc">Function</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Member</span><span class="o">&gt;</span> <span class="n">function1</span> <span class="o">=</span> <span class="nl">Member:</span><span class="o">:</span><span class="k">new</span><span class="o">;</span>
+		<span class="nc">Member</span> <span class="n">member1</span> <span class="o">=</span> <span class="n">function1</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="s">"java8"</span><span class="o">);</span>
+		<span class="n">member1</span><span class="o">.</span><span class="na">printStatus</span><span class="o">();</span>
+
+		<span class="c1">// 생성자 참조</span>
+		<span class="c1">// new는 생성자를 호출하는 키워드. Member의 생성자를 호출</span>
+		<span class="nc">BiFunction</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">,</span> <span class="nc">Member</span><span class="o">&gt;</span> <span class="n">function2</span> <span class="o">=</span> <span class="nl">Member:</span><span class="o">:</span><span class="k">new</span><span class="o">;</span>
+		<span class="nc">Member</span> <span class="n">member2</span> <span class="o">=</span> <span class="n">function2</span><span class="o">.</span><span class="na">apply</span><span class="o">(</span><span class="s">"홍길동"</span><span class="o">,</span> <span class="s">"java8"</span><span class="o">);</span>
+		<span class="n">member2</span><span class="o">.</span><span class="na">printStatus</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="4-operator-예제">4. Operator 예제</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam0625</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.function.IntBinaryOperator</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">OperatorMain</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">scores</span> <span class="o">=</span> <span class="o">{</span><span class="mi">94</span><span class="o">,</span> <span class="mi">96</span><span class="o">,</span> <span class="mi">86</span><span class="o">};</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">maxOrMin</span><span class="o">(</span><span class="nc">IntBinaryOperator</span> <span class="n">operator</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">scores</span><span class="o">[</span><span class="mi">0</span><span class="o">];</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">score</span> <span class="o">:</span> <span class="n">scores</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="na">applyAsInt</span><span class="o">(</span><span class="n">result</span><span class="o">,</span> <span class="n">score</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">maxOrMin</span><span class="o">(</span>
+				<span class="o">(</span><span class="n">a</span><span class="o">,</span><span class="n">b</span><span class="o">)</span> <span class="o">-&gt;{</span>
+					<span class="k">if</span><span class="o">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="o">)</span>
+						<span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+					<span class="k">else</span>
+						<span class="k">return</span> <span class="n">b</span><span class="o">;</span>
+				<span class="o">}</span>
+		<span class="o">);</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"최대값: "</span> <span class="o">+</span> <span class="n">max</span><span class="o">);</span>
+
+		<span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">maxOrMin</span><span class="o">(</span>
+				<span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+					<span class="k">if</span><span class="o">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="o">)</span>
+						<span class="k">return</span> <span class="n">a</span><span class="o">;</span>
+					<span class="k">else</span>
+						<span class="k">return</span> <span class="n">b</span><span class="o">;</span>
+				<span class="o">}</span>
+		<span class="o">);</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"최소값"</span> <span class="o">+</span> <span class="n">min</span><span class="o">);</span>
+
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="5-predicate">5. Predicate</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-1. Student.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">score</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">sex</span><span class="o">,</span> <span class="kt">int</span> <span class="n">score</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">sex</span> <span class="o">=</span> <span class="n">sex</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSex</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">sex</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getScore</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">score</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-2. PredicateMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam05</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.function.Predicate</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PredicateMain</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+			<span class="k">new</span> <span class="nf">Student</span><span class="o">(</span><span class="s">"홍길동"</span><span class="o">,</span> <span class="s">"남자"</span><span class="o">,</span> <span class="mi">90</span><span class="o">),</span>
+			<span class="k">new</span> <span class="nf">Student</span><span class="o">(</span><span class="s">"김영희"</span><span class="o">,</span> <span class="s">"여자"</span><span class="o">,</span> <span class="mi">90</span><span class="o">),</span>
+			<span class="k">new</span> <span class="nf">Student</span><span class="o">(</span><span class="s">"박철수"</span><span class="o">,</span> <span class="s">"남자"</span><span class="o">,</span> <span class="mi">85</span><span class="o">),</span>
+			<span class="k">new</span> <span class="nf">Student</span><span class="o">(</span><span class="s">"이혜숙"</span><span class="o">,</span> <span class="s">"여자"</span><span class="o">,</span> <span class="mi">87</span><span class="o">)</span>
+	<span class="o">);</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">avg</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">for</span><span class="o">(</span><span class="nc">Student</span> <span class="n">student</span> <span class="o">:</span> <span class="n">list</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">student</span><span class="o">))</span> <span class="o">{</span>
+				<span class="n">count</span><span class="o">++;</span>
+				<span class="n">sum</span> <span class="o">+=</span> <span class="n">student</span><span class="o">.</span><span class="na">getScore</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="o">(</span><span class="kt">double</span><span class="o">)</span><span class="n">sum</span><span class="o">/</span><span class="n">count</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">double</span> <span class="n">maleAvg</span> <span class="o">=</span> <span class="n">avg</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">getSex</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"남자"</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"남자 평균 점수: "</span> <span class="o">+</span> <span class="n">maleAvg</span><span class="o">);</span>
+
+		<span class="kt">double</span> <span class="n">femaleAvg</span> <span class="o">=</span> <span class="n">avg</span><span class="o">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="na">getSex</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">"여자"</span><span class="o">));</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"여자 평균점수: "</span> <span class="o">+</span> <span class="n">femaleAvg</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

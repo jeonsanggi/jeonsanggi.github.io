@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Developer - page 5</title>
+  <meta name="description" content=""배운 것과 공부한 것을 정리하는 습관을 갖자!"
+">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/5/">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">Developer</h1>
+      <p class="subtitle">배운 것과 공부한 것을 정리하는 습관을 갖자!</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/14.RANK.html">14.RANK</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>RANK RANK(): 중복 순위 개수만큼 다음 순위 값을 증가 DENSE_RANK(): 중복 순위가 존재해도 순차적으로 다음 순위 값을 표시 ROW_NUMBER(): 중복 순위 없이 순위 값을 표시 SELECT sal, ename, RANK() OVER (ORDER BY sal DESC) as rank, DENSE_RANK() OVER (ORDER BY sal DESC) AS dense_rank, ROW_NUMBER() OVER (ORDER BY sal DESC)...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/13.SET-Operator.html">13.SET Operator</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>SET Operator 두 질의의 결과를 가지고 집합 연산 1. UNION 여러 개의 SQL 문의 결과에 대한 합집합 중복된 행은 하나의 행으로 출력 SELECT ename FROM emp UNION SELECT dname FROM dept; ## 결과 값 ENAME ---------------------------- ACCOUNTING ADAMS ALLEN BLAKE CLARK FORD JAMES JONES KING MARTIN MILLER OPERATIONS RESEARCH SALES...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/12.Subquery.html">12.Subquery</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Subquery 하나의 SQL 질의문 속에 다른 SQL 질의문이 포함되어 있는 상태 ORACLE에서 Subquery의 결과 값을 Chache에 저장 해놓는다. FROM절에 있는 Subquery는 INLINE VIEW라고 함 SELECT ename FROM emp WHERE sal &gt; ( SELECT sal from emp WHERE ename = 'SCOTT') ## 결과 값 ENAME -------------------- KING 1. Single-Row Subquery Subquery의...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/11.NULL-%EA%B4%80%EB%A0%A8-%ED%95%A8%EC%88%98.html">11.NULL 관련 함수</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>NULL 관련 함수 1. NULL 아무런 값도 정해지지 않았음을 의미 NOT NULL이나 Primary Key 속성에는 사용할 수 없음 NULL을 포함한 산술식은 NULL 2. NVL NVL(expr1, expr2): expr1이 NULL이면 expr2, 아니면 expr1 SELECT ename, NVL(TO_CHAR(mgr), 'NO Manager') FROM emp; 3. NVL2 NVL2(expr1, expr2, expr3): expr1이 NOT NULL이면 expr2, 아니면 expr3 SELECT...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/10.Single-Row-Function.html">10.Single Row Function</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Single Row Function 하나의 Row를 입력으로 받는 함수 1. 문자열 함수 INITCAP : 첫글자만 대문자로 출력 SELECT INITCAP(ENAME), JOB FROM emp; LOWWER(s) : 소문자로 변경 SELECT INITCAP(ENAME), JOB FROM emp; UPPER(s) : 대문자로 변경 SELECT INITCAP(ENAME), JOB FROM emp; LAPD(s1, n, s2): 문자열의 왼쪽 채움 n : 길이 s2 :...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/page/6/">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
+			
+		
+		<span class="page-number">Page 5 of 10</span>
+		
+		<a class="newer-posts" href="/page/6/">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

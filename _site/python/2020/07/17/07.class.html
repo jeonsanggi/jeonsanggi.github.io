@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>07.클래스(Class)</title>
+  <meta name="description" content="Class">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/17/07.class.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">07.클래스(Class)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="class">Class</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="err">클래스 이름 (상속 받을 클래스):
+</span></code></pre></div></div>
+
+<ul>
+  <li>최상위 클래스는 object이다.</li>
+  <li>상속을 명시하지 않으면  default로 object를 상속</li>
+  <li>init: 생성자</li>
+  <li>str: 객체를 print 했을 때 출력 할 것</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SoccerPlayer</span><span class="p">:</span> <span class="c1"># 상속을 명시하지 않으면  default로 object를 상속
+</span>    <span class="c1"># __init__ 은 생성자
+</span>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">back_number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">back_number</span> <span class="o">=</span> <span class="n">back_number</span>
+
+    <span class="k">def</span> <span class="nf">change_back_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_number</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"선수 등번호 변경: From </span><span class="si">%</span><span class="s">d to </span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">back_number</span><span class="p">,</span> <span class="n">new_number</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">back_number</span> <span class="o">=</span> <span class="n">new_number</span>
+
+    <span class="c1"># 해당 객체를 print 했을 때 출력 해주는 역할 (Java의 toString과 비슷)
+</span>    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"Hello, My name is </span><span class="si">%</span><span class="s">s. I play in </span><span class="si">%</span><span class="s">s in center."</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+
+
+<span class="n">chaboom</span> <span class="o">=</span> <span class="n">SoccerPlayer</span><span class="p">(</span><span class="s">"Chaboom"</span><span class="p">,</span> <span class="s">"CF"</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"현재 선수의 등번호:"</span><span class="p">,</span> <span class="n">chaboom</span><span class="o">.</span><span class="n">back_number</span><span class="p">)</span>
+<span class="n">chaboom</span><span class="o">.</span><span class="n">change_back_number</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"현재 선수의 등번호:"</span><span class="p">,</span> <span class="n">chaboom</span><span class="o">.</span><span class="n">back_number</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">chaboom</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="1-클래스-변수와-인스턴스-변수">1. 클래스 변수와 인스턴스 변수</h3>
+
+<ul>
+  <li>클래스 변수 (Static 변수로 사용)
+    <ul>
+      <li>클래스 내, 메소드 밖에 선언 하는 변수</li>
+      <li>해당 클래스로 생성한 모든 객체가 공통으로 접근할 수 있는 변수</li>
+      <li>클래스명.변수명 으로 사용</li>
+    </ul>
+  </li>
+  <li>인스턴스 변수
+    <ul>
+      <li>클래스 내부의 메소드 안에서 “self.변수명”으로 선언한 변수</li>
+      <li>각 인스턴스 별로 생성</li>
+      <li>객체 생성후 “객체명.변수명”으로 접근</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Car</span><span class="p">:</span>
+    <span class="c1"># 클래스 변수
+</span>    <span class="n">instance_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="c1"># self.size, self.color는 인스턴스 변수
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="n">Car</span><span class="o">.</span><span class="n">instance_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차 객체의 수: {Car.instance_count}"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차({self.size} &amp; {self.color})가 움직입니다."</span><span class="p">)</span>
+
+
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s">"small"</span><span class="p">,</span> <span class="s">'white'</span><span class="p">)</span>
+<span class="n">car2</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s">"big"</span><span class="p">,</span> <span class="s">"black"</span><span class="p">)</span>
+<span class="c1"># Car.instance_count는 car1과 car2가 공용으로 사용
+</span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Car 클래스의 총 인스턴스 수: {Car.instance_count}"</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">move</span><span class="p">()</span>
+<span class="n">car2</span><span class="o">.</span><span class="n">move</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 결과</span>
+자동차 객체의 수: 1
+자동차 객체의 수: 2
+Car 클래스의 총 인스턴스 수: 2
+자동차<span class="o">(</span>small &amp; white<span class="o">)</span>가 움직입니다.
+자동차<span class="o">(</span>big &amp; black<span class="o">)</span>가 움직입니다.
+</code></pre></div></div>
+
+<h3 id="2-static-메서드">2. Static 메서드</h3>
+
+<ul>
+  <li>독립적으로 동작, 정의할 때 self를 사용하지 않음</li>
+  <li>static 메소드 안에서 인스턴스 메서드, 인스턴스 변수에 접근할 수 없음</li>
+  <li>함수 앞에 @staticmethod를 선언하여 static 메서드를 표시</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Car</span><span class="p">:</span>
+    <span class="c1"># 클래스 변수
+</span>    <span class="n">instance_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="c1"># self.size, self.color는 인스턴스 변수
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">Car</span><span class="o">.</span><span class="n">instance_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차 객체의 수: {Car.instance_count}"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차({self.size} &amp; {self.color})가 "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"시속 {self.speed}킬로미터로 전진"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">auto_cruise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"자율 주행 모드"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">model_code</span><span class="p">):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">model_code</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 전기차입니다."</span><span class="p">)</span>
+        <span class="k">elif</span><span class="p">(</span><span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">model_code</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 가솔린차입니다."</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 디젤차입니다."</span><span class="p">)</span>
+
+
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s">"small"</span><span class="p">,</span> <span class="s">"red"</span><span class="p">)</span>
+<span class="n">car</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">car</span><span class="o">.</span><span class="n">auto_cruise</span><span class="p">()</span>
+<span class="n">Car</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 결과
+</span><span class="err">자동차</span> <span class="err">객체의</span> <span class="err">수</span><span class="p">:</span> <span class="mi">1</span>
+<span class="err">자동차</span><span class="p">(</span><span class="n">small</span> <span class="o">&amp;</span> <span class="n">red</span><span class="p">)</span><span class="err">가</span> <span class="err">시속</span> <span class="mi">80</span><span class="err">킬로미터로</span> <span class="err">전진</span>
+<span class="err">자율</span> <span class="err">주행</span> <span class="err">모드</span>
+<span class="err">자동차</span><span class="p">(</span><span class="n">small</span> <span class="o">&amp;</span> <span class="n">red</span><span class="p">)</span><span class="err">가</span> <span class="err">시속</span> <span class="mi">80</span><span class="err">킬로미터로</span> <span class="err">전진</span>
+<span class="err">이</span> <span class="err">자동차는</span> <span class="err">전기차입니다</span><span class="o">.</span>
+</code></pre></div></div>
+
+<h3 id="3-클래스-메서드">3. 클래스 메서드</h3>
+
+<ul>
+  <li>클래스 변수를 사용하기 위한 메서드</li>
+  <li>함수 앞에 @classmethod를 선언하여 사용</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Car</span><span class="p">:</span>
+    <span class="c1"># 클래스 변수
+</span>    <span class="n">instance_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="c1"># self.size, self.color는 인스턴스 변수
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">Car</span><span class="o">.</span><span class="n">instance_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차 객체의 수: {Car.instance_count}"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자동차({self.size} &amp; {self.color})가 "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"시속 {self.speed}킬로미터로 전진"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">auto_cruise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"자율 주행 모드"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">check_type</span><span class="p">(</span><span class="n">model_code</span><span class="p">):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">model_code</span> <span class="o">&gt;=</span> <span class="mi">20</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 전기차입니다."</span><span class="p">)</span>
+        <span class="k">elif</span><span class="p">(</span><span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">model_code</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 가솔린차입니다."</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"이 자동차는 디젤차입니다."</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">classmethod</span>     
+    <span class="k">def</span> <span class="nf">count_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"클래스 변수: {cls.instance_count}"</span><span class="p">)</span>
+
+
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s">"small"</span><span class="p">,</span> <span class="s">"red"</span><span class="p">)</span>
+<span class="n">car</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">car</span><span class="o">.</span><span class="n">auto_cruise</span><span class="p">()</span>
+<span class="n">Car</span><span class="o">.</span><span class="n">check_type</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">Car</span><span class="o">.</span><span class="n">count_instance</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>static은 객체가 생성되기 이전 부터 사용할 수 있게 하기 위해 사용됨</p>
+
+<h2 id="상속">상속</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Bicycle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wheel_size</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wheel_size</span> <span class="o">=</span> <span class="n">wheel_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+
+    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자전거 시속 {speed}킬로미터로 전진"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">turn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자전거: {direction}회전"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자전거({self.wheel_size}, {self.color}): 정지"</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FoldingBicycle</span><span class="p">(</span><span class="n">Bicycle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wheel_size</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">wheel_size</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="nf">fold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s">'folding'</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자전거: 접기, state = {self.state}"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">unfold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s">'unfolding'</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"자전거: 펴기, state = {self.state}"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="1-오버라이드override">1. 오버라이드(Override)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+
+    <span class="k">def</span> <span class="nf">about_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"저의 이름은"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"({self.gender})이고요, 제 나이는"</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">),</span> <span class="s">"살입니다."</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">salary</span><span class="p">,</span> <span class="n">hire_date</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">gender</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">salary</span> <span class="o">=</span> <span class="n">salary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hire_date</span> <span class="o">=</span> <span class="n">hire_date</span>
+
+    <span class="k">def</span> <span class="nf">do_work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"열심히 일을 한다."</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">about_me</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">about_me</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"제 급여는"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">salary</span><span class="p">,</span> <span class="s">"원이고, 제 입사일은"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hire_date</span><span class="p">,</span> <span class="s">"입니다."</span><span class="p">)</span>
+
+
+<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s">'Tom'</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s">'남성'</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="s">'2020/06/02'</span><span class="p">)</span>
+<span class="n">emp</span><span class="o">.</span><span class="n">do_work</span><span class="p">()</span>
+<span class="n">emp</span><span class="o">.</span><span class="n">about_me</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="2-가시성visibility">2. 가시성(Visibility)</h3>
+
+<ul>
+  <li>기본적으로 python은 public이다</li>
+  <li>변수명 앞에 __를 주면 외부에서 접근이 불가능 (private)</li>
+  <li>이름 앞 뒤로 __가 있는건 내부적으로 예약되어 있는 것</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Product</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Inventory</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">add_new_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">product</span><span class="p">)</span> <span class="o">==</span> <span class="n">Product</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"new item added"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"Invalid Item"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_number_of_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">)</span>
+
+
+<span class="n">my_inventory</span> <span class="o">=</span> <span class="n">Inventory</span><span class="p">()</span>
+<span class="n">my_inventory</span><span class="o">.</span><span class="n">add_new_item</span><span class="p">(</span><span class="n">Product</span><span class="p">())</span>
+<span class="n">my_inventory</span><span class="o">.</span><span class="n">add_new_item</span><span class="p">(</span><span class="n">Product</span><span class="p">())</span>
+<span class="c1">#my_inventory.__items # Error 발생
+</span></code></pre></div></div>
+
+<ul>
+  <li>python에서 getter를 만들때는 @property 데코레이터를 선언</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Product</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Inventory</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">add_new_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">product</span><span class="p">)</span> <span class="o">==</span> <span class="n">Product</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"new item added"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"Invalid Item"</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_number_of_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__items</span><span class="p">)</span>
+
+    <span class="o">@</span><span class="nb">property</span>
+    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+
+
+<span class="n">my_inventory</span> <span class="o">=</span> <span class="n">Inventory</span><span class="p">()</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">my_inventory</span><span class="o">.</span><span class="n">items</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Product</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

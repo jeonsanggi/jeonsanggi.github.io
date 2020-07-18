@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>06.List</title>
+  <meta name="description" content="List">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/17/06.List.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">06.List</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="list">List</h2>
+
+<ul>
+  <li>linked list로 구현되어 있음</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">color1</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">]</span>
+<span class="n">color2</span> <span class="o">=</span> <span class="p">[</span><span class="s">'orange'</span><span class="p">,</span> <span class="s">'black'</span><span class="p">,</span> <span class="s">'white'</span><span class="p">]</span>
+<span class="n">add_color</span> <span class="o">=</span> <span class="n">color1</span> <span class="o">+</span> <span class="n">color2</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">add_color</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">add_color</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="1-extend">1. extend</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">]</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'purple'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-slice">2. Slice</h3>
+
+<ul>
+  <li>[start : end: step]</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cities</span> <span class="o">=</span> <span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'수원'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[:</span><span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">:])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[:])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 결과 값
+</span><span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'수원'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'수원'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'수원'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'수원'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'부산'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'수원'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">,</span> <span class="s">'광주'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'대구'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'부산'</span><span class="p">,</span> <span class="s">'서울'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'서울'</span><span class="p">,</span> <span class="s">'인천'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">,</span> <span class="s">'울산'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="3-insert">3. Insert</h3>
+
+<ul>
+  <li>특정 위치에 항목을 추가할 때</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">]</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">'black'</span><span class="p">)</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'purple'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="4-remove">4. remove</h3>
+
+<ul>
+  <li>특정 항목 삭제</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">}</span>
+<span class="n">colors</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'blue'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="6-del">6. del</h3>
+
+<ul>
+  <li>해당 인덱스에 있는 항목 삭제</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="7-count">7. count</h3>
+
+<ul>
+  <li>리스트 안에 특정 요소가 몇개 있는지 출력</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">appetizer</span> <span class="o">=</span> <span class="p">[</span><span class="s">'egg'</span><span class="p">,</span> <span class="s">'salad'</span><span class="p">,</span> <span class="s">'bread'</span><span class="p">,</span> <span class="s">'soup'</span><span class="p">,</span> <span class="s">'canape'</span><span class="p">]</span>
+<span class="n">main_dish</span> <span class="o">=</span> <span class="p">[</span><span class="s">'fish'</span><span class="p">,</span> <span class="s">'lamb'</span><span class="p">,</span> <span class="s">'pork'</span><span class="p">,</span> <span class="s">'beef'</span><span class="p">,</span> <span class="s">'chicken'</span><span class="p">]</span>
+<span class="n">dessert</span> <span class="o">=</span> <span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'ice cream'</span><span class="p">,</span> <span class="s">'pudding'</span><span class="p">,</span> <span class="s">'cookies'</span><span class="p">,</span> <span class="s">'cake'</span><span class="p">]</span>
+
+<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="n">appetizer</span><span class="p">,</span> <span class="n">main_dish</span><span class="p">,</span> <span class="n">dessert</span><span class="p">]</span>  
+<span class="n">jane</span> <span class="o">=</span> <span class="p">[</span><span class="n">order</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">main_dish</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">3</span><span class="p">],</span> <span class="n">dessert</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>  <span class="c1"># [['egg', 'salad', 'bread'], ['lamb', 'chicken'], ['lamb']]
+</span><span class="k">del</span> <span class="n">jane</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># [['egg', 'salad', 'bread'], ['lamb', 'chicken']]
+</span><span class="n">jane</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">order</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]])</span>  <span class="c1"># [['egg', 'salad', 'bread'], ['lamb', 'chicken'], ['apple']]
+</span><span class="k">print</span><span class="p">(</span><span class="n">jane</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="8-join">8. Join</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s">'red'</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">,</span> <span class="s">'yellow'</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="s">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="s">','</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">colors</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="s">'-'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="9-sort와-sorted">9. sort와 sorted</h3>
+
+<ul>
+  <li>python 에서 sort는 Timsort를 사용
+    <ul>
+      <li>병합정렬과 퀵정렬에서 파생된 하이브리드 정렬</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1"># sort 결과 리턴.. sorted(a, reverse=True)
+</span><span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="10-list-comprehension">10. List Comprehension</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Comprehension X
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="c1"># Comprehension O
+</span><span class="n">reuslt</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Comprehension X
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="c1"># Comprehension O
+</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Comprehension O
+</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span>  <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">99</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">word1</span> <span class="o">=</span> <span class="s">"Hello"</span>
+<span class="n">word2</span> <span class="o">=</span> <span class="s">"World"</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">word1</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">word2</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">case1</span> <span class="o">=</span> <span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'C'</span><span class="p">]</span>
+<span class="n">case2</span> <span class="o">=</span> <span class="p">[</span><span class="s">'D'</span><span class="p">,</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'F'</span><span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">case1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">case2</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

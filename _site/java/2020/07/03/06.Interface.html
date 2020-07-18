@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>06.인터페이스(Interface)</title>
+  <meta name="description" content="인터페이스(Interface)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/java/2020/07/03/06.Interface.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/java/java.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">06.인터페이스(Interface)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 3, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/JAVA">Java</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="인터페이스interface">인터페이스(Interface)</h2>
+
+<ul>
+  <li>클래스들이 구현해야 하는 동작(규격)을 지정하는데 사용되는 추상 자료형</li>
+  <li>인터페이스는 상수, 추상 메서드, 디폴트 메서드, static 메서드를 가질 수 있음</li>
+  <li>인터페이스를 구현하는 클래스를 구현클래스, 실제 메서드를 가지는 객체를 구현 객체라고 함</li>
+</ul>
+
+<h4 id="특징">특징</h4>
+
+<ul>
+  <li>생성자가 없어서 객체 생성이 불가능</li>
+  <li>자바 7까지는 추상 메서드만 가능, 자바 8부터는 디폴트메소드 및 정적메소드 가능</li>
+  <li>데이터 저장이 불가능하므로 필드 선언이 불가능</li>
+  <li>상수 필드만 선언가능 (public static final 생략 가능, 컴파일 과정에서 자동 첨가)</li>
+  <li>추상 메서드 (public abstract 특성을 가짐(생략 가능, 컴파일과정에서 자동 첨가)</li>
+  <li>default 메서드는 public 특성을 가짐(생략 가능, 컴파일과정에서 자동 첨가)</li>
+  <li>static 메서드는 public 특성을 가짐(생략 가능, 컴파일과정에서 자동 첨가)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-1. RemoteControl.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam03</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">RemoteControl</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="no">MAX_VOLUMN</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="no">MIN_VOLUMN</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setVolumn</span><span class="o">(</span><span class="kt">int</span> <span class="n">volumn</span><span class="o">);</span>
+
+	<span class="k">default</span> <span class="kt">void</span> <span class="nf">setMute</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">mute</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">mute</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"무음처리"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"무음해제"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">static</span> <span class="kt">void</span> <span class="nf">changeBattery</span><span class="o">()</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"배터리 교환"</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-2. Television.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam03</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Television</span> <span class="kd">implements</span> <span class="nc">RemoteControl</span><span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">volumn</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TV를 켭니다"</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"TV를 끕니다."</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setVolumn</span><span class="o">(</span><span class="kt">int</span> <span class="n">volumn</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">volumn</span> <span class="o">&gt;</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MAX_VOLUMN</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MAX_VOLUMN</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">volumn</span> <span class="o">&lt;</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MIN_VOLUMN</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MIN_VOLUMN</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="n">volumn</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"현재 TV 볼륨: "</span> <span class="o">+</span> <span class="n">volumn</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-3. Audio.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam03</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Audio</span> <span class="kd">implements</span> <span class="nc">RemoteControl</span><span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">volumn</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">boolean</span> <span class="n">mute</span><span class="o">;</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOn</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Audio를 켭니다."</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">turnOff</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Audio를 끕니다."</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setVolumn</span><span class="o">(</span><span class="kt">int</span> <span class="n">volumn</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">volumn</span> <span class="o">&gt;</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MAX_VOLUMN</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MAX_VOLUMN</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">volumn</span> <span class="o">&lt;</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MIN_VOLUMN</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="nc">RemoteControl</span><span class="o">.</span><span class="na">MAX_VOLUMN</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">volumn</span> <span class="o">=</span> <span class="n">volumn</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"현재 Audio 볼륨: "</span> <span class="o">+</span> <span class="n">volumn</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setMute</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">mute</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">mute</span> <span class="o">=</span> <span class="n">mute</span><span class="o">;</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">mute</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Audio 무음 처리"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Audio 무음 해제"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 예제 1-4. TvMain.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">exam03</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RemoteControlMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">RemoteControl</span> <span class="n">rc</span><span class="o">;</span>
+
+		<span class="n">rc</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Television</span><span class="o">();</span>
+		<span class="n">rc</span><span class="o">.</span><span class="na">turnOn</span><span class="o">();</span>
+		<span class="n">rc</span><span class="o">.</span><span class="na">turnOff</span><span class="o">();</span>
+
+		<span class="n">rc</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Audio</span><span class="o">();</span>
+		<span class="n">rc</span><span class="o">.</span><span class="na">turnOn</span><span class="o">();</span>
+		<span class="n">rc</span><span class="o">.</span><span class="na">setMute</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+		<span class="n">rc</span><span class="o">.</span><span class="na">turnOff</span><span class="o">();</span>
+
+		<span class="nc">RemoteControl</span><span class="o">.</span><span class="na">changeBattery</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

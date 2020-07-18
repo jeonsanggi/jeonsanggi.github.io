@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>03.SQL(Structured Query Language)</title>
+  <meta name="description" content="SQL(Structured Query Language)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/14/03.SQL.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">03.SQL(Structured Query Language)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="sqlstructured-query-language">SQL(Structured Query Language)</h2>
+
+<ul>
+  <li>데이터베이스 스키마 생성, 자료의 검색, 수정과 데이터터베이스 객체 접근 관리 등을 위해 고안된 언어</li>
+  <li>
+    <p>다수의 데이터베이스 관련 프로그램의 표준언어</p>
+  </li>
+  <li>SQL 명령어의 종류
+    <ol>
+      <li>DML: 데이터 조작어로 검색 및 수정하기 위한 수단 제공
+        <ul>
+          <li>SELECT, INSERT, UPDATE, DELETE, MERGE</li>
+        </ul>
+      </li>
+      <li>DDL: 데이터 구조를 생성, 변경, 삭제 등의 기능을 제공
+        <ul>
+          <li>CREATE, ALTER, DROP, RENAME</li>
+        </ul>
+      </li>
+      <li>DCL: 데이터에 대한 권한 관리 및 트랜잭션 제어
+        <ul>
+          <li>GRANT, REVOKE</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="syntax">Syntax</h3>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+<span class="k">FROM</span>
+<span class="k">WHERE</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+<span class="k">HAVING</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+</code></pre></div></div>
+
+<h3 id="1-select">1. SELECT</h3>
+
+<ul>
+  <li>데이터베이스에서 원하는 데이터를 검색, 추출</li>
+  <li>Syntax</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="p">[</span><span class="k">ALL</span><span class="o">|</span><span class="k">DISTINCT</span><span class="p">]</span> <span class="err">열</span><span class="n">_</span><span class="err">리스트</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>기능</p>
+
+    <ul>
+      <li>Projection: 특정 컬럼 값만 추출하는 것</li>
+    </ul>
+
+    <p><img src="/assets/oracle/projection.png" alt="projection" /></p>
+
+    <ul>
+      <li>SELECTION : 특정 행을 추출하는 것</li>
+    </ul>
+
+    <p><img src="/assets/oracle/Selection.png" alt="SELECTION" /></p>
+
+    <ul>
+      <li>Join : 여러개의 테이블 엮어서 결과 값을 출력하는 것</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="1-1-select-예제">1-1. SELECT 예제</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">Column</span> <span class="err">명</span> <span class="k">FROM</span> <span class="err">테이블명</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">DISTINCT</span> <span class="n">deptno</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-where">2. WHERE</h3>
+
+<ul>
+  <li>조건을 부여하여 만족하는 ROW Selection</li>
+</ul>
+
+<h4 id="21-연산자">2.1. 연산자</h4>
+
+<ul>
+  <li>=, !=, &lt;, &gt;</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">sal</span> <span class="o">&gt;=</span> <span class="mi">1200</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span><span class="p">,</span> <span class="n">HIREDATE</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">JOB</span> <span class="o">!=</span> <span class="s1">'CLERK'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span><span class="p">,</span> <span class="n">SAL</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">SAL</span> <span class="o">&gt;=</span> <span class="mi">2000</span> <span class="k">AND</span> <span class="n">HIREDATE</span> <span class="o">&lt;</span> <span class="s1">'81/06/01'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>IN, NOT IN</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">JOB</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">'CLERK'</span><span class="p">,</span> <span class="s1">'SALESMAN'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">JOB</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">'CLERK'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>BETWEEN ‘ ‘ and ‘ ‘</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span><span class="p">,</span> <span class="n">HIREDATE</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">HIREDATE</span> <span class="k">BETWEEN</span> <span class="s1">'81/01/01'</span> <span class="k">and</span> <span class="s1">'81/06/30'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>LIKE
+    <ul>
+      <li>%는 뒤에 무엇이든지</li>
+      <li>_ 는 한글자를 의미</li>
+      <li>%를 문자로 인식하게 하기 위해서는 / 를 사용</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="k">LIKE</span> <span class="s1">'S%'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="k">LIKE</span> <span class="s1">'S___H'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ENAME</span> <span class="k">LIKE</span> <span class="s1">'_A%'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>IS NOT NULL</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">COMM</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>IS NULL</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">COMM</span> <span class="k">IS</span> <span class="k">NULL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>NOT</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ENAME</span><span class="p">,</span> <span class="n">JOB</span><span class="p">,</span> <span class="n">SAL</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="p">(</span><span class="n">SAL</span> <span class="o">&gt;=</span> <span class="mi">2000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3-order-by">3. ORDER BY</h3>
+
+<ul>
+  <li>주어진 컬럼 리스트의 순서로 결과를 정렬</li>
+  <li>결과 정렬 방법
+    <ul>
+      <li>ASC : 오름차순 (default)</li>
+      <li>DESC : 내림차순</li>
+    </ul>
+  </li>
+  <li>컬럼명 대신 Alias로 해되 사용 가능</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">EMPNO</span><span class="p">,</span> <span class="n">ENAME</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">name</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>컬럼의 순서로도 가능</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">EMPNO</span><span class="p">,</span> <span class="n">ENAME</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>다중 조건으로 컬럼 정렬
+    <ul>
+      <li>첫번째 컬럼이 같으면 두번째 컬럼으로, 두번째 컬럼도 같으면 세번째 …</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span> <span class="k">DESC</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="4-group-by">4. GROUP BY</h3>
+
+<ul>
+  <li>데이터들을 원하는 그룹으로 나눌 때 사용</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="5-having">5. HAVING</h3>
+
+<ul>
+  <li>GROUP BY 한 것에 조건을 주고 싶을 때 사용</li>
+  <li>HAVING 절은 GROUP BY와 함께 쓰임</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span>
+<span class="k">HAVING</span> <span class="k">sum</span><span class="p">(</span><span class="k">sum</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10000</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="6-literal">6. Literal</h3>
+
+<ul>
+  <li>SELECT 절에 사용되는 문자, 숫자, Date 타입 등의 상수</li>
+  <li>Date 타입이나 문자열은 작은따옴표(‘‘)로 둘러싸야 함</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>문자열 결합(Concatunation) 연산자 :</td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">SYSDATE</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="s1">'Name is '</span> <span class="o">||</span> <span class="n">ename</span> <span class="o">||</span> <span class="s1">' and no is'</span> <span class="o">||</span> <span class="n">empno</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+Name is SMITH and no is7369
+Name is ALLEN and no is7499
+Name is WARD and no is7521
+Name is JONES and no is7566
+Name is MARTIN and no is7654
+Name is BLAKE and no is7698
+Name is CLARK and no is7782
+Name is SCOTT and no is7788
+Name is KING and no is7839
+Name is TURNER and no is7844
+Name is ADAMS and no is7876
+Name is JAMES and no is7900
+Name is FORD and no is7902
+Name is MILLER and no is7934
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

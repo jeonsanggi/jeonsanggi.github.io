@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>05.파이썬 자료 구조, Collections</title>
+  <meta name="description" content="파이썬에서 제공하는 자료구조">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/17/05.python_data_structure.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">05.파이썬 자료 구조, Collections</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="파이썬에서-제공하는-자료구조">파이썬에서 제공하는 자료구조</h2>
+
+<ul>
+  <li><a href="#3-Tuple">Tuple</a></li>
+  <li><a href="#4-Set">Set</a></li>
+  <li><a href="#5-Dictionary">Dictionary</a></li>
+  <li><a href="#6-Collections-모듈">Collections 모듈</a>
+    <ul>
+      <li><a href="#61-deque">deque</a></li>
+      <li><a href="#62-OrderedDict">OrderedDict</a></li>
+      <li><a href="#63-defaultdict">defaultdict</a></li>
+      <li><a href="#64-Counter">Counter</a></li>
+      <li><a href="#65-namedtuple">namedtuple</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="1-stack">1. Stack</h3>
+
+<ul>
+  <li>Last In First Out (LIFO)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">word</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Input a word:"</span><span class="p">)</span>
+<span class="n">word_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_list</span><span class="p">)):</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word_list</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="2-queue">2. Queue</h3>
+
+<ul>
+  <li>First In First Out(FIFO)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="3-tuple">3. Tuple</h3>
+
+<ul>
+  <li>리스트와 비슷하지만, 데이터 변경이 안됨</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<span class="c1">#t[2] = 4  # 데이터 변경이 안되서 에러가 발생함
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="c1"># 요소가 하나인 튜플을 만들때는 ,를 붙여줌
+</span><span class="k">print</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="4-set">4. Set</h3>
+
+<ul>
+  <li>데이터 중복을 허용하지 않음</li>
+  <li>순서가 없음</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># 없는 항목을 제거하면 error
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># 없는 항목을 제거하면 pass
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">|</span> <span class="n">s2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">&amp;</span> <span class="n">s2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s1</span> <span class="o">-</span> <span class="n">s2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="5-dictionary">5. Dictionary</h3>
+
+<ul>
+  <li>Key-Value 형태로 저장</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">student_info</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20190001</span><span class="p">:</span> <span class="s">"Tom"</span><span class="p">,</span> <span class="mi">20190002</span><span class="p">:</span> <span class="s">"Jane"</span><span class="p">,</span> <span class="mi">20190003</span> <span class="p">:</span> <span class="s">"Mike"</span><span class="p">,</span> <span class="mi">20190004</span><span class="p">:</span> <span class="s">"Jessica"</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">student_info</span><span class="p">[</span><span class="mi">20190002</span><span class="p">])</span>
+
+<span class="n">student_info</span><span class="p">[</span><span class="mi">20190002</span><span class="p">]</span> <span class="o">=</span> <span class="s">"Kate"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">student_info</span><span class="p">)</span>
+
+<span class="n">student_info</span><span class="p">[</span><span class="mi">20190005</span><span class="p">]</span> <span class="o">=</span> <span class="s">'David'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">student_info</span><span class="p">)</span>
+
+<span class="n">country_code</span> <span class="o">=</span> <span class="p">{</span><span class="s">'USA'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'Korea'</span><span class="p">:</span> <span class="mi">82</span><span class="p">,</span> <span class="s">'China'</span><span class="p">:</span> <span class="mi">86</span><span class="p">,</span> <span class="s">'Malaysia'</span><span class="p">:</span> <span class="mi">60</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">country_code</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">country_code</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="n">country_code</span><span class="p">[</span><span class="s">'German'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">49</span>
+<span class="k">print</span><span class="p">(</span><span class="n">country_code</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">country_code</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">country_code</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="c1"># 튜플 형태의 리스트로 만들어줌
+</span><span class="k">print</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">country_code</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Key:'</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Value:'</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Korea'</span> <span class="ow">in</span> <span class="n">country_code</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">85</span> <span class="ow">in</span> <span class="n">country_code</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h3 id="6-collections-모듈">6. Collections 모듈</h3>
+
+<ul>
+  <li>위 자료구조를 지원하는 파이썬 내장 모듈</li>
+  <li>기본 자료구조를 확장하여 미리 제작하고, 파이썬 모듈로 제공</li>
+  <li>deque, OrderedDict, defaultdict, Counter, namedtuple 등</li>
+</ul>
+
+<h4 id="61-deque">6.1 deque</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="n">deque_list</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">deque_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="n">deque_list</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">deque_list</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="o">.</span><span class="n">popleft</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="o">.</span><span class="n">popleft</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+
+<span class="n">deque_list</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">deque_list</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="n">deque_list</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 순서를 오른쪽으로 2번 회전
+</span><span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="n">deque_list</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># 순서를 왼쪽으로 2번 회전
+</span><span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="n">deque_list</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>  <span class="c1"># 오른쪽에 붙임 순서 대로
+</span><span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+
+<span class="n">deque_list</span><span class="o">.</span><span class="n">extendleft</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>  <span class="c1"># 왼쪽에 붙임 역순으로
+</span><span class="k">print</span><span class="p">(</span><span class="n">deque_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="62-ordereddict">6.2 OrderedDict</h4>
+
+<ul>
+  <li>순서를 보장하는 dictionary</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">d</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">d</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">d</span><span class="p">[</span><span class="s">'z'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">d</span><span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+<span class="k">print</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">od</span><span class="p">)</span>
+
+<span class="n">od_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">od</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">od_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="63-defaultdict">6.3 defaultdict</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">'first'</span><span class="p">])</span>
+
+<span class="n">d2</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">d2</span><span class="p">[</span><span class="s">'a'</span><span class="p">])</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'yellow'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'blue'</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s">'yellow'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s">'blue'</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="s">'red'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">d3</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">d3</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 결과 값
+</span><span class="mi">100</span>
+<span class="mi">0</span>
+<span class="n">dict_items</span><span class="p">([(</span><span class="s">'yellow'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="p">(</span><span class="s">'blue'</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="p">(</span><span class="s">'red'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+</code></pre></div></div>
+
+<h4 id="64-counter">6.4 Counter</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="s">'scientist'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">'i'</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="s">'n'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 결과 값
+</span><span class="n">Counter</span><span class="p">({</span><span class="s">'s'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'i'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'t'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'c'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'e'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'n'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>elements
+    <ul>
+      <li>개수 만큼 풀어줌</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">({</span><span class="s">'red'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">'blue'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 결과</span>
+Counter<span class="o">({</span><span class="s1">'red'</span>: 4, <span class="s1">'blue'</span>: 2<span class="o">})</span>
+<span class="o">[</span><span class="s1">'red'</span>, <span class="s1">'red'</span>, <span class="s1">'red'</span>, <span class="s1">'red'</span>, <span class="s1">'blue'</span>, <span class="s1">'blue'</span><span class="o">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>키워드 방식</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">cats</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">dogs</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">elements</span><span class="p">()))</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 결과</span>
+Counter<span class="o">({</span><span class="s1">'dogs'</span>: 6, <span class="s1">'cats'</span>: 4<span class="o">})</span>
+<span class="o">[</span><span class="s1">'cats'</span>, <span class="s1">'cats'</span>, <span class="s1">'cats'</span>, <span class="s1">'cats'</span>, <span class="s1">'dogs'</span>, <span class="s1">'dogs'</span>, <span class="s1">'dogs'</span>, <span class="s1">'dogs'</span>, <span class="s1">'dogs'</span>, <span class="s1">'dogs'</span><span class="o">]</span>
+</code></pre></div></div>
+
+<ul>
+  <li>subtract</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span>  <span class="c1"># 더하기
+</span><span class="k">print</span><span class="p">(</span><span class="n">c</span> <span class="o">&amp;</span> <span class="n">d</span><span class="p">)</span>  <span class="c1"># 적은 수
+</span><span class="k">print</span><span class="p">(</span><span class="n">c</span> <span class="o">|</span> <span class="n">d</span><span class="p">)</span>  <span class="c1"># 큰 수
+</span>
+<span class="n">c</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>   <span class="c1"># 빼기
+</span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 결과</span>
+Counter<span class="o">({</span><span class="s1">'a'</span>: 5, <span class="s1">'b'</span>: 4, <span class="s1">'c'</span>: 3, <span class="s1">'d'</span>: 2<span class="o">})</span>
+Counter<span class="o">({</span><span class="s1">'b'</span>: 2, <span class="s1">'a'</span>: 1<span class="o">})</span>
+Counter<span class="o">({</span><span class="s1">'a'</span>: 4, <span class="s1">'d'</span>: 4, <span class="s1">'c'</span>: 3, <span class="s1">'b'</span>: 2<span class="o">})</span>
+Counter<span class="o">({</span><span class="s1">'a'</span>: 3, <span class="s1">'b'</span>: 0, <span class="s1">'c'</span>: <span class="nt">-3</span>, <span class="s1">'d'</span>: <span class="nt">-6</span><span class="o">})</span>
+</code></pre></div></div>
+
+<h3 id="65-namedtuple">6.5 namedtuple</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">Point</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">'my_point'</span><span class="p">,</span> <span class="p">[</span><span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="연습">연습</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 풀이 방법 1
+</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="n">text</span> <span class="o">=</span> <span class="s">"""A press release is the quickest and easiest way to get free publicity. If
+	 well written, a press release can result in multiple published articles about your
+	firm and its products. And that can mean new prospects contacting you
+    asking you to sell to them. …."""</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+
+
+
+<span class="n">text_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">text_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1"># 디폴트 값이 0인 dictionary
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">text_set</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">word_set</span> <span class="ow">in</span> <span class="n">text_set</span><span class="p">:</span>  <span class="c1">## [a, b, c, d]
+</span>    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>      <span class="c1">## [a, a, a, b, b, c, c, d]
+</span>        <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="n">word_set</span><span class="p">:</span>    <span class="c1">##
+</span>            <span class="n">text_dict</span><span class="p">[</span><span class="n">word_set</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+
+<span class="n">text_dict</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">text_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">text_dict</span><span class="p">)</span>
+
+
+<span class="c1"># 풀이 방법 2
+</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+
+<span class="n">text</span> <span class="o">=</span> <span class="s">"""A press release is the quickest and easiest way to get free publicity. If
+	 well written, a press release can result in multiple published articles about your
+	firm and its products. And that can mean new prospects contacting you
+    asking you to sell to them. …."""</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+
+<span class="c1"># 풀이 방법 3
+</span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+
+<span class="n">text</span> <span class="o">=</span> <span class="s">"""A press release is the quickest and easiest way to get free publicity. If
+	 well written, a press release can result in multiple published articles about your
+	firm and its products. And that can mean new prospects contacting you
+    asking you to sell to them. …."""</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">word_count</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="n">word_count</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_count</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">word_count</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

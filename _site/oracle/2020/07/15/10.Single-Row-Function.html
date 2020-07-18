@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>10.Single Row Function</title>
+  <meta name="description" content="Single Row Function">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/15/10.Single-Row-Function.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">10.Single Row Function</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 15, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="single-row-function">Single Row Function</h2>
+
+<ul>
+  <li>하나의 Row를 입력으로 받는 함수</li>
+</ul>
+
+<h3 id="1-문자열-함수">1. 문자열 함수</h3>
+
+<ul>
+  <li>INITCAP : 첫글자만 대문자로 출력</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">INITCAP</span><span class="p">(</span><span class="n">ENAME</span><span class="p">),</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>LOWWER(s) : 소문자로 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">INITCAP</span><span class="p">(</span><span class="n">ENAME</span><span class="p">),</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>UPPER(s) : 대문자로 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">INITCAP</span><span class="p">(</span><span class="n">ENAME</span><span class="p">),</span> <span class="n">JOB</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>LAPD(s1, n, s2): 문자열의 왼쪽 채움
+    <ul>
+      <li>n : 길이</li>
+      <li>s2 : 채울 문자</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">LPAD</span><span class="p">(</span><span class="n">ENAME</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>RAPD(s1, n, s2): 문자열의 오른쪽 채움</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">RPAD</span><span class="p">(</span><span class="n">ENAME</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>SUBSTR(s1, m, n) : 부분 문자열, m번째부터 길이 n인 문자열 반환</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">SUBSTR</span><span class="p">(</span><span class="n">HIREDATE</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>TRANSLATE(s, from, to) : s에서 from 문자열의 각 문자를 to 문자열의 각 문자로 변환</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">TRANSLATE</span><span class="p">(</span><span class="n">JOB</span><span class="p">,</span> <span class="s1">'CLA'</span><span class="p">,</span> <span class="s1">'321'</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>CONCAT(s1, s2) : 문자열 결합</li>
+  <li>LTRIM(s, c) : 문자열 왼쪽 c문자열 제거</li>
+  <li>RTRIM(s, c): 문자열 오른쪽 c문자열 제거</li>
+  <li>CHR(n): ASCII값이 n인 문자 반환</li>
+  <li>REPLACE(s, p, r): 문자열 치환, s속의 p 문자열을 r로 치환</li>
+  <li>ASCII(s): ASCII값 반환</li>
+  <li>INSTR(s1, s2, m, n): 문자열 검색, s1의 m번째부터 s2 문자열이 나타내는 n번째 위치 반환</li>
+  <li>LENGTH(s): 문자열 길이 반환</li>
+</ul>
+
+<h3 id="2-숫자-함수">2. 숫자 함수</h3>
+
+<ul>
+  <li>ABS(n): 절대값</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">ABS</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>CEIL(n): n보다 크거나 같은 최소 정수 (예제 결과 값: -2)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">CEIL</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>FLOOR(n): n보다 작거나 같은 최대 정수 (예제 결과 값: -3)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">FLOOR</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>MOD(m, n): m을 n으로 나눈 나머지</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">MOD</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>POWER(m, n): m의 n승</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">POWER</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>ROUND(m, n): 소수점아래 n자리까지 반올림</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ROUND</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">567</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>TRUNC(m, n): 소수점아래 n자리미만 버림</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TRUNC</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="mi">567</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>SIGN(n): 부호(1, 0, -1)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">SIGN</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="3-date-타입">3. DATE 타입</h3>
+
+<ul>
+  <li>century, year, month, day, hours, minutes, seconds 등 포함한 내부 표현(7Bytes)</li>
+  <li>Date Format에 따라 출력, 입력됨</li>
+  <li>기본 Date Format: ‘RR/MM/DD’ or ‘DD-MON-RR’</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">value</span>
+<span class="k">FROM</span> <span class="n">nls_session_parameters</span>
+<span class="k">WHERE</span> <span class="k">parameter</span> <span class="o">=</span> <span class="s1">'NLS_DATE_FORMAT'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Date Format 변경
+    <ul>
+      <li>user에서 변경할 경우 세션을 종료 후 다시 접속하면 원래 상태로 돌아와 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">session</span> <span class="k">SET</span> <span class="n">NLS_DATE_FORMAT</span> <span class="o">=</span> <span class="s1">'YYYY-MM-DD'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="31-date-함수">3.1 DATE 함수</h4>
+
+<ul>
+  <li>ADD_MONTHS(d, n) : d날짜에 n달을 더함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ADD_MONTHS</span><span class="p">(</span><span class="n">HIREDATE</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>LAST_DAY(d) : d의 달의 마지막 날</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">LAST_DAY</span><span class="p">(</span><span class="n">HIREDATE</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>MONTHS_BETWEEN(d1, d2): d1, d2사이의 달 수</li>
+  <li>NEW_TIME(d, z1, z2): z1타임존의 d에서 z2타임존의 날짜 생성</li>
+  <li>NEXT_DAY(d, day): d날 후의 첫 day요일의 날짜</li>
+  <li>ROUND(d, fmt): fmt에 따른 날짜 반올림</li>
+  <li>TURNC(d, fmt): fmt에 따른 날짜반올림</li>
+  <li>SYSDATE: 현재 날짜 시간 반환</li>
+</ul>
+
+<h3 id="4-변환-함수">4. 변환 함수</h3>
+
+<ul>
+  <li>묵시적 변환: 변환함수 없이도 어느정도는 자동으로 변환됨</li>
+  <li>
+    <p>자동으로 변환되지 않을때 명시적인 변환 함수 사용</p>
+  </li>
+  <li>TO_DATE(s, fmt) : 문자열에서 Date 타입으로 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TO_DATE</span><span class="p">(</span><span class="s1">'20190305'</span><span class="p">,</span> <span class="s1">'YYYY-MM-DD'</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>TO_CHAR(n) : Date or 숫자 타입에서 문자열로 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">HIREDATE</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">MGR</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>TO_NUMBER(S) : 문자열에서 숫자로 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TO_NUMBER</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">dual</span><span class="p">;</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

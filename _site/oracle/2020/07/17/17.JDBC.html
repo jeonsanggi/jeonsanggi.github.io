@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>17.JDBC</title>
+  <meta name="description" content="JDBC(Java DataBase Connectivity)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/17/17.JDBC.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">17.JDBC</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="jdbcjava-database-connectivity">JDBC(Java DataBase Connectivity)</h2>
+
+<ul>
+  <li>자바에서 데이터베이스에 접속할 수 있도록 하는 자바 API</li>
+  <li>인터페이스로 작성되어 있음</li>
+</ul>
+
+<h3 id="1eclipse에-oracle-jdbc-설정">1.Eclipse에 Oracle JDBC 설정</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.프로젝트 우클릭
+2.Properties
+3.Java Build Path
+4.Libraries
+5.Classpath에 Add external JARs..
+6.ojdbc8.jar 추가
+</code></pre></div></div>
+
+<h3 id="2-java에서--데이터베이스-연결">2. Java에서  데이터베이스 연결</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+
+<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="c1">// 문자열을 많이 사용하고 더할 때 StringBuffer를 사용</span>
+<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+<span class="c1">// sql 쿼리문을 만들고 인자에 값을 넣어주기 위해 사용</span>
+<span class="nc">PreparedStatement</span> <span class="n">pStmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Su"</span><span class="o">;</span>
+<span class="nc">ResultSet</span> <span class="n">rSet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">lastName</span><span class="o">,</span> <span class="n">email</span><span class="o">,</span> <span class="n">phoneNumber</span><span class="o">,</span> <span class="n">hireDate</span><span class="o">;</span>
+
+<span class="k">try</span> <span class="o">{</span>
+    <span class="c1">// 자바의 리플렉션 기법</span>
+    <span class="c1">// Class는 클래스의 메타 정보를 관리해줌</span>
+    <span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="3-sql-작성">3. SQL 작성</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"SELECT FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE "</span><span class="o">);</span>
+<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"FROM EMPLOYEES "</span><span class="o">);</span>
+<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"WHERE FIRST_NAME LIKE ? OR LAST_NAME = ?"</span><span class="o">);</span>
+
+<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+</code></pre></div></div>
+
+<h3 id="4-preparedstatement와-resultset">4. PreparedStatement와 ResultSet</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+    <span class="n">pStmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+    <span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+    <span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+
+    <span class="n">rSet</span> <span class="o">=</span> <span class="n">pStmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+
+    <span class="k">while</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">firstName</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">lastName</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+        <span class="n">phoneNumber</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+        <span class="n">hireDate</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getDate</span><span class="o">(</span><span class="mi">5</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+
+        <span class="n">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">"-"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">lastName</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">email</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">phoneNumber</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">hireDate</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">rSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">pStmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+    <span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="5-전체-코드">5. 전체 코드</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProjetMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">//jdbc 접속 url</span>
+		<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="c1">// 문자열을 많이 사용하고 더할 때 StringBuffer를 사용</span>
+		<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+		<span class="c1">// sql 쿼리문을 만들고 인자에 값을 넣어주기 위해 사용</span>
+		<span class="nc">PreparedStatement</span> <span class="n">pStmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Su"</span><span class="o">;</span>
+		<span class="nc">ResultSet</span> <span class="n">rSet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="n">lastName</span><span class="o">,</span> <span class="n">email</span><span class="o">,</span> <span class="n">phoneNumber</span><span class="o">,</span> <span class="n">hireDate</span><span class="o">;</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="c1">// 자바의 리플렉션 기법</span>
+			<span class="c1">// Class는 클래스의 메타 정보를 관리해줌</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"SELECT FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"FROM EMPLOYEES "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"WHERE FIRST_NAME LIKE ? OR LAST_NAME = ?"</span><span class="o">);</span>
+
+		<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">pStmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+
+			<span class="n">rSet</span> <span class="o">=</span> <span class="n">pStmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+
+			<span class="k">while</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">firstName</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+				<span class="n">lastName</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+				<span class="n">email</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+				<span class="n">phoneNumber</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+				<span class="n">hireDate</span> <span class="o">=</span> <span class="n">rSet</span><span class="o">.</span><span class="na">getDate</span><span class="o">(</span><span class="mi">5</span><span class="o">).</span><span class="na">toString</span><span class="o">();</span>
+
+				<span class="n">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">.</span><span class="na">replace</span><span class="o">(</span><span class="s">"."</span><span class="o">,</span> <span class="s">"-"</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">firstName</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">lastName</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">email</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">phoneNumber</span><span class="o">);</span>
+
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">hireDate</span><span class="o">);</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">rSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">pStmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>
+
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="예제2-1-java-bean-생성">예제2-1. Java Bean 생성</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employees</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">departmentID</span><span class="o">;</span>
+
+
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getEmployeeID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmployeeID</span><span class="o">(</span><span class="kt">long</span> <span class="n">employeeID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">employeeID</span> <span class="o">=</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="nc">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHireDate</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHireDate</span><span class="o">(</span><span class="nc">String</span> <span class="n">hireDate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">hireDate</span> <span class="o">=</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getJobID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setJobID</span><span class="o">(</span><span class="nc">String</span> <span class="n">jobID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jobID</span> <span class="o">=</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCommissionPct</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCommissionPct</span><span class="o">(</span><span class="kt">double</span> <span class="n">commissionPct</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">commissionPct</span> <span class="o">=</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getManagerID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setManagerID</span><span class="o">(</span><span class="kt">long</span> <span class="n">managerID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">managerID</span> <span class="o">=</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getDepartmentID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDepartmentID</span><span class="o">(</span><span class="kt">long</span> <span class="n">departmentID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">departmentID</span> <span class="o">=</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="예제2-2-main">예제2-2. Main</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employees</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProjetMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">//jdbc 접속 url</span>
+		<span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+
+		<span class="nc">Connection</span> <span class="n">conn</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="c1">// 문자열을 많이 사용하고 더할 때 StringBuffer를 사용</span>
+		<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+		<span class="c1">// sql 쿼리문을 만들고 인자에 값을 넣어주기 위해 사용</span>
+		<span class="nc">PreparedStatement</span> <span class="n">pStmt</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="nc">String</span> <span class="n">name</span> <span class="o">=</span> <span class="s">"Su"</span><span class="o">;</span>
+		<span class="nc">ResultSet</span> <span class="n">rSet</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="c1">// 자바의 리플렉션 기법</span>
+			<span class="c1">// Class는 클래스의 메타 정보를 관리해줌</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"SELECT FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"FROM EMPLOYEES "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"WHERE FIRST_NAME LIKE ? OR LAST_NAME = ?"</span><span class="o">);</span>
+
+		<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+		<span class="nc">Employees</span> <span class="n">employee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Employees</span><span class="o">();</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">pStmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+
+			<span class="n">rSet</span> <span class="o">=</span> <span class="n">pStmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+
+			<span class="k">while</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setHireDate</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getLastName</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getHireDate</span><span class="o">());</span>
+				<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="k">try</span> <span class="o">{</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">rSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">pStmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+					<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+			<span class="o">}</span>		
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="2-daodata-access-object">2. DAO(Data Access Object)</h3>
+
+<ul>
+  <li>데이터베이스 접근에 관련된 객체</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">dao</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HrDao</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">Connection</span> <span class="n">conn</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">ResultSet</span> <span class="n">rSet</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">PreparedStatement</span> <span class="n">pStmt</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDriver</span><span class="o">(){</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">closeConnection</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">rSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">pStmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="nf">getEmployees</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;();</span>
+
+		<span class="n">getConnection</span><span class="o">();</span>
+
+		<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"SELECT FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"FROM EMPLOYEES "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"WHERE FIRST_NAME LIKE ? OR LAST_NAME LIKE ?"</span><span class="o">);</span>
+
+		<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">pStmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+
+			<span class="n">rSet</span> <span class="o">=</span> <span class="n">pStmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+			<span class="nc">Employee</span> <span class="n">employee</span><span class="o">;</span>
+
+			<span class="k">while</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">employee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Employee</span><span class="o">();</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setHireDate</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+
+				<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">employee</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="n">closeConnection</span><span class="o">();</span>		
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">employees</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">departmentID</span><span class="o">;</span>
+
+
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getEmployeeID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmployeeID</span><span class="o">(</span><span class="kt">long</span> <span class="n">employeeID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">employeeID</span> <span class="o">=</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="nc">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHireDate</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHireDate</span><span class="o">(</span><span class="nc">String</span> <span class="n">hireDate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">hireDate</span> <span class="o">=</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getJobID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setJobID</span><span class="o">(</span><span class="nc">String</span> <span class="n">jobID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jobID</span> <span class="o">=</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCommissionPct</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCommissionPct</span><span class="o">(</span><span class="kt">double</span> <span class="n">commissionPct</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">commissionPct</span> <span class="o">=</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getManagerID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setManagerID</span><span class="o">(</span><span class="kt">long</span> <span class="n">managerID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">managerID</span> <span class="o">=</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getDepartmentID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDepartmentID</span><span class="o">(</span><span class="kt">long</span> <span class="n">departmentID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">departmentID</span> <span class="o">=</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.dao.HrDao</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HrMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">HrDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HrDao</span><span class="o">();</span>
+		<span class="n">dao</span><span class="o">.</span><span class="na">setDriver</span><span class="o">();</span>
+
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;();</span>
+
+		<span class="n">employees</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">getEmployees</span><span class="o">(</span><span class="s">"Su"</span><span class="o">);</span>
+
+		<span class="k">for</span><span class="o">(</span><span class="nc">Employee</span> <span class="n">employee</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getLastName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getHireDate</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.dao.HrDao</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HrMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">HrDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HrDao</span><span class="o">();</span>
+		<span class="n">dao</span><span class="o">.</span><span class="na">setDriver</span><span class="o">();</span>
+
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;();</span>
+
+		<span class="n">employees</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">getEmployees</span><span class="o">(</span><span class="s">"Su"</span><span class="o">);</span>
+
+		<span class="k">for</span><span class="o">(</span><span class="nc">Employee</span> <span class="n">employee</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getLastName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getHireDate</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h2 id="jdbc-singleton">JDBC Singleton</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// HrDao.java</span>
+<span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">dao</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HrDao</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">HrDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HrDao</span><span class="o">();</span>
+	<span class="kd">private</span> <span class="nc">Connection</span> <span class="n">conn</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">ResultSet</span> <span class="n">rSet</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">PreparedStatement</span> <span class="n">pStmt</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="nc">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="nf">HrDao</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="nc">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="nc">HrDao</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">dao</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">getConnection</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="na">getConnection</span><span class="o">(</span><span class="n">url</span><span class="o">,</span> <span class="n">username</span><span class="o">,</span> <span class="n">password</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">closeConnection</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">rSet</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">pStmt</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="n">conn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="nf">getEmployees</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;();</span>
+
+		<span class="n">getConnection</span><span class="o">();</span>
+
+		<span class="nc">StringBuffer</span> <span class="n">sb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuffer</span><span class="o">();</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"SELECT FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"FROM EMPLOYEES "</span><span class="o">);</span>
+		<span class="n">sb</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"WHERE FIRST_NAME LIKE ? OR LAST_NAME LIKE ?"</span><span class="o">);</span>
+
+		<span class="nc">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="n">sb</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">pStmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="na">prepareStatement</span><span class="o">(</span><span class="n">sql</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+			<span class="n">pStmt</span><span class="o">.</span><span class="na">setString</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"%"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">"%"</span><span class="o">);</span>
+
+			<span class="n">rSet</span> <span class="o">=</span> <span class="n">pStmt</span><span class="o">.</span><span class="na">executeQuery</span><span class="o">();</span>
+			<span class="nc">Employee</span> <span class="n">employee</span><span class="o">;</span>
+
+			<span class="k">while</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">next</span><span class="o">())</span> <span class="o">{</span>
+				<span class="n">employee</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Employee</span><span class="o">();</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setLastName</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">2</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setEmail</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">4</span><span class="o">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="na">setHireDate</span><span class="o">(</span><span class="n">rSet</span><span class="o">.</span><span class="na">getString</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
+
+				<span class="n">employees</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">employee</span><span class="o">);</span>
+			<span class="o">}</span>
+		<span class="o">}</span><span class="k">catch</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span><span class="k">finally</span> <span class="o">{</span>
+			<span class="n">closeConnection</span><span class="o">();</span>		
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">employees</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">main</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.dao.HrDao</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HrMain</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">HrDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="nc">HrDao</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+
+		<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="nc">Employee</span><span class="o">&gt;();</span>
+
+		<span class="n">employees</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">getEmployees</span><span class="o">(</span><span class="s">"Su"</span><span class="o">);</span>
+
+		<span class="k">for</span><span class="o">(</span><span class="nc">Employee</span> <span class="n">employee</span> <span class="o">:</span> <span class="n">employees</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"First Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Last Name: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getLastName</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"email: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getEmail</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Phone Number: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hire Date: "</span> <span class="o">+</span> <span class="n">employee</span><span class="o">.</span><span class="na">getHireDate</span><span class="o">());</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">jremind</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">email</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">double</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kt">long</span> <span class="n">departmentID</span><span class="o">;</span>
+
+
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getEmployeeID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmployeeID</span><span class="o">(</span><span class="kt">long</span> <span class="n">employeeID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">employeeID</span> <span class="o">=</span> <span class="n">employeeID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getLastName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setLastName</span><span class="o">(</span><span class="nc">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getEmail</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmail</span><span class="o">(</span><span class="nc">String</span> <span class="n">email</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="nc">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getHireDate</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHireDate</span><span class="o">(</span><span class="nc">String</span> <span class="n">hireDate</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">hireDate</span> <span class="o">=</span> <span class="n">hireDate</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getJobID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setJobID</span><span class="o">(</span><span class="nc">String</span> <span class="n">jobID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">jobID</span> <span class="o">=</span> <span class="n">jobID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getSalary</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setSalary</span><span class="o">(</span><span class="kt">double</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">double</span> <span class="nf">getCommissionPct</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCommissionPct</span><span class="o">(</span><span class="kt">double</span> <span class="n">commissionPct</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">commissionPct</span> <span class="o">=</span> <span class="n">commissionPct</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getManagerID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setManagerID</span><span class="o">(</span><span class="kt">long</span> <span class="n">managerID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">managerID</span> <span class="o">=</span> <span class="n">managerID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">long</span> <span class="nf">getDepartmentID</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDepartmentID</span><span class="o">(</span><span class="kt">long</span> <span class="n">departmentID</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">departmentID</span> <span class="o">=</span> <span class="n">departmentID</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>jar 파일: 클래스 파일을 묶어서 배포할 때 사용하는 파일</p>
+
+<p>java bean : getter setter로 구성되며 필드에 잠시 데이터를 가지고 있는 용도로 사용</p>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

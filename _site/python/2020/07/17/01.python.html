@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>01.Python</title>
+  <meta name="description" content="Python">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/17/01.python.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">01.Python</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="python">Python</h2>
+
+<ul>
+  <li>Interpreter</li>
+  <li>Object Oriented</li>
+  <li>Dynamic Tpyed
+    <ul>
+      <li>non-type binding</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="파이썬-철학">파이썬 철학</h3>
+
+<p>https://www.python.org/dev/peps/pep-0020/</p>
+
+<ul>
+  <li>아름다운게 추한 것보다 낫다. (Beautiful is better than ugly.)</li>
+  <li>명시적인 것이 암시적인 것 보다 낫다. (Explicit is better than implicit.)</li>
+  <li>단순함이 복잡함보다 낫다. (Simple is better than complex.)</li>
+  <li>복잡함이 난해한 것보다 낫다. (Complex is better than complicated.)</li>
+  <li>가독성이 중요하다. (Readability counts.)</li>
+</ul>
+
+<h3 id="1-python-기본-문법">1. Python 기본 문법</h3>
+
+<h4 id="11-mod-연산">1.1 Mod 연산</h4>
+
+<ul>
+  <li>A%B =&gt; (A+B)%B</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="mi">7</span><span class="o">%</span><span class="mi">2</span><span class="p">)</span> <span class="c1">## 1
+</span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">%</span><span class="mi">5</span><span class="p">)</span> <span class="c1">## 1
+</span><span class="k">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">%</span><span class="mi">5</span><span class="p">)</span> <span class="c1">## 4
+</span><span class="k">print</span><span class="p">(</span><span class="mi">1</span><span class="o">%-</span><span class="mi">5</span><span class="p">)</span> <span class="c1">## -4
+</span></code></pre></div></div>
+
+<h4 id="12-자료형-변환">1.2 자료형 변환</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">## &lt;class 'float'&gt;
+</span></code></pre></div></div>
+
+<h4 id="13-주석">1.3 주석</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 한줄 단위 주석
+</span><span class="s">"""
+여러줄 주석
+"""</span>
+</code></pre></div></div>
+
+<h4 id="14-none">1.4 None</h4>
+
+<ul>
+  <li>None is for non-exist value</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">assert</span> <span class="n">x</span> <span class="o">==</span> <span class="bp">None</span> <span class="c1"># pytonic 하지 않음
+</span><span class="k">assert</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span> <span class="c1"># Pythonic 함
+</span></code></pre></div></div>
+
+<ul>
+  <li>파이썬이나 사용하는 false
+    <ul>
+      <li>False, None, [], {}, “”, set(), 0, 0.0</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">"hello"</span>
+<span class="n">first_char</span> <span class="o">=</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="s">""</span>
+<span class="n">first_char</span> <span class="o">=</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="15-조건문">1.5 조건문</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 예제 1
+</span><span class="n">score</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Enter your score: "</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s">'A'</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s">'B'</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s">'C'</span>
+<span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s">'D'</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="s">'F'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 예제2
+</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">10</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="16-반복문">1.6 반복문</h4>
+
+<ul>
+  <li>for n in range([start,] end, [step] )</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'No.'</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'No.'</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'No.'</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이중 for 문</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'banana'</span><span class="p">,</span> <span class="s">'pineapple'</span><span class="p">,</span> <span class="s">'mango'</span><span class="p">]:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<ul>
+  <li>while 반복문</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>break</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"End of program"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>continue</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"End of program"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>for-else
+    <ul>
+      <li>for문이 정상적으로 끝났을 때 else문 실행</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span> <span class="k">break</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"End of program"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="17-function">1.7 Function</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="err">함수 이름 (인자1, 인자2,....):
+    실행문 1
+    실행문 2
+    </span><span class="nf">return</span> <span class="err">반환값</span> <span class="p">(</span><span class="err">옵션</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">shopping_cart</span><span class="p">(</span><span class="n">goods</span><span class="p">):</span>
+    <span class="n">goods</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'coupon'</span><span class="p">)</span>
+    <span class="n">goods</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"In shopping_cart:"</span><span class="p">,</span> <span class="n">goods</span><span class="p">)</span>
+
+
+<span class="n">shopping_list</span> <span class="o">=</span> <span class="p">[</span><span class="s">'bean'</span><span class="p">,</span> <span class="s">'salt'</span><span class="p">,</span> <span class="s">'beef'</span><span class="p">]</span>
+<span class="n">shopping_cart</span><span class="p">(</span><span class="n">shopping_list</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Goods I bought:"</span><span class="p">,</span> <span class="n">shopping_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="18-assert">1.8 assert</h4>
+
+<ul>
+  <li>가정 설정문
+    <ul>
+      <li>함수 값이 제대로 작동하는 지 확인</li>
+      <li>방어적 프로그래밍</li>
+      <li>에러나 가는 부분을 설정하여 출력할 수 있음</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">calculate_rectangle_area</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">;</span>
+
+
+<span class="k">assert</span> <span class="n">calculate_rectangle_area</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+<span class="c1">#assert calculate_rectangle_area(2, 3) == 7
+</span>
+<span class="n">rectangle_x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">rectangle_y</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"사각형 x의 길이"</span><span class="p">,</span> <span class="n">rectangle_x</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"사각형 y의 길이"</span><span class="p">,</span> <span class="n">rectangle_y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"사각형의 넓이:"</span><span class="p">,</span> <span class="n">calculate_rectangle_area</span><span class="p">(</span><span class="n">rectangle_x</span><span class="p">,</span> <span class="n">rectangle_y</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<h4 id="19-global">1.9 global</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">f</span><span class="p">():</span>
+    <span class="c1"># 함수에서는 자신만의 스택을 가지고 있음
+</span>    <span class="c1"># local namespace
+</span>    <span class="k">global</span> <span class="n">s</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s">"I love Doosan!"</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+<span class="c1"># global namespace
+</span><span class="n">s</span> <span class="o">=</span> <span class="s">"I love Hanhwa!"</span>
+<span class="n">f</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="110-format">1.10 Format</h4>
+
+<ul>
+  <li>문자열 출력 방식 중 하나</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">print_name</span><span class="p">(</span><span class="n">my_name</span><span class="p">,</span> <span class="n">your_name</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Hello {0}, My name is {1}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">your_name</span><span class="p">,</span> <span class="n">my_name</span><span class="p">))</span>
+
+
+<span class="n">print_name</span><span class="p">(</span><span class="s">"Tom"</span><span class="p">,</span> <span class="s">"Jane"</span><span class="p">)</span>
+<span class="n">print_name</span><span class="p">(</span><span class="n">your_name</span><span class="o">=</span><span class="s">"jane"</span><span class="p">,</span> <span class="n">my_name</span><span class="o">=</span><span class="s">"Tom"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">print_name</span><span class="p">(</span><span class="n">my_name</span><span class="p">,</span> <span class="n">your_name</span><span class="o">=</span><span class="s">"Jane"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Hello {0}, My name is {1}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">your_name</span><span class="p">,</span> <span class="n">my_name</span><span class="p">))</span>
+
+
+<span class="n">print_name</span><span class="p">(</span><span class="s">"Tom"</span><span class="p">,</span> <span class="s">"Jane"</span><span class="p">)</span>
+<span class="n">print_name</span><span class="p">(</span><span class="s">"Tom"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="111-string-method">1.11 String Method</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">"BLACK liVES mATTER"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>    <span class="c1"># 대문자
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>    <span class="c1"># 소문자
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>    <span class="c1"># 각 단어의 첫 문자를 대문자로 변경
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span> <span class="c1"># 첫 문자를 대문자로 변경
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">"T"</span><span class="p">))</span>   <span class="c1"># 특정 단어의 수
+</span><span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">"B"</span><span class="p">))</span> <span class="c1"># 특정 단어로 시작하는지 확인 (True/False)
+</span>
+<span class="n">k</span> <span class="o">=</span> <span class="s">"123"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>  <span class="c1"># 숫자인지 확인 (True/False)
+</span></code></pre></div></div>
+
+<h4 id="112-split">1.12 split</h4>
+
+<ul>
+  <li>구분자를 기준으로 문자열을 나눠서 리스트 만들어 줌</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">items</span> <span class="o">=</span> <span class="s">'zero on two three'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+<span class="n">examples</span> <span class="o">=</span> <span class="s">'python,javascript,sql'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">examples</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">','</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

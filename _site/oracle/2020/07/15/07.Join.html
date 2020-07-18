@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>07.JOIN</title>
+  <meta name="description" content="JOIN">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/15/07.Join.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">07.JOIN</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 15, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="join">JOIN</h2>
+
+<ul>
+  <li>둘 이상의 테이블을 합쳐서 하나의 큰 테이블로 만드는 방법</li>
+  <li>필요성
+    <ul>
+      <li>관계형 모델에서는 데이터의 일관성이나 효율을 위하여 데이터의 중복을 최소화(정규화)</li>
+      <li>Foreign Key를 이용하여 참조</li>
+      <li>정규화된 테이블로부터 결합된 형태의 정보를 추출할 필요가 있음</li>
+    </ul>
+  </li>
+  <li>JOIN의 종류</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>CROSS JOIN</th>
+      <th>모든 가능한 쌍이 나타남</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>THETA JOIN</td>
+      <td>조건(Theta)에 의한 조인 (=, &lt;, &gt; 등)</td>
+    </tr>
+    <tr>
+      <td>EQUI JOIN</td>
+      <td>THETA JOIN에서 조건이 Equal(=)인 경우</td>
+    </tr>
+    <tr>
+      <td>NATURAL JOIN</td>
+      <td>EQUI JOIN에서 중복되는 Column이 하나로 합쳐지는 경우</td>
+    </tr>
+    <tr>
+      <td>INNER JOIN</td>
+      <td>조건을 만족하는 튜플만 나타남</td>
+    </tr>
+    <tr>
+      <td>OUTER JOIN</td>
+      <td>조건을 만족하지 않는 튜플(짝이 없는 튜플)도 NULL과 함께 나타남</td>
+    </tr>
+    <tr>
+      <td>SELF JOIN</td>
+      <td>자기 자신과 조인</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="1-카티션-프로덕트cartesian-product">1. 카티션 프로덕트(Cartesian Product)</h3>
+
+<ul>
+  <li>
+    <p>수학적으로는 카티션 프로덕트, JOIN에서는 CROSS JOIN이라고함</p>
+  </li>
+  <li>
+    <p>두 테이블의 행들의 가능한 모든 쌍이 추출됨</p>
+  </li>
+  <li>
+    <script type="math/tex; mode=display">X*Y = {(x,y)|x∈X and y∈Y}</script>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span><span class="p">,</span> <span class="n">dept</span> <span class="n">d</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="11-equi-join">1.1 EQUI JOIN</h4>
+
+<ul>
+  <li>카티션 프로덕트를 막기 위해 WHERE 절을 이용할 수 있음</li>
+  <li>옛날 표현</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span><span class="p">,</span> <span class="n">dept</span> <span class="n">d</span>
+<span class="k">WHERE</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="12-natural-join">1.2. NATURAL JOIN</h4>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span> <span class="k">NATURAL</span> <span class="k">JOIN</span> <span class="n">dept</span> <span class="n">d</span>
+</code></pre></div></div>
+
+<h4 id="13-inner-join">1.3 INNER JOIN</h4>
+
+<ul>
+  <li>EQUI JOIN의 새로운 표현 방법</li>
+  <li>복잡한 JOIN문에서 on에서 join 조건을 따로 명시하기 때문에 구분하기 편함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span> <span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">dept</span> <span class="n">d</span>
+<span class="k">on</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span> <span class="o">=</span> <span class="s1">'RESEARCH'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>inner를 생략해도 가능</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span> <span class="k">JOIN</span> <span class="n">dept</span> <span class="n">d</span>
+<span class="k">on</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span>
+<span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span> <span class="o">=</span> <span class="s1">'RESEARCH'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="14-outer-join">1.4. OUTER JOIN</h4>
+
+<ul>
+  <li>RIGHT OUTER JOIN : 오른쪽 테이블을 기준</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span> <span class="n">RIGTH</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">dept</span> <span class="n">d</span>
+<span class="k">on</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>LEFT OUTER JOIN : 왼쪽 테이블 기준</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">d</span><span class="p">.</span><span class="n">dname</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">join</span> <span class="n">dept</span> <span class="n">d</span>
+<span class="k">on</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="15-self-join">1.5. SELF JOIN</h4>
+
+<ul>
+  <li>자시 자신과 JOIN</li>
+  <li>Alias를 사용할 수 밖에 없음</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e2</span><span class="p">.</span><span class="n">empno</span><span class="p">,</span> <span class="n">e2</span><span class="p">.</span><span class="n">ENAME</span><span class="p">,</span> <span class="n">e1</span><span class="p">.</span><span class="n">empno</span><span class="p">,</span> <span class="n">e1</span><span class="p">.</span><span class="n">ename</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e1</span> <span class="k">RIGHT</span> <span class="k">join</span> <span class="n">emp</span> <span class="n">e2</span>
+<span class="k">on</span> <span class="n">e2</span><span class="p">.</span><span class="n">mgr</span> <span class="o">=</span> <span class="n">e1</span><span class="p">.</span><span class="n">empno</span><span class="p">;</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

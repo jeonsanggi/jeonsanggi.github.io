@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>04.DML(Data Manipulation Language)</title>
+  <meta name="description" content="DML (Data Manipulation Language)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/14/04.DML.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">04.DML(Data Manipulation Language)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 14, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="dml-data-manipulation-language">DML (Data Manipulation Language)</h2>
+
+<ul>
+  <li>ADD new rows</li>
+  <li>Modify existing rows</li>
+  <li>Remove existing rows</li>
+</ul>
+
+<h3 id="1-insert">1. INSERT</h3>
+
+<ul>
+  <li>묵시적 방법
+    <ul>
+      <li>컬림 이름, 순서 지정하지 않음, 테이블 생성시 정의한 순서에 따라 값 지정</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">author</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'박경리'</span><span class="p">,</span> <span class="s1">'토지 작가'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">author</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="s1">'토지 작가'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>명시적 방법
+    <ul>
+      <li>컬럼 이름 명시적 사용. 지정되지 않은 컬럼 NULL 자동 입력</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">author</span> <span class="p">(</span><span class="n">author_id</span><span class="p">,</span> <span class="n">author_name</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'이문열'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Subquery 이용
+    <ul>
+      <li>타 테이블로부터 데이터 복사(테이블은 이미 존재하여야 함)</li>
+      <li>CREATE TABLE AS SELECT는 없는 테이블을 생성하고 데이터 복사</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">department_usa</span>
+	<span class="k">SELECT</span> <span class="n">department_id</span><span class="p">,</span> <span class="n">department_name</span>
+	<span class="k">FROM</span> <span class="n">deptments</span>
+	<span class="k">WHERE</span> <span class="n">department_name</span><span class="o">=</span><span class="s1">'IT'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-update">2. UPDATE</h3>
+
+<ul>
+  <li>조건을 만족하는 레코드를 변경</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">emp</span>
+<span class="k">SET</span> <span class="n">sal</span> <span class="o">=</span> <span class="n">sal</span><span class="o">+</span><span class="mi">100</span><span class="p">,</span> <span class="n">comm</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">WHERE</span> <span class="n">deptno</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>WHERE 절이 생략되면 모든 레코드에 적용
+    <ul>
+      <li>모든 직원의 월급 10%인상</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">emp</span>
+<span class="k">SET</span> <span class="n">sal</span> <span class="o">=</span> <span class="n">sal</span><span class="o">*</span><span class="mi">1</span><span class="p">.</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Subquery를 이용한 변경
+    <ul>
+      <li>담당업무가 ‘SCOTT’과 같은 사람들의 월급을 부서 최고액으로 변경</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">UPDATE</span> <span class="n">emp</span>
+<span class="k">SET</span> <span class="n">sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">job</span><span class="o">=</span><span class="p">(</span><span class="k">SELECT</span> <span class="n">job</span> <span class="k">FROM</span> <span class="n">emp</span> <span class="k">WHERE</span> <span class="n">ename</span><span class="o">=</span><span class="s1">'SCOTT'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3-delete">3. DELETE</h3>
+
+<ul>
+  <li>조건을 만족하는 레코드 삭제
+    <ul>
+      <li>이름이 ‘SCOTT인 사원 삭제’</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="o">=</span> <span class="s1">'SCOTT'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>조건이 없으면 모든 레코드 삭제
+    <ul>
+      <li>모든 직원 정보 삭제</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Subquery를 이용한 DELETE</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">deptno</span> <span class="k">from</span> <span class="n">dept</span>
+               <span class="k">WHERE</span> <span class="n">dname</span><span class="o">=</span><span class="s1">'SALES'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="4-rollback--commit">4. Rollback &amp; COMMIT</h3>
+
+<ul>
+  <li>INSERT, UPDATE, DELETE 수행시 Rollback Segment에 저장된 상태이기 때문에 Rollback으로 되돌리거나 COMMIT으로 확정할 수 있음</li>
+</ul>
+
+<h3 id="5-참고">5. 참고</h3>
+
+<ul>
+  <li>데이터 입력, 수정시 자주 사용되는 Pseudo 컬럼
+    <ul>
+      <li>User: Current user name</li>
+      <li>SYSDATE: current date and time</li>
+      <li>ROWID: Location information of rows</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">emp</span><span class="p">(</span><span class="n">eno</span><span class="p">,</span> <span class="n">hiredate</span><span class="p">)</span>
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">SYSDATE</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>DEFAULT: default 값이 정의된 컬럼에 기본 값을 입력할 경우 사용할 수 있음</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">book</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s1">'Gems'</span><span class="p">,</span> <span class="k">DEFAULT</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>DELETE와 TRUNCATE의 차이점
+    <ul>
+      <li>Delete는 Rollback 가능 but 대량의 log 등을 유발하므로 TRUNCATE보다 느림</li>
+    </ul>
+  </li>
+  <li>모든 DML문은 Integrity Constraint를 어길 경우 에러 발생</li>
+</ul>
+
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

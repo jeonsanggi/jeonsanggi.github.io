@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>11.클로저(Closure)</title>
+  <meta name="description" content="클로저(Closure)">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/17/11.Closure.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">11.클로저(Closure)</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 17, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="클로저closure">클로저(Closure)</h2>
+
+<ul>
+  <li>First class function을 지원하는 언어의 네임 바인딩 기술</li>
+  <li>어떤 함수를 함수 자신이 가지고 있는 환경과 함께 저장한 레코드
+    <ul>
+      <li>클로저는 함수의 지역 변수 값을 그 함수가 종료된 후에도 기억</li>
+    </ul>
+  </li>
+  <li>함수가 가진 프리변수(Free Variable)를 클로저가 만들어지는 당시의 값과 레퍼런스에 매핑하는 역할
+    <ul>
+      <li>프리변수(Free Variable) : 코드블럭 안에서 사용은 되지만 코드블럭안에서 정의 되지 않은 변수</li>
+    </ul>
+  </li>
+  <li>자신의 영역 밖에서 호출된 함수의 변수값과 레퍼런스를 복사하고 저장</li>
+  <li>함수가 종료된 이후에도 참조가 가능한 것을 <strong>클로저(Closure)</strong>라고 함</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 예제 1
+</span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">log_formatter</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">log_message</span><span class="p">():</span>
+        <span class="n">time_str</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">'</span><span class="si">%</span><span class="s">c'</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">time_str</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'------&gt;'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="c1"># MSG는 프리변수
+</span>
+    <span class="k">return</span> <span class="n">log_message</span>
+
+
+<span class="n">log_msg</span> <span class="o">=</span> <span class="n">log_formatter</span><span class="p">(</span><span class="s">'test log'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">log_msg</span><span class="p">)</span>
+<span class="n">log_msg</span><span class="p">()</span>
+
+<span class="k">del</span> <span class="n">log_formatter</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">log_formatter</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">NameError</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'log_formatter 함수는 존재하지 않습니다.'</span><span class="p">)</span>
+
+<span class="n">log_msg</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>msg는 log_formatter 함수가 종료되면 사라지는 Local namespace의 변수이다. 하지만 log_message를 클로저로 활용하여 함수가 종료된 이후에도 msg의 값을 출력할 수 있다.</p>
+
+<pre><code class="language-PYTHON"># 예제 2
+def outer_func():
+    msg = 'Good Morning!'
+
+    def inner_func():
+        print(msg)
+
+    return inner_func
+
+
+func = outer_func()
+print(func)
+
+print(dir(func)) 				# dir(): 객체로 사용할 수 있는 멤버를 알려 줌
+print(type(func.__closure__)) 	# closure의 type이 tuple인 것을 확인
+print(func.__closure__) 		# closure는 cell 객체로 이루어짐
+print(func.__closure__[0].cell_contents)	# cell_contents로 값을 확인
+</code></pre>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 결과
+</span><span class="o">&lt;</span><span class="n">function</span> <span class="n">outer_func</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">inner_func</span> <span class="n">at</span> <span class="mh">0x000002A8ABB61948</span><span class="o">&gt;</span>
+<span class="p">[</span><span class="s">'__annotations__'</span><span class="p">,</span> <span class="s">'__call__'</span><span class="p">,</span> <span class="s">'__class__'</span><span class="p">,</span> <span class="s">'__closure__'</span><span class="p">,</span> <span class="s">'__code__'</span><span class="p">,</span> <span class="s">'__defaults__'</span><span class="p">,</span> <span class="s">'__delattr__'</span><span class="p">,</span> <span class="s">'__dict__'</span><span class="p">,</span> <span class="s">'__dir__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__eq__'</span><span class="p">,</span> <span class="s">'__format__'</span><span class="p">,</span> <span class="s">'__ge__'</span><span class="p">,</span> <span class="s">'__get__'</span><span class="p">,</span> <span class="s">'__getattribute__'</span><span class="p">,</span> <span class="s">'__globals__'</span><span class="p">,</span> <span class="s">'__gt__'</span><span class="p">,</span> <span class="s">'__hash__'</span><span class="p">,</span> <span class="s">'__init__'</span><span class="p">,</span> <span class="s">'__init_subclass__'</span><span class="p">,</span> <span class="s">'__kwdefaults__'</span><span class="p">,</span> <span class="s">'__le__'</span><span class="p">,</span> <span class="s">'__lt__'</span><span class="p">,</span> <span class="s">'__module__'</span><span class="p">,</span> <span class="s">'__name__'</span><span class="p">,</span> <span class="s">'__ne__'</span><span class="p">,</span> <span class="s">'__new__'</span><span class="p">,</span> <span class="s">'__qualname__'</span><span class="p">,</span> <span class="s">'__reduce__'</span><span class="p">,</span> <span class="s">'__reduce_ex__'</span><span class="p">,</span> <span class="s">'__repr__'</span><span class="p">,</span> <span class="s">'__setattr__'</span><span class="p">,</span> <span class="s">'__sizeof__'</span><span class="p">,</span> <span class="s">'__str__'</span><span class="p">,</span> <span class="s">'__subclasshook__'</span><span class="p">]</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">tuple</span><span class="s">'&gt;</span><span class="err">
+</span><span class="s">(&lt;cell at 0x000002A8ABA399D8: str object at 0x000002A8ABA4D9F0&gt;,)</span><span class="err">
+</span><span class="s">Good Morning!</span><span class="err">
+</span></code></pre></div></div>
+
+<p>dir(func)을 통해서 func에서 객체로 사용할 수 있는 멤버에서 clouser가 있다는 것을 알 수 있다. func.__ closuer __의 타입이 tuplue이고 요소가 한개 인것을 알 수 있다.</p>
+
+<p>그리고, func.__ clouser __의 0번째 요소의 cell_contents를 통해 클로저의 값을 확인 할 수 있다.</p>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

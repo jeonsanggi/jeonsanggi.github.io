@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Developer - page 6</title>
+  <meta name="description" content=""배운 것과 공부한 것을 정리하는 습관을 갖자!"
+">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/page/6/">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="home">
+
+<div class="site-header-container has-cover" style="background-image: url(/assets/header_image.jpg);">
+  <div class="scrim has-cover">
+    <header class="site-header">
+      <h1 class="title">Developer</h1>
+      <p class="subtitle">배운 것과 공부한 것을 정리하는 습관을 갖자!</p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+<ul class="post-list">
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/09.B-Tree.html">09.B-Tree</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Index Primary Key 설정하면 자동으로 Index 생성 Unique 설정하면 자동으로 Index 생성 Index 테이블에 접근할 때 효율성적으로 접근하기 위해 B-Tree(Balanced Tree)를 활용 임의로 Index 테이블을 만들때는 WHERE 절에 많이 접근 되는 컬럼을 생성 Index 테이블을 사용하지 않고 scan 할때는 Table Scan SELECT * FROM tab;은 Index Scan (전체 데이터를 가져와야...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/08.Condition-Expression&Aggregation-Function.html">08.Condition Expression & Aggregation Function</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Conditional Expression 1. CASE ANSI 표준 (모든 DB에서 사용 가능) SELECT ename, job, sal, CASE job WHEN 'CLERK' THEN 1.10*sal WHEN 'MANAGER' THEN 1.15*sal WHEN 'PRESIDENT' THEN 1.20*sal ELSE sal END REVISED_SALARY FROM emp; 2. DECODE ORACLE 전용 함수 SELECT ename, job, sal, DECODE(job, 'CLERK', 1.10*sal, 'MANAGER', 1.15*sal, 'PRESIDENT', 1.20*sal,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/07.Join.html">07.JOIN</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>JOIN 둘 이상의 테이블을 합쳐서 하나의 큰 테이블로 만드는 방법 필요성 관계형 모델에서는 데이터의 일관성이나 효율을 위하여 데이터의 중복을 최소화(정규화) Foreign Key를 이용하여 참조 정규화된 테이블로부터 결합된 형태의 정보를 추출할 필요가 있음 JOIN의 종류 CROSS JOIN 모든 가능한 쌍이 나타남 THETA JOIN 조건(Theta)에 의한 조인 (=, &lt;, &gt; 등) EQUI...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/06.ROLLUP&CUBE.html">06.ROLLUP & CUBE</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>ROLLUP &amp; CUBE ROLLUP과 CUBE는 GRUOP BY와 함께 사용이 된다 1. ROLLUP ROLLUP (A, B): GROUP BY(A, B) &amp; GROUP BY(A) &amp; ALL SELECT loc, yr, sum(sales) FROM salesdata GROUP BY ROLLUP(loc, yr); ## 결과 값 LOC YR SUM(SALES) -------------------- ---------- ---------- 부산 2000 100 부산 2001 150 부산 2002...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/14/05.DDL.html">05.DDL(Data Definition Language)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>DDL(Data Definition Language) CREATE TABLE 테이블 생성 ALTER TABLE 테이블 관련 변경 DROP TABLE 테이블 삭제 RENAME 이름 변경 TRUNCATE 테이블의 모든 데이터 삭제 COMMENT 테이블 설명 추가 1. DDL 종류 1.1. CREATE TABLE CREATE TABLE book ( book_id NUMBER(5), title VARCHAR2(50), author VARCHAR2(10), pub_date DATE ) 1.1.1. Subquery를 이용한...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 14, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  
+</ul>
+
+<nav class="pagination" role="navigation">
+	<p>
+    
+			
+			<a class="newer-posts" href="/page/7/">
+				<span class="fa-stack fa-lg">
+					<i class="fa fa-square fa-stack-2x"></i>
+					<i class="fa fa-angle-double-left fa-stack-1x fa-inverse"></i>
+				</span>
+			</a>
+			
+		
+		<span class="page-number">Page 6 of 10</span>
+		
+		<a class="newer-posts" href="/page/7/">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-angle-double-right fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+		
+	</p>
+</nav>
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>08.Condition Expression & Aggregation Function</title>
+  <meta name="description" content="Conditional Expression">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/15/08.Condition-Expression&Aggregation-Function.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">08.Condition Expression & Aggregation Function</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 15, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="conditional-expression">Conditional Expression</h2>
+
+<h3 id="1-case">1. CASE</h3>
+
+<ul>
+  <li>ANSI 표준 (모든 DB에서 사용 가능)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="k">CASE</span> <span class="n">job</span> <span class="k">WHEN</span> <span class="s1">'CLERK'</span> <span class="k">THEN</span> <span class="mi">1</span><span class="p">.</span><span class="mi">10</span><span class="o">*</span><span class="n">sal</span>
+<span class="k">WHEN</span> <span class="s1">'MANAGER'</span> <span class="k">THEN</span> <span class="mi">1</span><span class="p">.</span><span class="mi">15</span><span class="o">*</span><span class="n">sal</span>
+<span class="k">WHEN</span> <span class="s1">'PRESIDENT'</span> <span class="k">THEN</span> <span class="mi">1</span><span class="p">.</span><span class="mi">20</span><span class="o">*</span><span class="n">sal</span>
+<span class="k">ELSE</span> <span class="n">sal</span> <span class="k">END</span> <span class="n">REVISED_SALARY</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="2-decode">2. DECODE</h3>
+
+<ul>
+  <li>ORACLE 전용 함수</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="n">DECODE</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="s1">'CLERK'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">10</span><span class="o">*</span><span class="n">sal</span><span class="p">,</span>
+<span class="s1">'MANAGER'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">15</span><span class="o">*</span><span class="n">sal</span><span class="p">,</span>
+<span class="s1">'PRESIDENT'</span><span class="p">,</span> <span class="mi">1</span><span class="p">.</span><span class="mi">20</span><span class="o">*</span><span class="n">sal</span><span class="p">,</span>
+<span class="n">sal</span><span class="p">)</span> <span class="n">REVISED_SALARY</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">DEPTNO</span><span class="p">,</span>	<span class="k">sum</span><span class="p">(</span><span class="n">DECODE</span><span class="p">(</span><span class="n">DEPTNO</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="n">DEPTNO10</span><span class="p">,</span>
+				<span class="k">sum</span><span class="p">(</span><span class="n">DECODE</span><span class="p">(</span><span class="n">DEPTNO</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="n">DEPTNO20</span><span class="p">,</span>
+				<span class="k">sum</span><span class="p">(</span><span class="n">DECODE</span><span class="p">(</span><span class="n">DEPTNO</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="n">DEPTNO30</span><span class="p">,</span>
+				<span class="k">sum</span><span class="p">(</span><span class="n">DECODE</span><span class="p">(</span><span class="n">DEPTNO</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="n">DEPTNO40</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DEPTNO</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">DEPTNO</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="aggregation-function">Aggregation Function</h2>
+
+<ul>
+  <li>집계 함수</li>
+</ul>
+
+<h4 id="1-sum">1. SUM</h4>
+
+<ul>
+  <li>sum(c) : c 컬럼의 모든 값을 더함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="2-avg">2. AVG</h4>
+
+<ul>
+  <li>avg(c): c 컬럼의 평균</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">avg</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="3-count">3. COUNT</h4>
+
+<ul>
+  <li>count(c): c 컬럼의 개수</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="n">empno</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="4-max">4. MAX</h4>
+
+<ul>
+  <li>max(c): c 컬럼 값 중 최대 값을 반환</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="5-min">5. MIN</h4>
+
+<ul>
+  <li>min(c): c 컬럼 값 중 최소 값을 반환</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">min</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="6-stddev">6. STDDEV</h4>
+
+<ul>
+  <li>stddey(c): c 컬럼의 표준편차를 반환</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">stddey</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">emp</span><span class="p">;</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

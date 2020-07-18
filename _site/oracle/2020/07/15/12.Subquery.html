@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>12.Subquery</title>
+  <meta name="description" content="Subquery">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/15/12.Subquery.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">12.Subquery</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 15, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="subquery">Subquery</h2>
+
+<ul>
+  <li>하나의 SQL 질의문 속에 다른 SQL 질의문이 포함되어 있는 상태</li>
+  <li>ORACLE에서 Subquery의 결과 값을 Chache에 저장 해놓는다.</li>
+  <li>FROM절에 있는 Subquery는 INLINE VIEW라고 함</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="p">(</span> <span class="k">SELECT</span> <span class="n">sal</span>
+	       <span class="k">from</span> <span class="n">emp</span>
+	       <span class="k">WHERE</span> <span class="n">ename</span> <span class="o">=</span> <span class="s1">'SCOTT'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME
+<span class="nt">--------------------</span>
+KING
+</code></pre></div></div>
+
+<h3 id="1-single-row-subquery">1. Single-Row Subquery</h3>
+
+<ul>
+  <li>Subquery의 결과가 한 ROW인 경우</li>
+  <li>Single-Row Operator를 사용해야 함 (=, &gt;, &gt;=, &lt;, ,=, &lt;&gt;)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                       SAL     DEPTNO
+<span class="nt">--------------------</span> <span class="nt">----------</span> <span class="nt">----------</span>
+ADAMS                      1100         20
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">sal</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">emp</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                       SAL
+<span class="nt">--------------------</span> <span class="nt">----------</span>
+SMITH                       800
+ALLEN                      1600
+WARD                       1250
+MARTIN                     1250
+TURNER                     1500
+ADAMS                      1100
+JAMES                       950
+MILLER                     1300
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">deptno</span>
+				<span class="k">FROM</span> <span class="n">dept</span>
+				<span class="k">WHERE</span> <span class="n">dname</span> <span class="o">=</span> <span class="s1">'SALES'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                    DEPTNO
+<span class="nt">--------------------</span> <span class="nt">----------</span>
+ALLEN                        30
+WARD                         30
+MARTIN                       30
+BLAKE                        30
+TURNER                       30
+JAMES                        30
+</code></pre></div></div>
+
+<h3 id="2-multi-row-subquery">2. Multi-Row Subquery</h3>
+
+<ul>
+  <li>Subquery의 결과가  둘 이상의 Row</li>
+  <li>Multi-Row에 대한 연산을 사용해야 함 (ANY, ALL, IN, EXIST 등)</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span>
+                <span class="k">FROM</span> <span class="n">emp</span>
+                <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                       SAL     DEPTNO
+<span class="nt">--------------------</span> <span class="nt">----------</span> <span class="nt">----------</span>
+ALLEN                      1600         30
+CLARK                      2450         10
+ADAMS                      1100         20
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="n">ename</span> <span class="o">=</span> <span class="k">ANY</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">ename</span><span class="p">)</span>
+                   <span class="k">FROM</span> <span class="n">emp</span>
+                   <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                       SAL     DEPTNO
+<span class="nt">--------------------</span> <span class="nt">----------</span> <span class="nt">----------</span>
+ALLEN                      1600         30
+CLARK                      2450         10
+ADAMS                      1100         20
+</code></pre></div></div>
+
+<h3 id="3-correlated-query">3. Correlated Query</h3>
+
+<h4 id="31-outer-query-와-inner-query">3.1. Outer Query 와 Inner Query</h4>
+
+<ul>
+  <li>Outer query의 한 Row를 얻음</li>
+  <li>해당 Row를 가지고 Inner Query를 계산</li>
+  <li>계산 결과를 이용하여 Outer query의 WHERE절을 Evaluate</li>
+  <li>결과가 참이면 해당 Row를 결과에 포함시킴</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span><span class="p">,</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="k">outer</span>
+<span class="k">WHERE</span> <span class="n">sal</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+            <span class="k">FROM</span> <span class="n">emp</span>
+            <span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">=</span> <span class="k">outer</span><span class="p">.</span><span class="n">deptno</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+ENAME                       SAL     DEPTNO
+<span class="nt">--------------------</span> <span class="nt">----------</span> <span class="nt">----------</span>
+ALLEN                      1600         30
+JONES                      2975         20
+BLAKE                      2850         30
+SCOTT                      3000         20
+KING                       5000         10
+FORD                       3000         20
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>같은 결과 값을 얻더라도 사람마다 스타일이 다를 수 있음</p>
+  </li>
+  <li>
+    <p>예제1. 각 부서별로 최고급여를 받는 사원을 출력하시오.</p>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span>
+<span class="k">FROM</span> <span class="n">emp</span>
+<span class="k">WHERE</span> <span class="p">(</span><span class="n">deptno</span><span class="p">,</span> <span class="n">sal</span><span class="p">)</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+                        <span class="k">FROM</span> <span class="n">emp</span>
+                        <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+DEPTNO      EMPNO ENAME                       SAL
+<span class="nt">----------</span> <span class="nt">----------</span> <span class="nt">--------------------</span> <span class="nt">----------</span>
+        30       7698 BLAKE                      2850
+        20       7788 SCOTT                      3000
+        10       7839 KING                       5000
+        20       7902 FORD                       3000
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">empno</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">ename</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">sal</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">s</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span> <span class="k">max</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">sal</span><span class="p">)</span> <span class="n">msal</span>
+             <span class="k">FROM</span> <span class="n">emp</span> <span class="n">s</span>
+             <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">)</span> <span class="n">m</span>
+<span class="k">WHERE</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">deptno</span> <span class="k">AND</span> <span class="n">e</span><span class="p">.</span><span class="n">sal</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">msal</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+DEPTNO      EMPNO ENAME                       SAL
+<span class="nt">----------</span> <span class="nt">----------</span> <span class="nt">--------------------</span> <span class="nt">----------</span>
+        30       7698 BLAKE                      2850
+        10       7839 KING                       5000
+        20       7788 SCOTT                      3000
+        20       7902 FORD                       3000
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span> <span class="n">empno</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span>
+<span class="k">FROM</span> <span class="n">emp</span> <span class="n">e</span>
+<span class="k">WHERE</span> <span class="n">e</span><span class="p">.</span><span class="n">sal</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">sal</span><span class="p">)</span>
+               <span class="k">FROM</span> <span class="n">emp</span>
+               <span class="k">WHERE</span> <span class="n">deptno</span> <span class="o">=</span> <span class="n">e</span><span class="p">.</span><span class="n">deptno</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+    DEPTNO      EMPNO ENAME                       SAL
+<span class="nt">----------</span> <span class="nt">----------</span> <span class="nt">--------------------</span> <span class="nt">----------</span>
+        30       7698 BLAKE                      2850
+        20       7788 SCOTT                      3000
+        10       7839 KING                       5000
+        20       7902 FORD                       3000
+</code></pre></div></div>
+
+<h3 id="4-top-k-query">4. Top-K Query</h3>
+
+<ul>
+  <li>ROWNUM: 질의의 결과에 가상으로 부여되는 Oracle의 Pseudo Column</li>
+  <li>Top-K Query: 조건을 만족하는 상위 K 개의 결과를 빨리 얻음</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">rownum</span><span class="p">,</span> <span class="n">ename</span><span class="p">,</span> <span class="n">sal</span>
+<span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span>
+     <span class="k">FROM</span> <span class="n">emp</span>
+     <span class="k">WHERE</span> <span class="n">hiredate</span> <span class="k">LIKE</span> <span class="s1">'81%'</span>
+     <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">sal</span> <span class="k">DESC</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">rownum</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">## 결과 값</span>
+    ROWNUM ENAME                       SAL
+<span class="nt">----------</span> <span class="nt">--------------------</span> <span class="nt">----------</span>
+         1 KING                       5000
+         2 FORD                       3000
+         3 JONES                      2975
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

@@ -122,6 +122,50 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/oracle/2020/07/15/11.NULL-%EA%B4%80%EB%A0%A8-%ED%95%A8%EC%88%98.html">11.NULL 관련 함수</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>NULL 관련 함수 1. NULL 아무런 값도 정해지지 않았음을 의미 NOT NULL이나 Primary Key 속성에는 사용할 수 없음 NULL을 포함한 산술식은 NULL 2. NVL NVL(expr1, expr2): expr1이 NULL이면 expr2, 아니면 expr1 SELECT ename, NVL(TO_CHAR(mgr), 'NO Manager') FROM emp; 3. NVL2 NVL2(expr1, expr2, expr3): expr1이 NOT NULL이면 expr2, 아니면 expr3 SELECT...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/oracle/2020/07/15/10.Single-Row-Function.html">10.Single Row Function</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Single Row Function 하나의 Row를 입력으로 받는 함수 1. 문자열 함수 INITCAP : 첫글자만 대문자로 출력 SELECT INITCAP(ENAME), JOB FROM emp; LOWWER(s) : 소문자로 변경 SELECT INITCAP(ENAME), JOB FROM emp; UPPER(s) : 대문자로 변경 SELECT INITCAP(ENAME), JOB FROM emp; LAPD(s1, n, s2): 문자열의 왼쪽 채움 n : 길이 s2 :...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/oracle/2020/07/15/09.B-Tree.html">09.B-Tree</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -173,50 +217,6 @@
     </section>
     <section class="post-meta">
       <div class="post-date">July 15, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/15/06.ROLLUP&CUBE.html">06.ROLLUP & CUBE</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>ROLLUP &amp; CUBE ROLLUP과 CUBE는 GRUOP BY와 함께 사용이 된다 1. ROLLUP ROLLUP (A, B): GROUP BY(A, B) &amp; GROUP BY(A) &amp; ALL SELECT loc, yr, sum(sales) FROM salesdata GROUP BY ROLLUP(loc, yr); ## 결과 값 LOC YR SUM(SALES) -------------------- ---------- ---------- 부산 2000 100 부산 2001 150 부산 2002...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 15, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/14/05.DDL.html">05.DDL(Data Definition Language)</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>DDL(Data Definition Language) CREATE TABLE 테이블 생성 ALTER TABLE 테이블 관련 변경 DROP TABLE 테이블 삭제 RENAME 이름 변경 TRUNCATE 테이블의 모든 데이터 삭제 COMMENT 테이블 설명 추가 1. DDL 종류 1.1. CREATE TABLE CREATE TABLE book ( book_id NUMBER(5), title VARCHAR2(50), author VARCHAR2(10), pub_date DATE ) 1.1.1. Subquery를 이용한...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 14, 2020</div>
       <div class="post-categories">
       in 
         

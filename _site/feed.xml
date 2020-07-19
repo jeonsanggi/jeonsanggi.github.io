@@ -6,9 +6,33 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 18 Jul 2020 23:05:29 +0900</pubDate>
-    <lastBuildDate>Sat, 18 Jul 2020 23:05:29 +0900</lastBuildDate>
+    <pubDate>Sun, 19 Jul 2020 20:23:27 +0900</pubDate>
+    <lastBuildDate>Sun, 19 Jul 2020 20:23:27 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>18.SQL 연습</title>
+        <description>&lt;h3 id=&quot;실습-1&quot;&gt;실습 1&lt;/h3&gt; &lt;ul&gt; &lt;li&gt;각 사원(employee)에 대해서 사번(employee_id), 이름(first_name), 부서명(department_name), 매니저(manager)의 이름(first_name)을 조회하시오.&lt;/li&gt; &lt;/ul&gt; &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EMPLOYEE_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FIRST_NAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;...</description>
+        <pubDate>Sun, 19 Jul 2020 06:00:52 +0900</pubDate>
+        <link>http://localhost:4000/oracle/2020/07/19/18.SQL.html</link>
+        <guid isPermaLink="true">http://localhost:4000/oracle/2020/07/19/18.SQL.html</guid>
+        
+        
+        <category>ORACLE</category>
+        
+      </item>
+    
+      <item>
+        <title>14.JAVA와 ORACLE REF CURSOR 예제</title>
+        <description>&lt;h2 id=&quot;java와-oracle-ref-cursor-예제&quot;&gt;JAVA와 ORACLE REF CURSOR 예제&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;CallableStatement &lt;ul&gt; &lt;li&gt;DBMS들에 대한 표준방법으로 저장 프로시저(Stored Procedure)를 호출하는 방법을 제공&lt;/li&gt; &lt;/ul&gt; &lt;/li&gt; &lt;li&gt;CURSOR &lt;ul&gt; &lt;li&gt;특정 SQL문을 처리한 결과를 담고있는 영역으로 일종의 포인터&lt;/li&gt;...</description>
+        <pubDate>Sat, 18 Jul 2020 23:59:52 +0900</pubDate>
+        <link>http://localhost:4000/java/2020/07/18/14.JAVA-REF-CURSOR.html</link>
+        <guid isPermaLink="true">http://localhost:4000/java/2020/07/18/14.JAVA-REF-CURSOR.html</guid>
+        
+        
+        <category>JAVA</category>
+        
+      </item>
     
       <item>
         <title>17.JDBC</title>
@@ -100,30 +124,6 @@
         <pubDate>Fri, 17 Jul 2020 06:13:52 +0900</pubDate>
         <link>http://localhost:4000/python/2020/07/17/13.Exception.html</link>
         <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/13.Exception.html</guid>
-        
-        
-        <category>PYTHON</category>
-        
-      </item>
-    
-      <item>
-        <title>12.데코레이터(Decorator)</title>
-        <description>&lt;h2 id=&quot;데코레이터decorator&quot;&gt;데코레이터(Decorator)&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;특정 함수를 실행하는데 함수를 실행하기 전에 사전 작업을 해줌 &lt;ul&gt; &lt;li&gt;기존의 코드에 여러가지 기능을 추가하는 파이썬 구문&lt;/li&gt; &lt;/ul&gt; &lt;/li&gt; &lt;/ul&gt; &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span...</description>
-        <pubDate>Fri, 17 Jul 2020 06:12:52 +0900</pubDate>
-        <link>http://localhost:4000/python/2020/07/17/12.Decorator.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/12.Decorator.html</guid>
-        
-        
-        <category>PYTHON</category>
-        
-      </item>
-    
-      <item>
-        <title>11.클로저(Closure)</title>
-        <description>&lt;h2 id=&quot;클로저closure&quot;&gt;클로저(Closure)&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;First class function을 지원하는 언어의 네임 바인딩 기술&lt;/li&gt; &lt;li&gt;어떤 함수를 함수 자신이 가지고 있는 환경과 함께 저장한 레코드 &lt;ul&gt; &lt;li&gt;클로저는 함수의 지역 변수 값을 그 함수가 종료된...</description>
-        <pubDate>Fri, 17 Jul 2020 06:11:52 +0900</pubDate>
-        <link>http://localhost:4000/python/2020/07/17/11.Closure.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/11.Closure.html</guid>
         
         
         <category>PYTHON</category>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>18.SQL 연습</title>
+  <meta name="description" content="실습 1">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/oracle/2020/07/19/18.SQL.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/oracle/oracle.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">18.SQL 연습</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 19, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/ORACLE">Oracle</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h3 id="실습-1">실습 1</h3>
+
+<ul>
+  <li>각 사원(employee)에 대해서 사번(employee_id), 이름(first_name), 부서명(department_name), 매니저(manager)의 이름(first_name)을 조회하시오.</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">E</span><span class="p">.</span><span class="n">EMPLOYEE_ID</span><span class="p">,</span> <span class="n">E</span><span class="p">.</span><span class="n">FIRST_NAME</span><span class="p">,</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="n">M</span><span class="p">.</span><span class="n">FIRST_NAME</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+	<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">EMPLOYEES</span> <span class="n">M</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">MANAGER_ID</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">EMPLOYEE_ID</span>
+</code></pre></div></div>
+
+<h3 id="실습-2">실습 2</h3>
+
+<ul>
+  <li>자신의(EMPLOYEE_ID = 118) 매니저보다 채용일(hire_date)이 빠른 사원의 사번(employee_id), 성(last_name)과 채용일(hire_date)을 조회하세요.</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">EMPLOYEE_ID</span><span class="p">,</span> <span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">HIRE_DATE</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span>
+<span class="k">WHERE</span> <span class="n">HIRE_DATE</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">M</span><span class="p">.</span><span class="n">HIRE_DATE</span>
+					<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">EMPLOYEES</span> <span class="n">M</span>
+					<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">MANAGER_ID</span> <span class="o">=</span> <span class="n">M</span><span class="p">.</span><span class="n">EMPLOYEE_ID</span>
+					<span class="k">WHERE</span> <span class="n">E</span><span class="p">.</span><span class="n">EMPLOYEE_ID</span> <span class="o">=</span> <span class="mi">118</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="실습-3">실습 3</h3>
+
+<ul>
+  <li>자신의(EMPLOYEE_ID = 118) 부서 평균 급여보다 연봉이 많은 사원의 사번(EMPLOYEE_ID), 성(LAST_NAME)과 연봉(SALARY)을 조회하세요.</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">EMPLOYEE_ID</span><span class="p">,</span> <span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">SALARY</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span>
+<span class="k">WHERE</span> <span class="n">SALARY</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">)</span>
+				<span class="k">FROM</span> <span class="n">EMPLOYEES</span>
+				<span class="k">WHERE</span> <span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">DEPARTMENT_ID</span>
+										<span class="k">FROM</span> <span class="n">EMPLOYEES</span>
+										<span class="k">WHERE</span> <span class="n">EMPLOYEE_ID</span><span class="o">=</span><span class="mi">118</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="실습-4">실습 4</h3>
+
+<ul>
+  <li>입사일이 2005년 이전 직원들의 부서, 이름, 입사일, 부서 주소를 다음과 같이 출력 출력시 입사일 빠른 순으로 정렬하시오.
+    <ul>
+      <li>
+        <table>
+          <tbody>
+            <tr>
+              <td>부서</td>
+              <td>이름</td>
+              <td>입사일</td>
+              <td>주소</td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span> <span class="k">AS</span> <span class="nv">"부서"</span><span class="p">,</span> <span class="n">E</span><span class="p">.</span><span class="n">FIRST_NAME</span> <span class="o">||</span> <span class="s1">' '</span> <span class="o">||</span> <span class="n">E</span><span class="p">.</span><span class="n">LAST_NAME</span> <span class="k">AS</span> <span class="nv">"이름"</span><span class="p">,</span> <span class="n">E</span><span class="p">.</span><span class="n">HIRE_DATE</span> <span class="k">AS</span> <span class="nv">"입사일"</span><span class="p">,</span> <span class="n">L</span><span class="p">.</span><span class="n">STREET_ADDRESS</span> <span class="o">||</span> <span class="s1">' '</span> <span class="o">||</span> <span class="n">L</span><span class="p">.</span><span class="n">CITY</span> <span class="o">||</span> <span class="s1">' '</span> <span class="o">||</span> <span class="k">C</span><span class="p">.</span><span class="n">COUNTRY_NAME</span> <span class="o">||</span> <span class="s1">' '</span> <span class="o">||</span> <span class="n">R</span><span class="p">.</span><span class="n">REGION_NAME</span> <span class="k">AS</span> <span class="nv">"주소"</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+	<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">LOCATIONS</span> <span class="n">L</span>
+	<span class="k">ON</span> <span class="n">D</span><span class="p">.</span><span class="n">LOCATION_ID</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">LOCATION_ID</span>
+	<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">COUNTRIES</span> <span class="k">C</span>
+	<span class="k">ON</span> <span class="n">L</span><span class="p">.</span><span class="n">COUNTRY_ID</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">COUNTRY_ID</span>
+	<span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">REGIONS</span> <span class="n">R</span>
+	<span class="k">ON</span> <span class="k">C</span><span class="p">.</span><span class="n">REGION_ID</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">REGION_ID</span>
+<span class="k">WHERE</span> <span class="n">E</span><span class="p">.</span><span class="n">HIRE_DATE</span> <span class="o">&lt;</span> <span class="s1">'05/01/01'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">E</span><span class="p">.</span><span class="n">HIRE_DATE</span>
+<span class="o">/</span>
+</code></pre></div></div>
+
+<h3 id="실습-5">실습 5</h3>
+
+<ul>
+  <li>직책(JOB TITLE)이 SALES MANAGER인 사원들의 입사년도와 입사년도(HIRE_DATE)별 평균 급여를 출력하시오
+    <ul>
+      <li>출력 시 년도를 기준으로 오름차순 정렬하시오.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">HIRE_DATE</span><span class="p">,</span> <span class="s1">'YYYY'</span><span class="p">)</span> <span class="k">AS</span> <span class="nv">"HIRE DATE"</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">)</span> <span class="k">AS</span> <span class="k">AVG</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">JOBS</span> <span class="n">JO</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">JOB_ID</span> <span class="o">=</span> <span class="n">JO</span><span class="p">.</span><span class="n">JOB_ID</span>
+<span class="k">WHERE</span> <span class="n">JOB_TITLE</span> <span class="o">=</span> <span class="s1">'Sales Manager'</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">HIRE_DATE</span><span class="p">,</span> <span class="s1">'YYYY'</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="nv">"HIRE DATE"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="실습-6">실습 6</h3>
+
+<ul>
+  <li>각 도시(City)에 있는 모든 부서 직원들의 평균 급여를 조회하고자 한다.
+    <ul>
+      <li>평균급여가 가장 낮은 도시부터 도시명(city)과 평균연봉, 해당 도시의 직원수를 출력하시오.</li>
+      <li>단, 도시에 근무하는 직원이 최소 3명 이상 근무하는 지역만 조회하시오.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">L</span><span class="p">.</span><span class="n">CITY</span><span class="p">,</span> <span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">),</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+	<span class="k">JOIN</span> <span class="n">LOCATIONS</span> <span class="n">L</span>
+	<span class="k">ON</span> <span class="n">D</span><span class="p">.</span><span class="n">LOCATION_ID</span> <span class="o">=</span> <span class="n">L</span><span class="p">.</span><span class="n">LOCATION_ID</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">L</span><span class="p">.</span><span class="n">CITY</span>
+<span class="k">HAVING</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span><span class="mi">2</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">AVG</span><span class="p">(</span><span class="n">E</span><span class="p">.</span><span class="n">SALARY</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="실습-7">실습 7</h3>
+
+<ul>
+  <li>‘Public Accountant’의 직책(job_title)으로 과거에 근무한 적이 있는 모든 사원의 사번과 이름을 출력하시오.
+    <ul>
+      <li>(현재 ‘Public Accountant’의 직책(job_title)으로 근무하는 사원은 고려 하지 않는다.)</li>
+      <li>다음과 같이 출력
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>사번</td>
+                  <td>이름</td>
+                  <td>시작일</td>
+                  <td>종료일</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code class="language-SQL">SELECT E.EMPLOYEE_ID AS "사번", FIRST_NAME || ' ' || LAST_NAME AS "이름", START_DATE "시작일", END_DATE "종료일"
+FROM EMPLOYEES E JOIN JOB_HISTORY JOH
+	ON E.EMPLOYEE_ID = JOH.EMPLOYEE_ID
+	JOIN JOBS JO
+	ON JOH.JOB_ID = JO.JOB_ID
+WHERE JO.JOB_TITLE = 'Public Accountant';
+</code></pre>
+
+<h3 id="실습-8">실습 8</h3>
+
+<ul>
+  <li>2007년 입사(HIRE_DATE)한 직원들의 사번(EMPLOYEE_ID), 이름(FIRST_NAME), 성(LAST_NAME), 부서명(DEPARTMENT_NAME)을 조회함
+    <ul>
+      <li>이때, 부서에 배치되지 않은 직원의경우, ‘<Not Assigned="">'로 출력하시오.</Not></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">EMPLOYEE_ID</span><span class="p">,</span> <span class="n">FIRST_NAME</span><span class="p">,</span> <span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">NVL</span><span class="p">(</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="s1">'&lt;Not Assigned&gt;'</span><span class="p">)</span> <span class="k">AS</span> <span class="n">DEPT_NAME</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+<span class="k">WHERE</span> <span class="n">TO_CHAR</span><span class="p">(</span><span class="n">HIRE_DATE</span><span class="p">,</span> <span class="s1">'YYYY'</span><span class="p">)</span> <span class="o">=</span> <span class="s1">'2007'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="실습-9">실습 9</h3>
+
+<ul>
+  <li>부서별로 가장 적은 급여를 받고 있는 직원의 이름, 부서이름, 급여를 출력하시오.
+    <ul>
+      <li>이름은 LAST_NAME만 출력하며, 부서이름으로 오름차순 정렬하고,</li>
+      <li>부서가 같은 경우 이름을 기준으로 오름차순 정렬하여 출력합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">E</span><span class="p">.</span><span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="n">ED</span><span class="p">.</span><span class="n">SALARY</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span><span class="p">,</span> <span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="k">MIN</span><span class="p">(</span><span class="n">SALARY</span><span class="p">)</span> <span class="k">AS</span> <span class="n">SALARY</span>
+			<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+			<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+			<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span><span class="p">,</span> <span class="n">DEPARTMENT_NAME</span><span class="p">)</span> <span class="n">ED</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+<span class="k">WHERE</span> <span class="n">E</span><span class="p">.</span><span class="n">SALARY</span> <span class="o">=</span> <span class="n">ED</span><span class="p">.</span><span class="n">SALARY</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="n">E</span><span class="p">.</span><span class="n">LAST_NAM</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">E</span><span class="p">.</span><span class="n">LAST_NAME</span><span class="p">,</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="n">ED</span><span class="p">.</span><span class="n">SALARY</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span><span class="p">,</span> <span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="k">MIN</span><span class="p">(</span><span class="n">SALARY</span><span class="p">)</span> <span class="k">AS</span> <span class="n">SALARY</span>
+			<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+			<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+			<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span><span class="p">,</span> <span class="n">DEPARTMENT_NAME</span><span class="p">)</span> <span class="n">ED</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="k">AND</span> <span class="n">E</span><span class="p">.</span><span class="n">SALARY</span> <span class="o">=</span> <span class="n">ED</span><span class="p">.</span><span class="n">SALARY</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ED</span><span class="p">.</span><span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="n">E</span><span class="p">.</span><span class="n">LAST_NAME</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="실습-10">실습 10</h3>
+
+<ul>
+  <li>사원의 부서가 속한 도시(CITY)가 ‘Seattle’인 사원의 이름, 해당 사원의 매니저 이름, 사원의 부서이름을 출력하시오.
+    <ul>
+      <li>이때 사원의 매니저가 없을 경우 <없음>이라고 출력하시오. 이름은 LAST_NAME만 출력하며</없음></li>
+      <li>사원의 이름을 오름차순으로 정렬하시오.</li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code class="language-SQL">SELECT E.LAST_NAME, NVL(M.LAST_NAME, '없음'), D.DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	JOIN LOCATIONS L
+	ON D.LOCATION_ID = L.LOCATION_ID AND L.CITY = 'Seattle'
+	LEFT OUTER JOIN EMPLOYEES M
+	ON E.MANAGER_ID = M.EMPLOYEE_ID
+ORDER BY E.LAST_NAME;
+</code></pre>
+
+<pre><code class="language-SQL">SELECT E.E_NAME, NVL(E.M_NAME, '&lt;없음&gt;') AS LNAME, D.DEPARTMENT_NAME
+FROM (SELECT A.LAST_NAME AS E_NAME, B.LAST_NAME AS M_NAME, A.DEPARTMENT_ID
+     FROM EMPLOYEES A LEFT OUTER JOIN EMPLOYEES B
+     ON A.MANAGER_ID = B.EMPLOYEE_ID
+     ) E JOIN DEPARTMENTS D
+     ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+     JOIN LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID
+WHERE L.CITY = 'Seattle'
+ORDER BY E.E_NAME;
+</code></pre>
+
+<h3 id="실습-11">실습 11</h3>
+
+<ul>
+  <li>각 업무(JOB) 별로 연봉(SALARY)의 총합을 구하고자 한다. 연봉 총합이 가장 높은 업무부터 업무명(JOB_TITLE)과 연봉 총합을 내림차순으로 조회하시오. 단 연봉총합이 30,000 보다 큰 업무만 출력하시오.</li>
+</ul>
+
+<pre><code class="language-SQL">SELECT JOB_TITLE, SUM(SALARY) TOTAL_SAL
+FROM EMPLOYEES E JOIN JOBS J
+	ON E.JOB_ID = J.JOB_ID
+GROUP BY JOB_TITLE
+HAVING SUM(SALARY) &gt; 30000
+ORDER BY TOTAL_SAL DESC;
+</code></pre>
+
+<ul>
+  <li>‘Sales’ 부서에 속한 직원의 이름(FIRST_NAME), 급여(SALARY), 부서이름(DEPARTMENT_NAME)을 조회하시오.
+    <ul>
+      <li>단, 급여는 100번 부서의 평균보다 적게 받는 직원 정보만 출력되어야 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<pre><code class="language-SQL">SELECT FIRST_NAME, SALARY, DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID AND D.DEPARTMENT_NAME='Sales'
+WHERE SALARY &lt; (SELECT AVG(SALARY)
+               	FROM EMPLOYEES
+               	WHERE DEPARTMENT_ID = 100);
+</code></pre>
+
+<pre><code class="language-SQL">SELECT E.RIST_NAME, E.SALARY, D.DEPARTMENT_NAME
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+	CROSS JOIN (SELECT AVG(SALARY) AS SAL
+               	FROM EMPLOYEES
+               	WHERE DEPARTMENT_ID = 100) SAL100
+WHERE D.DEPARTMENT_NAME = 'Sales'
+AND E.SALARY &lt; SAL100.SAL
+</code></pre>
+
+<h3 id="실습-12">실습 12</h3>
+
+<ul>
+  <li>부서별 직원들의 최대, 최소, 평균급여(소수점 이하 절사)를 조회하되, 평균 급여가 ‘IT’ 부서의 평균급여보다 많고, ‘Sales’ 부서의 평균보다 적은 부서 정보만 출력하시오.</li>
+</ul>
+
+<pre><code class="language-SQL">SELECT DEPARTMENT_NAME, MAX(SALARY), MIN(SALARY), TRUNC(AVG(SALARY)) AVG
+FROM EMPLOYEES E JOIN DEPARTMENTS D
+	ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+GROUP BY DEPARTMENT_NAME
+HAVING TRUNC(AVG(SALARY)) &gt; (SELECT AVG(SALARY)
+             FROM EMPLOYEES E JOIN DEPARTMENTS D
+             ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+             WHERE DEPARTMENT_NAME='IT')
+        AND
+        TRUNC(AVG(SALARY)) &lt; (SELECT AVG(SALARY)
+             FROM EMPLOYEES E JOIN DEPARTMENTS D
+             ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+             WHERE DEPARTMENT_NAME='Sales');
+</code></pre>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">DEPARTMENT_NAME</span><span class="p">,</span> <span class="k">MAX</span><span class="p">(</span><span class="n">SALARY</span><span class="p">),</span> <span class="k">MIN</span><span class="p">(</span><span class="n">SALARY</span><span class="p">),</span> <span class="n">TRUNC</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">))</span> <span class="k">AVG</span>
+<span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+	<span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">DEPARTMENT_NAME</span>
+<span class="k">HAVING</span> <span class="n">TRUNC</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">))</span> <span class="o">&gt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">TRUNC</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">))</span>
+             <span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+             <span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+             <span class="k">WHERE</span> <span class="n">DEPARTMENT_NAME</span><span class="o">=</span><span class="s1">'IT'</span><span class="p">)</span>
+        <span class="k">AND</span>
+        <span class="n">TRUNC</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">))</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">TRUNC</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">SALARY</span><span class="p">))</span>
+             <span class="k">FROM</span> <span class="n">EMPLOYEES</span> <span class="n">E</span> <span class="k">JOIN</span> <span class="n">DEPARTMENTS</span> <span class="n">D</span>
+             <span class="k">ON</span> <span class="n">E</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span> <span class="o">=</span> <span class="n">D</span><span class="p">.</span><span class="n">DEPARTMENT_ID</span>
+             <span class="k">WHERE</span> <span class="n">DEPARTMENT_NAME</span><span class="o">=</span><span class="s1">'Sales'</span><span class="p">);</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

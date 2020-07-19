@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>14.JAVA와 ORACLE REF CURSOR 예제</title>
+  <meta name="description" content="JAVA와 ORACLE REF CURSOR 예제">
+  
+  <meta name="author" content="Sanggi Jeon">
+  <meta name="copyright" content="&copy; Sanggi Jeon 2020">
+  
+
+  <!-- External libraries -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/monokai-sublime.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css">
+
+  <!-- Favicon and other icons (made with http://www.favicon-generator.org/) -->
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+
+  
+
+  
+
+  
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://localhost:4000/java/2020/07/18/14.JAVA-REF-CURSOR.html">
+	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
+
+	<!-- Tooltips -->
+	<script type="text/javascript">
+		window.tooltips = []
+	</script>
+</head>
+
+
+  <body>
+
+    <header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="/" class="logo">
+      
+      <img src="/assets/profile-placeholder.png" alt="Developer">
+      
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">
+      <i class="fa fa-bars"></i>
+    </a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <div class="page-content">
+        <div class="post">
+
+<div class="post-header-container has-cover" style="background-image: url(/assets/java/java.png);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">14.JAVA와 ORACLE REF CURSOR 예제</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
+
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 18, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/JAVA">Java</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="java와-oracle-ref-cursor-예제">JAVA와 ORACLE REF CURSOR 예제</h2>
+
+<ul>
+  <li>CallableStatement
+    <ul>
+      <li>DBMS들에 대한 표준방법으로 저장 프로시저(Stored Procedure)를 호출하는 방법을 제공</li>
+    </ul>
+  </li>
+  <li>CURSOR
+    <ul>
+      <li>특정 SQL문을 처리한 결과를 담고있는 영역으로 일종의 포인터</li>
+      <li>커서를 사용하여 처리된 SQL문의 결과 집합에 접근</li>
+      <li>묵시적 CURSOR와 명시적 CURSOR가 있음</li>
+    </ul>
+  </li>
+  <li>REF CURSOR
+    <ul>
+      <li>묵시적 CURSOR와 명시적 CURSOR는 CURSOR가 선언이 될 때 수행 될 SQL을 미리 지정하고 실행하는 방법을 지원</li>
+      <li>REF CURSOR는 CURSOR를 선언하는 시점에는 SQL을 지정하지 않고 CURSOR가 Open이 되는 시점에 SQL 문장을 지정</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="패키지-헤더">패키지 헤더</h3>
+
+<pre><code class="language-plsql">CREATE OR REPLACE PACKAGE CURSOR_PKG
+AS
+	TYPE T_CURSOR IS REF CURSOR;
+	PROCEDURE SP_JOB_HISTORY(
+        IN_EMPLOYEE_ID IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+        OUT_CURSOR		IN OUT T_CURSOR
+    );
+END CURSOR_PKG;
+/
+</code></pre>
+
+<h3 id="패키지-바디">패키지 바디</h3>
+
+<pre><code class="language-plsql">CREATE OR REPLACE PACKAGE BODY CURSOR_PKG
+AS
+PROCEDURE SP_JOB_HISTORY
+(
+    IN_EMPLOYEE_ID IN EMPLOYEES.EMPLOYEE_ID%TYPE,
+    OUT_CURSOR		IN OUT T_CURSOR
+)
+IS
+BEGIN
+	OPEN OUT_CURSOR FOR
+	SELECT E.FIRST_NAME || ' ' || E.LAST_NAME AS NAME,
+	JO.JOB_TITLE AS TITLE,
+	JH.START_DATE AS SDATE,
+	JH.END_DATE AS EDATE
+	FROM EMPLOYEES E JOIN JOB_HISTORY JH
+		ON E.EMPLOYEE_ID = JH.EMPLOYEE_ID
+		JOIN JOBS JO
+        ON JH.JOB_ID = JO.JOB_ID
+    WHERE E.EMPLOYEE_ID = IN_EMPLOYEE_ID;
+END SP_JOB_HISTORY;
+END CURSOR_PKG;
+/
+</code></pre>
+
+<h3 id="java에서-ref-cursor-활용">JAVA에서 REF CURSOR 활용</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">package</span> <span class="n">com</span><span class="o">.</span><span class="n">jremind</span><span class="o">.</span><span class="n">dao</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.sql.CallableStatement</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.Connection</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.DriverManager</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.PreparedStatement</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.sql.ResultSet</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">com.jremind.model.Employee</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">oracle.jdbc.OracleCallableStatement</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">oracle.jdbc.OracleTypes</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">HrDao</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="err">싱글톤으로</span> <span class="err">메모리</span> <span class="err">할당</span>
+	<span class="n">private</span> <span class="n">static</span> <span class="n">HrDao</span> <span class="n">dao</span> <span class="o">=</span> <span class="n">new</span> <span class="n">HrDao</span><span class="p">();</span>
+	<span class="n">private</span> <span class="n">Connection</span> <span class="n">conn</span><span class="p">;</span>
+	<span class="n">private</span> <span class="n">ResultSet</span> <span class="n">rSet</span><span class="p">;</span>
+	<span class="n">private</span> <span class="n">PreparedStatement</span> <span class="n">pStmt</span><span class="p">;</span>
+	<span class="n">private</span> <span class="n">CallableStatement</span> <span class="n">cstmt</span><span class="p">;</span>
+    <span class="n">private</span> <span class="n">OracleCallableStatement</span> <span class="n">ocstmt</span><span class="p">;</span>
+	
+	<span class="n">private</span> <span class="n">final</span> <span class="n">String</span> <span class="n">url</span> <span class="o">=</span> <span class="s">"jdbc:oracle:thin:@localhost:1521:xe"</span><span class="p">;</span>
+	<span class="n">private</span> <span class="n">final</span> <span class="n">String</span> <span class="n">username</span> <span class="o">=</span> <span class="s">"c##hr"</span><span class="p">;</span>
+	<span class="n">private</span> <span class="n">final</span> <span class="n">String</span> <span class="n">password</span> <span class="o">=</span> <span class="s">"1234"</span><span class="p">;</span>
+	
+	<span class="n">private</span> <span class="n">HrDao</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">try</span> <span class="p">{</span>
+			<span class="n">Class</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s">"oracle.jdbc.driver.OracleDriver"</span><span class="p">);</span>
+		<span class="p">}</span><span class="n">catch</span> <span class="p">(</span><span class="nb">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+    <span class="o">//</span> <span class="n">getInstance</span><span class="p">()</span> <span class="err">메서드로</span> <span class="n">dao</span> <span class="err">인스턴스를</span> <span class="err">반환</span>
+	<span class="n">public</span> <span class="n">static</span> <span class="n">HrDao</span> <span class="n">getInstance</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="n">dao</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+    <span class="o">//</span> <span class="n">Oracle</span> <span class="err">데이터베이스</span> <span class="n">connection</span>
+	<span class="n">private</span> <span class="n">void</span> <span class="n">getConnection</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">try</span> <span class="p">{</span>
+			<span class="n">conn</span> <span class="o">=</span> <span class="n">DriverManager</span><span class="o">.</span><span class="n">getConnection</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">);</span>
+		<span class="p">}</span><span class="n">catch</span> <span class="p">(</span><span class="nb">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+	<span class="o">//</span> <span class="n">Oracle</span> <span class="err">데이터베이스</span> <span class="err">연결</span> <span class="err">종료</span>
+	<span class="n">private</span> <span class="n">void</span> <span class="n">closeConnection</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">try</span> <span class="p">{</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">rSet</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+				<span class="n">rSet</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">pStmt</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+				<span class="n">pStmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">cstmt</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+				<span class="n">cstmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">ocstmt</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+				<span class="n">ocstmt</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">conn</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span>
+				<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+		<span class="p">}</span><span class="n">catch</span> <span class="p">(</span><span class="nb">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	
+	<span class="n">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">getHistoryEmployees</span><span class="p">(</span><span class="nb">int</span> <span class="nb">id</span><span class="p">){</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span> <span class="n">employees</span> <span class="o">=</span> <span class="n">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Employee</span><span class="o">&gt;</span><span class="p">();</span>
+		
+		<span class="n">getConnection</span><span class="p">();</span>
+						
+		<span class="k">try</span> <span class="p">{</span>
+            <span class="o">//</span> <span class="n">Connection</span><span class="err">의</span> <span class="n">prepareCall</span> <span class="err">메서드로</span> <span class="n">CallableStatement</span> <span class="err">객체를</span> <span class="err">생성</span>
+            <span class="o">//</span> <span class="n">prepareCall</span> <span class="err">메서드로</span> <span class="err">데이터베이스</span> <span class="err">저장</span> <span class="err">프로시저를</span> <span class="err">호출</span>
+			<span class="n">cstmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">prepareCall</span><span class="p">(</span><span class="s">"BEGIN CURSOR_PKG.SP_JOB_HISTORY(?,?); END;"</span><span class="p">);</span>
+            <span class="o">//</span> <span class="err">프로시저의</span> <span class="ow">in</span> <span class="n">Parameter</span><span class="err">로</span> <span class="err">사원</span> <span class="err">번호</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="err">를</span> <span class="err">사용</span>
+			<span class="n">cstmt</span><span class="o">.</span><span class="n">setInt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">id</span><span class="p">);</span>
+            <span class="o">//</span> <span class="n">REF</span> <span class="n">CURSOR</span> <span class="n">OUTPUT</span> <span class="n">PARAMETER</span><span class="err">를</span> <span class="n">OracleTypes</span><span class="o">.</span><span class="n">CURSOR</span><span class="err">으로</span> <span class="err">등록</span> 
+			<span class="n">cstmt</span><span class="o">.</span><span class="n">registerOutParameter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">OracleTypes</span><span class="o">.</span><span class="n">CURSOR</span><span class="p">);</span>
+			
+            <span class="o">//</span> <span class="n">CallableStatement</span><span class="err">를</span> <span class="err">실행</span>
+			<span class="n">cstmt</span><span class="o">.</span><span class="n">executeQuery</span><span class="p">();</span>
+			
+            <span class="o">//</span> <span class="n">getCursor</span><span class="p">()</span> <span class="err">메서드를</span> <span class="err">사용하기</span> <span class="err">위해</span> <span class="n">OracleCallableStatement</span> <span class="n">Object</span><span class="err">로</span> <span class="err">변환</span>
+            <span class="o">//</span> <span class="n">CallableStatement</span><span class="err">는</span> <span class="n">getCursor</span><span class="p">()</span> <span class="err">메서드가</span> <span class="err">정의되어</span> <span class="err">있지</span> <span class="err">않기</span> <span class="err">때문</span>
+			<span class="n">ocstmt</span> <span class="o">=</span> <span class="p">(</span><span class="n">OracleCallableStatement</span><span class="p">)</span><span class="n">cstmt</span><span class="p">;</span>
+            <span class="o">//</span> <span class="n">ResultSet</span><span class="err">에</span> <span class="err">결과</span> <span class="err">데이터를</span> <span class="err">담은</span> <span class="n">Cursor</span><span class="err">를</span> <span class="err">저장</span>
+			<span class="n">rSet</span> <span class="o">=</span> <span class="n">ocstmt</span><span class="o">.</span><span class="n">getCursor</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+			<span class="n">Employee</span> <span class="n">employee</span><span class="p">;</span>
+
+			<span class="k">while</span><span class="p">(</span><span class="n">rSet</span><span class="o">.</span><span class="nb">next</span><span class="p">())</span> <span class="p">{</span>
+                <span class="o">//</span> <span class="err">미리</span> <span class="err">만들어놓은</span> <span class="n">Employee</span> <span class="err">모델에</span> <span class="err">데이터를</span> <span class="err">담음</span>
+				<span class="n">employee</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Employee</span><span class="p">();</span>
+				<span class="n">employee</span><span class="o">.</span><span class="n">setFullName</span><span class="p">(</span><span class="n">rSet</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="n">setTitle</span><span class="p">(</span><span class="n">rSet</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="n">setHireDate</span><span class="p">(</span><span class="n">rSet</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+				<span class="n">employee</span><span class="o">.</span><span class="n">setEndDate</span><span class="p">(</span><span class="n">rSet</span><span class="o">.</span><span class="n">getString</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+
+				<span class="n">employees</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">employee</span><span class="p">);</span>
+			<span class="p">}</span>
+		<span class="p">}</span><span class="n">catch</span><span class="p">(</span><span class="nb">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">();</span>
+		<span class="p">}</span><span class="k">finally</span> <span class="p">{</span>
+			<span class="n">closeConnection</span><span class="p">();</span>		
+		<span class="p">}</span>
+		
+		<span class="k">return</span> <span class="n">employees</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+</article>
+
+
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
+
+</div>
+</div>
+
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h3 class="footer-heading">Developer</h3>
+
+    <div class="site-navigation">
+
+      <p><strong>Site Map</strong></p>
+      <ul class="pages">
+				
+	
+	<li class="nav-link"><a href="/about/">About</a>
+	
+
+	
+
+	
+
+	
+	<li class="nav-link"><a href="/posts/">Posts</a>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+      </ul>
+    </div>
+
+    <div class="site-contact">
+
+      <p><strong>Contact</strong></p>
+      <ul class="social-media-list">
+        <li>
+          <a href="mailto:jsg2861@gmail.com">
+            <i class="fa fa-envelope-o"></i>
+            <span class="username">jsg2861@gmail.com</span>
+          </a>
+        </li>
+
+        
+          
+        
+          
+          <li>
+            <a href="https://github.com/jeonsanggi" title="Fork me on GitHub">
+              <i class="fa fa-github"></i>
+              <span class="username">jeonsanggi</span>
+            </a>
+          </li>
+          
+        
+          
+        
+
+      </ul>
+    </div>
+
+    <div class="site-signature">
+      <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+      <p class="text">"배운 것과 공부한 것을 정리하는 습관을 갖자!"
+</p>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- Scripts -->
+<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="//unpkg.com/popper.js@1"></script>
+<script src="//unpkg.com/tippy.js@5"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  // Default syntax highlighting
+  hljs.initHighlightingOnLoad();
+
+  // Header
+  var menuToggle = $('#js-mobile-menu').unbind();
+  $('#js-navigation-menu').removeClass("show");
+  menuToggle.on('click', function(e) {
+    e.preventDefault();
+    $('#js-navigation-menu').slideToggle(function(){
+      if($('#js-navigation-menu').is(':hidden')) {
+        $('#js-navigation-menu').removeAttr('style');
+      }
+    });
+  });
+
+	// Enable tooltips via Tippy.js
+	if (Array.isArray(window.tooltips)) {
+		window.tooltips.forEach(function(tooltip) {
+			var selector = tooltip[0];
+			var config = tooltip[1];
+			tippy(selector, config);
+		})
+	}
+});
+
+</script>
+
+
+
+
+
+
+  </body>
+
+</html>

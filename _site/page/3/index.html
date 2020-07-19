@@ -122,6 +122,50 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/python/2020/07/17/12.Decorator.html">12.데코레이터(Decorator)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>데코레이터(Decorator) 특정 함수를 실행하는데 함수를 실행하기 전에 사전 작업을 해줌 기존의 코드에 여러가지 기능을 추가하는 파이썬 구문 import time def log_decorator(param_func): def log_message(): time_str = time.strftime('%c', time.localtime(time.time())) print(time_str, end='') print('------&gt;', end='') return param_func() return log_message def test_log_msg(): print('This is test log message') def runtime_log_msg(): print('This is runtime log message') test_log...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
+      <a class="post-link" href="/python/2020/07/17/11.Closure.html">11.클로저(Closure)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>클로저(Closure) First class function을 지원하는 언어의 네임 바인딩 기술 어떤 함수를 함수 자신이 가지고 있는 환경과 함께 저장한 레코드 클로저는 함수의 지역 변수 값을 그 함수가 종료된 후에도 기억 함수가 가진 프리변수(Free Variable)를 클로저가 만들어지는 당시의 값과 레퍼런스에 매핑하는 역할 프리변수(Free Variable) : 코드블럭 안에서 사용은 되지만 코드블럭안에서 정의 되지...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/python/2020/07/17/10.First-Class-Function.html">10.일급함수(First Class Function)</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -170,50 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Module 함수나 변수 또는 클래스를 모아 놓은 파일 모듈은 다른 파이썬 프로그램에서 불러와 사용할 수 있게 만든 파이썬 파일 def convert_to_f(celsius_value): return celsius_value * 90 / 5 +32 # 모듈 테스트 할때는 따로 작성해서 해줘야함 if __name__ == '__main__': print("모듈 테스트") print(convert_to_f(45)) else: print("임포트문 실행") #chap04.py from fah_converter import convert_to_f...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 17, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/PYTHON">Python</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/python/2020/07/17/07.class.html">07.클래스(Class)</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Class class 클래스 이름 (상속 받을 클래스): 최상위 클래스는 object이다. 상속을 명시하지 않으면 default로 object를 상속 init: 생성자 str: 객체를 print 했을 때 출력 할 것 class SoccerPlayer: # 상속을 명시하지 않으면 default로 object를 상속 # __init__ 은 생성자 def __init__(self, name, position, back_number): self.name = name self.position = position...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 17, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/PYTHON">Python</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/python/2020/07/17/06.List.html">06.List</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>List linked list로 구현되어 있음 color1 = ['red', 'blue', 'green'] color2 = ['orange', 'black', 'white'] add_color = color1 + color2 print(len(add_color)) print(add_color) 1. extend colors = ['red', 'blue', 'green'] colors.extend(['black', 'purple']) print(colors) 2. Slice [start : end: step] cities = ['서울', '부산', '인천', '대구', '대전', '광주', '울산', '수원'] print(cities[0:6]) print(cities[:6])...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 17, 2020</div>

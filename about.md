@@ -60,7 +60,7 @@ main_nav: true
 
 - 개인 프로젝트
   - 인사 정보 검색 미니 프로젝트 (2020.07.16 ~ 2020.07.17) 
-    - **View Code on GitHub**(# 업데이트 예정)
+    - [**View Code on GitHub**](https://github.com/jeonsanggi/TIL/tree/master/JAVA/HrSearch)
     - Skill
       - Java, Oracle, PL/SQL
   - 품질 데이터 시각화 웹 (2020.02.02 ~ 2020.03.01)

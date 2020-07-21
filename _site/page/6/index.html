@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/oracle/2020/07/15/12.Subquery.html">12.Subquery</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Subquery 하나의 SQL 질의문 속에 다른 SQL 질의문이 포함되어 있는 상태 ORACLE에서 Subquery의 결과 값을 Chache에 저장 해놓는다. FROM절에 있는 Subquery는 INLINE VIEW라고 함 SELECT ename FROM emp WHERE sal &gt; ( SELECT sal from emp WHERE ename = 'SCOTT') ## 결과 값 ENAME -------------------- KING 1. Single-Row Subquery Subquery의...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/oracle/2020/07/15/11.NULL-%EA%B4%80%EB%A0%A8-%ED%95%A8%EC%88%98.html">11.NULL 관련 함수</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Conditional Expression 1. CASE ANSI 표준 (모든 DB에서 사용 가능) SELECT ename, job, sal, CASE job WHEN 'CLERK' THEN 1.10*sal WHEN 'MANAGER' THEN 1.15*sal WHEN 'PRESIDENT' THEN 1.20*sal ELSE sal END REVISED_SALARY FROM emp; 2. DECODE ORACLE 전용 함수 SELECT ename, job, sal, DECODE(job, 'CLERK', 1.10*sal, 'MANAGER', 1.15*sal, 'PRESIDENT', 1.20*sal,...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 15, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/15/07.Join.html">07.JOIN</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>JOIN 둘 이상의 테이블을 합쳐서 하나의 큰 테이블로 만드는 방법 필요성 관계형 모델에서는 데이터의 일관성이나 효율을 위하여 데이터의 중복을 최소화(정규화) Foreign Key를 이용하여 참조 정규화된 테이블로부터 결합된 형태의 정보를 추출할 필요가 있음 JOIN의 종류 CROSS JOIN 모든 가능한 쌍이 나타남 THETA JOIN 조건(Theta)에 의한 조인 (=, &lt;, &gt; 등) EQUI...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 15, 2020</div>

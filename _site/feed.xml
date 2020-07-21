@@ -6,9 +6,21 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jul 2020 20:23:27 +0900</pubDate>
-    <lastBuildDate>Sun, 19 Jul 2020 20:23:27 +0900</lastBuildDate>
+    <pubDate>Tue, 21 Jul 2020 14:20:20 +0900</pubDate>
+    <lastBuildDate>Tue, 21 Jul 2020 14:20:20 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>17.Static Method &amp; Class Method</title>
+        <description>&lt;h2 id=&quot;method&quot;&gt;Method&lt;/h2&gt; &lt;p&gt;파이썬에서 메서드는 크게 인스턴스 메서드(Instance Method), 정적 메서드(Static Method), 클래스 메서드(Class Method)가 있다.&lt;/p&gt; &lt;p&gt;Static Method와 Class Method 모두 정적 메서드이며 클래스의 인스턴스 없이 호출이 가능하며, 인스턴스에서는 호출 할...</description>
+        <pubDate>Tue, 21 Jul 2020 10:16:52 +0900</pubDate>
+        <link>http://localhost:4000/python/2020/07/21/17.Method.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/07/21/17.Method.html</guid>
+        
+        
+        <category>PYTHON</category>
+        
+      </item>
     
       <item>
         <title>18.SQL 연습</title>
@@ -112,18 +124,6 @@
         <pubDate>Fri, 17 Jul 2020 06:14:52 +0900</pubDate>
         <link>http://localhost:4000/python/2020/07/17/14.Typing.html</link>
         <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/14.Typing.html</guid>
-        
-        
-        <category>PYTHON</category>
-        
-      </item>
-    
-      <item>
-        <title>13.예외처리(Exception)</title>
-        <description>&lt;h2 id=&quot;예외처리-exception&quot;&gt;예외처리 (Exception)&lt;/h2&gt; &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;...</description>
-        <pubDate>Fri, 17 Jul 2020 06:13:52 +0900</pubDate>
-        <link>http://localhost:4000/python/2020/07/17/13.Exception.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/13.Exception.html</guid>
         
         
         <category>PYTHON</category>

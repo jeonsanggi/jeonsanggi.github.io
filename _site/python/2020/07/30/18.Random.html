@@ -6,9 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>PYTHON</title>
-  <meta name="description" content=""배운 것과 공부한 것을 정리하는 습관을 갖자!"
-">
+  <title>18.Random</title>
+  <meta name="description" content="Random">
   
   <meta name="author" content="Sanggi Jeon">
   <meta name="copyright" content="&copy; Sanggi Jeon 2020">
@@ -31,7 +30,7 @@
 
   <!-- Site styles -->
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://localhost:4000/category/python/">
+  <link rel="canonical" href="http://localhost:4000/python/2020/07/30/18.Random.html">
 	<link rel="alternate" type="application/rss+xml" title="Developer" href="http://localhost:4000/feed.xml" />
 
 	<!-- Tooltips -->
@@ -106,64 +105,97 @@
 
 
     <div class="page-content">
-        <div class="wrapper">
-<div class="page">
+        <div class="post">
 
-  <header class="post-header">
-    <h1 class="post-title">Posts in "Python"</h1>
-  </header>
+<div class="post-header-container has-cover" style="background-image: url(/assets/python/python.jpg);">
+  <div class="scrim has-cover">
+    <header class="post-header">
+      <h1 class="title">18.Random</h1>
+      <p class="info">by <strong>SANGGI JEON</strong></p>
+    </header>
+  </div>
+</div>
 
-  <span class="page-divider">
-  <span class="one"></span>
-  <span class="two"></span>
+<div class="wrapper">
+
+
+
+<section class="post-meta">
+  <div class="post-date">July 30, 2020</div>
+  <div class="post-categories">
+  in 
+    
+    <a href="/category/PYTHON">Python</a>
+    
+  
+  </div>
+</section>
+
+<article class="post-content">
+  <h2 id="random">Random</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 매번 동일한 결과를 반환해 주는 설정 (pseudo random)
+</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1"># 0과 1사이의 난수를 생성
+</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># 0~10 범위에서 난수 생성
+</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="c1"># 3~6 범위에서 난수 생성
 </span>
+<span class="n">ten</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">random</span><span class="o">.</span><span class="n">suffle</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span>	<span class="c1"># 리스트의 항목을 임의 순서로 재정렬해 줌 (섞어줌)
+</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span>	<span class="c1"># 리스트에서 임의의 항목을 하나 선택
+</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">ten</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="c1"># 리스트에서 중복이 허용되지 않는 임의의 표본 리스트를 생성
+</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span> <span class="c1"># 중복을 허용하는 표본 리스트
+</span></code></pre></div></div>
+
+</article>
 
 
-  <article class="post-content">
-    <ul class="posts-list">
-      
-      <li><strong><a class="post-link" href="/python/2020/07/30/18.Random.html">18.Random</a></strong><span class="post-date"> - July 30, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/21/17.Method.html">17.Static Method & Class Method</a></strong><span class="post-date"> - July 21, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/16.Sort-Sorted-Operator-Module.html">16.정렬, Operator Module</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/15.print-format.html">15.print Format</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/14.Typing.html">14.Typing</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/13.Exception.html">13.예외처리(Exception)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/12.Decorator.html">12.데코레이터(Decorator)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/11.Closure.html">11.클로저(Closure)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/10.First-Class-Function.html">10.일급함수(First Class Function)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/09.Generator.html">09.제너레이터(Generator)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/08.Module.html">08.모듈(Module)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/07.class.html">07.클래스(Class)</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/06.List.html">06.List</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/05.python_data_structure.html">05.파이썬 자료 구조, Collections</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/04.parameter.html">04.가변 위치 인자(*args), 가변 키워드 인자(**kwargs), Packing, Unpacking</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/03.Lambda.html">03.Lambda</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/02.for_in_range_enumerate_zip.html">02.for in, range, enumerate, zip</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-      <li><strong><a class="post-link" href="/python/2020/07/17/01.python.html">01.Python</a></strong><span class="post-date"> - July 17, 2020</span></li>
-      
-    </ul>
-  </article>
+
+
+
+<section class="rss">
+  <p class="rss-subscribe text"><strong>Subscribe <a href="/feed.xml">via RSS</a></strong></p>
+</section>
+
+<section class="share">
+  <span>Share: </span>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+  
+</section>
+
+
+
 
 </div>
 </div>
-<br>
 
     </div>
 

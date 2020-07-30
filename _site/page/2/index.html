@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/oracle/2020/07/17/16.PLSQL.html">16.PL/SQL</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>PL/SQL ORACLE에서 SQL언어를 확장해서 사용하는 프로그래밍 언어 PL/SQL ON &gt;set serveroutput on 변수 선언 DECLARE V_NO NUMBER(4); V_NAME VARCHAR2(20); DECLARE V_EMPNO EMP.EMPNO%TYPE; V_SAL EMP.SAL%TYPE; 코드 블럭 BEGIN SELECT EMPNO, ENAME INTO V_NO, V_NAME FROM EMP WHERE EMPNO = 7369; DBMS_OUTPUT.LINE(V_NO || '' || V_NAME); END; / 1. PL/SQL 예제 &amp;ID는...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/oracle/2020/07/17/15.TRANSACTION.html">15.TRANSACTION</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>print 출력 방법 print(1, 2, 3) print("%d %d %d" %(1, 2, 3)) print("%f %.1f %.2f" %(1.1, 2.2, 3.2)) print("%s--%s--%s" %('abc', 'def', 'ghi')) print("{} {} {}".format('abc', 'def', 'ghi')) print("{1}, {0}, {2}".format('abc', 'def', 'ghi')) print(f"{'def'}{'abc'}{'ghi'}") print("{0:&gt;10s}".format('python')) print("{0:&lt;10s}".format('python')) print(f"{'python':&gt;10s}") print(f"{'python':&lt;10s}") # 결과 값 1 2 3 1 2 3 1.100000 2.2 3.20 abc--def--ghi...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 17, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/PYTHON">Python</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/python/2020/07/17/14.Typing.html">14.Typing</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Type 모듈 다이나믹 타입의 특징으로 발생하는 단점을 해결하기 위해 사용 가독성은 좋지만 실질적으로 강제성이 없어서 Mypy와 같은 정적 타입 검사를 해야함 (a: int) 형태로 type을 지정해주고 -&gt;int 형태로 반환 타입을 정함 def add(a: int, b: int)-&gt;int: return a + b print(add(10, 5)) print(add([1, 2], [3])) print(add("hi ", "there")) 2. List,...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 17, 2020</div>

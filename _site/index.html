@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/python/2020/07/30/18.Random.html">18.Random</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Random import random random.seed(10) # 매번 동일한 결과를 반환해 주는 설정 (pseudo random) random.random() # 0과 1사이의 난수를 생성 random.randrange(10) # 0~10 범위에서 난수 생성 random.randrange(3, 6) # 3~6 범위에서 난수 생성 ten = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] random.suffle(ten) # 리스트의 항목을 임의 순서로...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 30, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/python/2020/07/21/17.Method.html">17.Static Method & Class Method</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>JDBC(Java DataBase Connectivity) 자바에서 데이터베이스에 접속할 수 있도록 하는 자바 API 인터페이스로 작성되어 있음 1.Eclipse에 Oracle JDBC 설정 1.프로젝트 우클릭 2.Properties 3.Java Build Path 4.Libraries 5.Classpath에 Add external JARs.. 6.ojdbc8.jar 추가 2. Java에서 데이터베이스 연결 String url = "jdbc:oracle:thin:@localhost:1521:xe"; String username = "c##hr"; String password = "1234"; Connection conn =...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 17, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/17/16.PLSQL.html">16.PL/SQL</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>PL/SQL ORACLE에서 SQL언어를 확장해서 사용하는 프로그래밍 언어 PL/SQL ON &gt;set serveroutput on 변수 선언 DECLARE V_NO NUMBER(4); V_NAME VARCHAR2(20); DECLARE V_EMPNO EMP.EMPNO%TYPE; V_SAL EMP.SAL%TYPE; 코드 블럭 BEGIN SELECT EMPNO, ENAME INTO V_NO, V_NAME FROM EMP WHERE EMPNO = 7369; DBMS_OUTPUT.LINE(V_NO || '' || V_NAME); END; / 1. PL/SQL 예제 &amp;ID는...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 17, 2020</div>

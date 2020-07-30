@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/python/2020/07/17/09.Generator.html">09.제너레이터(Generator)</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Generator iterator를 생성해주는 함수로 함수안에 yield 키워드를 사용 모든 값을 포함하여 반환하지 않고 한 개의 값씩 반환하는 방식 메모리를 효율적으로 사용하기 위해 사용 # 기존 함수 구현 def square_numbers(nums): result = [] for i in nums: result.append(i*i) return result my_nums = square_numbers([1, 2, 3, 4, 5]) print(my_nums) next() 메서드를 사용하거나...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/python/2020/07/17/08.Module.html">08.모듈(Module)</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>파이썬에서 제공하는 자료구조 Tuple Set Dictionary Collections 모듈 deque OrderedDict defaultdict Counter namedtuple 1. Stack Last In First Out (LIFO) a = [1, 2, 3, 4, 5] a.append(10) print(a) a.append(20) print(a) print(a.pop()) print(a) print(a.pop()) word = input("Input a word:") word_list = list(word) print(word_list) result = [] for _ in range(len(word_list)):...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 17, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/PYTHON">Python</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/python/2020/07/17/04.parameter.html">04.가변 위치 인자(*args), 가변 키워드 인자(**kwargs), Packing, Unpacking</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>가변 인자 가변 위치인자(*args): 임의 개수의 위치 인자를 tuple 형태의 변수로 저장 가변 키워드인자(**kwargs): 임의 개수의 키워드인자를 dictionary 형태로 저장 # 가변 위치 인자(*args) 예제 1 def variable_length(a, b, *args): print(a) print(b) print(args) variable_length(1, 2, 3, 4, 5) # 3, 4, 5는 *args에 들어감 # 결과 1 2 (3, 4,...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 17, 2020</div>

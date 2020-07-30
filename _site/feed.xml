@@ -6,9 +6,21 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Jul 2020 14:20:20 +0900</pubDate>
-    <lastBuildDate>Tue, 21 Jul 2020 14:20:20 +0900</lastBuildDate>
+    <pubDate>Thu, 30 Jul 2020 16:21:34 +0900</pubDate>
+    <lastBuildDate>Thu, 30 Jul 2020 16:21:34 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>18.Random</title>
+        <description>&lt;h2 id=&quot;random&quot;&gt;Random&lt;/h2&gt; &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 매번 동일한 결과를 반환해 주는 설정 (pseudo random) &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span...</description>
+        <pubDate>Thu, 30 Jul 2020 10:16:52 +0900</pubDate>
+        <link>http://localhost:4000/python/2020/07/30/18.Random.html</link>
+        <guid isPermaLink="true">http://localhost:4000/python/2020/07/30/18.Random.html</guid>
+        
+        
+        <category>PYTHON</category>
+        
+      </item>
     
       <item>
         <title>17.Static Method &amp; Class Method</title>
@@ -112,18 +124,6 @@
         <pubDate>Fri, 17 Jul 2020 06:15:52 +0900</pubDate>
         <link>http://localhost:4000/python/2020/07/17/15.print-format.html</link>
         <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/15.print-format.html</guid>
-        
-        
-        <category>PYTHON</category>
-        
-      </item>
-    
-      <item>
-        <title>14.Typing</title>
-        <description>&lt;h2 id=&quot;type-모듈&quot;&gt;Type 모듈&lt;/h2&gt; &lt;ul&gt; &lt;li&gt;다이나믹 타입의 특징으로 발생하는 단점을 해결하기 위해 사용&lt;/li&gt; &lt;li&gt;가독성은 좋지만 실질적으로 강제성이 없어서 Mypy와 같은 정적 타입 검사를 해야함&lt;/li&gt; &lt;li&gt;(a: int) 형태로 type을 지정해주고 -&amp;gt;int 형태로...</description>
-        <pubDate>Fri, 17 Jul 2020 06:14:52 +0900</pubDate>
-        <link>http://localhost:4000/python/2020/07/17/14.Typing.html</link>
-        <guid isPermaLink="true">http://localhost:4000/python/2020/07/17/14.Typing.html</guid>
         
         
         <category>PYTHON</category>

@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/oracle/2020/07/15/13.SET-Operator.html">13.SET Operator</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>SET Operator 두 질의의 결과를 가지고 집합 연산 1. UNION 여러 개의 SQL 문의 결과에 대한 합집합 중복된 행은 하나의 행으로 출력 SELECT ename FROM emp UNION SELECT dname FROM dept; ## 결과 값 ENAME ---------------------------- ACCOUNTING ADAMS ALLEN BLAKE CLARK FORD JAMES JONES KING MARTIN MILLER OPERATIONS RESEARCH SALES...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/oracle/2020/07/15/12.Subquery.html">12.Subquery</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>Index Primary Key 설정하면 자동으로 Index 생성 Unique 설정하면 자동으로 Index 생성 Index 테이블에 접근할 때 효율성적으로 접근하기 위해 B-Tree(Balanced Tree)를 활용 임의로 Index 테이블을 만들때는 WHERE 절에 많이 접근 되는 컬럼을 생성 Index 테이블을 사용하지 않고 scan 할때는 Table Scan SELECT * FROM tab;은 Index Scan (전체 데이터를 가져와야...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 15, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/15/08.Condition-Expression&Aggregation-Function.html">08.Condition Expression & Aggregation Function</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>Conditional Expression 1. CASE ANSI 표준 (모든 DB에서 사용 가능) SELECT ename, job, sal, CASE job WHEN 'CLERK' THEN 1.10*sal WHEN 'MANAGER' THEN 1.15*sal WHEN 'PRESIDENT' THEN 1.20*sal ELSE sal END REVISED_SALARY FROM emp; 2. DECODE ORACLE 전용 함수 SELECT ename, job, sal, DECODE(job, 'CLERK', 1.10*sal, 'MANAGER', 1.15*sal, 'PRESIDENT', 1.20*sal,...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 15, 2020</div>

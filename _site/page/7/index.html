@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/oracle/2020/07/15/08.Condition-Expression&Aggregation-Function.html">08.Condition Expression & Aggregation Function</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>Conditional Expression 1. CASE ANSI 표준 (모든 DB에서 사용 가능) SELECT ename, job, sal, CASE job WHEN 'CLERK' THEN 1.10*sal WHEN 'MANAGER' THEN 1.15*sal WHEN 'PRESIDENT' THEN 1.20*sal ELSE sal END REVISED_SALARY FROM emp; 2. DECODE ORACLE 전용 함수 SELECT ename, job, sal, DECODE(job, 'CLERK', 1.10*sal, 'MANAGER', 1.15*sal, 'PRESIDENT', 1.20*sal,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 15, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/ORACLE">Oracle</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/oracle/2020/07/15/07.Join.html">07.JOIN</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>DML (Data Manipulation Language) ADD new rows Modify existing rows Remove existing rows 1. INSERT 묵시적 방법 컬림 이름, 순서 지정하지 않음, 테이블 생성시 정의한 순서에 따라 값 지정 INSERT INTO author VALUES (1, '박경리', '토지 작가'); INSERT INTO author VALUES (1, default, '토지 작가'); 명시적 방법 컬럼 이름 명시적...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 14, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/14/03.SQL.html">03.SQL(Structured Query Language)</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>SQL(Structured Query Language) 데이터베이스 스키마 생성, 자료의 검색, 수정과 데이터터베이스 객체 접근 관리 등을 위해 고안된 언어 다수의 데이터베이스 관련 프로그램의 표준언어 SQL 명령어의 종류 DML: 데이터 조작어로 검색 및 수정하기 위한 수단 제공 SELECT, INSERT, UPDATE, DELETE, MERGE DDL: 데이터 구조를 생성, 변경, 삭제 등의 기능을 제공 CREATE, ALTER,...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 14, 2020</div>

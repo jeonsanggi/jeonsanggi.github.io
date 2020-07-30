@@ -122,6 +122,28 @@
   
   <li>
     <h2>
+      <a class="post-link" href="/python/2020/07/17/04.parameter.html">04.가변 위치 인자(*args), 가변 키워드 인자(**kwargs), Packing, Unpacking</a>
+    </h2>
+    <section class="post-excerpt" itemprop="description">
+      <p>가변 인자 가변 위치인자(*args): 임의 개수의 위치 인자를 tuple 형태의 변수로 저장 가변 키워드인자(**kwargs): 임의 개수의 키워드인자를 dictionary 형태로 저장 # 가변 위치 인자(*args) 예제 1 def variable_length(a, b, *args): print(a) print(b) print(args) variable_length(1, 2, 3, 4, 5) # 3, 4, 5는 *args에 들어감 # 결과 1 2 (3, 4,...</p>
+    </section>
+    <section class="post-meta">
+      <div class="post-date">July 17, 2020</div>
+      <div class="post-categories">
+      in 
+        
+        <a href="/category/PYTHON">Python</a>
+        
+      
+      </div>
+    </section>
+  </li>
+  
+  <hr>
+  
+  
+  <li>
+    <h2>
       <a class="post-link" href="/python/2020/07/17/03.Lambda.html">03.Lambda</a>
     </h2>
     <section class="post-excerpt" itemprop="description">
@@ -192,28 +214,6 @@
     </h2>
     <section class="post-excerpt" itemprop="description">
       <p>RANK RANK(): 중복 순위 개수만큼 다음 순위 값을 증가 DENSE_RANK(): 중복 순위가 존재해도 순차적으로 다음 순위 값을 표시 ROW_NUMBER(): 중복 순위 없이 순위 값을 표시 SELECT sal, ename, RANK() OVER (ORDER BY sal DESC) as rank, DENSE_RANK() OVER (ORDER BY sal DESC) AS dense_rank, ROW_NUMBER() OVER (ORDER BY sal DESC)...</p>
-    </section>
-    <section class="post-meta">
-      <div class="post-date">July 15, 2020</div>
-      <div class="post-categories">
-      in 
-        
-        <a href="/category/ORACLE">Oracle</a>
-        
-      
-      </div>
-    </section>
-  </li>
-  
-  <hr>
-  
-  
-  <li>
-    <h2>
-      <a class="post-link" href="/oracle/2020/07/15/13.SET-Operator.html">13.SET Operator</a>
-    </h2>
-    <section class="post-excerpt" itemprop="description">
-      <p>SET Operator 두 질의의 결과를 가지고 집합 연산 1. UNION 여러 개의 SQL 문의 결과에 대한 합집합 중복된 행은 하나의 행으로 출력 SELECT ename FROM emp UNION SELECT dname FROM dept; ## 결과 값 ENAME ---------------------------- ACCOUNTING ADAMS ALLEN BLAKE CLARK FORD JAMES JONES KING MARTIN MILLER OPERATIONS RESEARCH SALES...</p>
     </section>
     <section class="post-meta">
       <div class="post-date">July 15, 2020</div>

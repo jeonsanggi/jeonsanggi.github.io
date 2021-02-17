@@ -11,7 +11,7 @@ main_nav: true
 ### 🧑 전상기 (Sanggi Jeon)
 
 Web Developer
-깊이 있는 개발자가 되고 싶은 전상기입니다.
+깊이 있는 풀스택 개발자가 되고 싶은 전상기입니다.
 
 
 
@@ -19,7 +19,9 @@ Web Developer
 
 --------------------
 #### 📘 교내외 활동
-- WebCash, Web Developer (2020.10.14 ~ )
+- WebCash, Web Developer (2021.01.14 ~ )
+
+- WebCash, Intern (2020.10.14 ~ 2021.01.13)
 
 - 클라우드 기반 빅데이터 서비스 개발자 양성과정, 비트교육센터 (2020.06.22 ~ 2020.10.05)
 

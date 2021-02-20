@@ -52,6 +52,13 @@ Web Developer
 
 - 개인 프로젝트
 
+  - 품질 데이터 시각화 웹 (2020.02.02 ~ 2020.03.01)
+    - [**View Code on GitHub**](https://github.com/jeonsanggi/DataVisualization/tree/master/4주차)
+    - Skill
+      - HTML, jQuery, Highchart
+      - Java, Spring MVC
+      - MariaDB, Mybatis
+
   - 유사색상 기반 립스틱 추천 웹 (2019.08.12 ~2019.08.28)
     - [**View Code on GitHub**](https://github.com/jeonsanggi/flask_server)
     - Skill
@@ -65,17 +72,6 @@ Web Developer
       - Java, Android
       - Linux, Apache, PHP, MySQL
       - Text Recognition API
-
-  - 인사 정보 검색 미니 프로젝트 (2020.07.16 ~ 2020.07.17) 
-    - [**View Code on GitHub**](https://github.com/jeonsanggi/TIL/tree/master/JAVA/HrSearch)
-    - Skill
-      - Java, Oracle, PL/SQL
-  - 품질 데이터 시각화 웹 (2020.02.02 ~ 2020.03.01)
-    - [**View Code on GitHub**](https://github.com/jeonsanggi/DataVisualization/tree/master/4주차)
-    - Skill
-      - HTML, jQuery, Highchart
-      - Java, Spring MVC
-      - MariaDB, Mybatis
 
 ---------------------
 

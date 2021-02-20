@@ -50,20 +50,22 @@ Web Developer
 
 #### 💻 PROJECTS
 
-- 유사색상 기반 립스틱 추천 웹 (2019.08.12 ~2019.08.28)
-  - [**View Code on GitHub**](https://github.com/jeonsanggi/flask_server)
-  - Skill
-    - Python, Flask, Bootstrap
-    - BeautifulSoup, Selenium, Pandas, K-means Clustering, Scikit Learn
-- 명함관리 애플리케이션 (2018.03 ~ 2018.06)
-  - NFC 명함 관리와 사진 촬영으로 명함 정보를 얻어 관리하는 애플리케이션
-  - [**View Code on GitHub**](https://github.com/jeonsanggi/BCM)
-  - Skill
-    - Java, Android
-    - Linux, Apache, PHP, MySQL
-    - Text Recognition API
-
 - 개인 프로젝트
+
+  - 유사색상 기반 립스틱 추천 웹 (2019.08.12 ~2019.08.28)
+    - [**View Code on GitHub**](https://github.com/jeonsanggi/flask_server)
+    - Skill
+      - Python, Flask, Bootstrap
+      - BeautifulSoup, Selenium, Pandas, K-means Clustering, Scikit Learn
+
+  - 명함관리 애플리케이션 (2018.03 ~ 2018.06)
+    - NFC 명함 관리와 사진 촬영으로 명함 정보를 얻어 관리하는 애플리케이션
+    - [**View Code on GitHub**](https://github.com/jeonsanggi/BCM)
+    - Skill
+      - Java, Android
+      - Linux, Apache, PHP, MySQL
+      - Text Recognition API
+
   - 인사 정보 검색 미니 프로젝트 (2020.07.16 ~ 2020.07.17) 
     - [**View Code on GitHub**](https://github.com/jeonsanggi/TIL/tree/master/JAVA/HrSearch)
     - Skill
